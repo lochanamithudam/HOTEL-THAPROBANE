@@ -1,27 +1,7 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "api/**/*.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/bookings",
-      "dest": "/api/bookings.js"
-    },
-    {
-      "src": "/api/subscribe",
-      "dest": "/api/subscribe.js"
-    },
-    {
-      "src": "/api/test-email",
-      "dest": "/api/test-email.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
+  "rewrites": [
+    { "source": "/api/bookings", "destination": "/api/bookings.js" },
+    { "source": "/api/subscribe", "destination": "/api/subscribe.js" },
+    { "source": "/api/test-email", "destination": "/api/test-email.js" }
   ]
 }
