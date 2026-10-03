@@ -12,15 +12,10 @@ const roomRates = {
   'presidential-villa': { name: 'Imperial 3-Bedroom Oceanfront Estate', baseRate: 890, tax: 0.12 }
 };
 
-// Smart API Endpoint Resolver (works in Live Server, direct file, Docker, or Node port 5000)
+// API Endpoint Resolver
+// Since frontend & backend are on the SAME host (Vercel or localhost:5000),
+// always use relative paths — no hardcoded URLs needed.
 function getApiEndpoint(route) {
-  const isLocalDevServer = window.location.protocol === 'file:' || 
-    (window.location.hostname === 'localhost' && window.location.port !== '5000' && window.location.port !== '8080') ||
-    (window.location.hostname === '127.0.0.1' && window.location.port !== '5000' && window.location.port !== '8080');
-
-  if (isLocalDevServer) {
-    return `http://localhost:5000${route}`;
-  }
   return route;
 }
 
@@ -340,7 +335,10 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (err) {
         console.error('Reservation API Error:', err);
         if (modalBackdrop) modalBackdrop.classList.remove('open');
-        showToast('⚠️ Could not reach server (http://localhost:5000). Please ensure "npm start" is running.');
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        showToast(isLocal
+          ? '⚠️ Could not reach local server. Run "npm start" and visit http://localhost:5000'
+          : '⚠️ Could not connect to reservation service. Please check your connection and try again.');
       } finally {
         modalConfirmBtn.disabled = false;
         modalConfirmBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Reserve with Free Cancellation';
@@ -606,7 +604,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       } catch (err) {
         console.error('Newsletter Fetch error:', err);
-        showToast('⚠️ Unable to connect to server. Please ensure "npm start" is running on port 5000.');
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        showToast(isLocal
+          ? '⚠️ Unable to connect to server. Run "npm start" on port 5000.'
+          : '⚠️ Unable to subscribe right now. Please try again.');
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
