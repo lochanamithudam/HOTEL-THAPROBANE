@@ -1,0 +1,29 @@
+services:
+  # 1. MongoDB Database Container
+  database:
+    image: mongo:latest
+    container_name: hotel-mongodb
+    restart: always
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  # 2. Node.js Web App Container
+  web-app:
+    build: .
+    container_name: hotel-site
+    restart: always
+    ports:
+      - "8080:5000"
+    environment:
+      - MONGO_URI=mongodb://database:27017/hotel_db
+      - GMAIL_USER=lochanamithudam097@gmail.com
+      - GMAIL_PASS=gljguakkenemhrkz
+      - EMAIL_USER=lochanamithudam097@gmail.com
+      - EMAIL_PASS=gljguakkenemhrkz
+    depends_on:
+      - database
+
+volumes:
+  mongo-data:

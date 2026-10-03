@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test Video</title>
+</head>
+<body style="background:#222; color:#fff; font-family:sans-serif; padding:20px;">
+  <h2>Testing Hero Banner Video</h2>
+  <div id="status">Loading...</div>
+  <video id="vid" controls autoplay muted playsinline style="max-width:600px; display:block; margin:20px 0;">
+    <source src="Videos/SSP_BRAND_HERO.mp4" type="video/mp4">
+    <source src="Videos/SSP_BRAND_%20HERO.mp4" type="video/mp4">
+    <source src="Videos/SSP_BRAND_ HERO.mp4" type="video/mp4">
+  </video>
+  <pre id="log" style="background:#111; padding:15px; border-radius:5px;"></pre>
+
+  <script>
+    const v = document.getElementById('vid');
+    const log = document.getElementById('log');
+    function logMsg(msg) {
+      log.innerText += msg + '\n';
+      console.log(msg);
+    }
+    v.addEventListener('loadstart', () => logMsg('1. loadstart'));
+    v.addEventListener('loadedmetadata', () => logMsg('2. loadedmetadata - duration: ' + v.duration + ' dimensions: ' + v.videoWidth + 'x' + v.videoHeight));
+    v.addEventListener('loadeddata', () => logMsg('3. loadeddata'));
+    v.addEventListener('canplay', () => logMsg('4. canplay'));
+    v.addEventListener('playing', () => {
+      logMsg('5. playing!');
+      document.getElementById('status').innerText = 'VIDEO IS PLAYING!';
+      document.getElementById('status').style.color = '#4ade80';
+    });
+    v.addEventListener('error', (e) => {
+      const err = v.error;
+      logMsg('ERROR: code=' + (err ? err.code : 'unknown') + ' message=' + (err ? err.message : ''));
+      document.getElementById('status').innerText = 'FAILED TO PLAY VIDEO (Error code ' + (err ? err.code : '') + ')';
+      document.getElementById('status').style.color = '#f87171';
+    });
+  </script>
+</body>
+</html>
