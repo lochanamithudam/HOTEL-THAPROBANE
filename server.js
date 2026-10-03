@@ -33,6 +33,11 @@ app.use(cors({
 }));
 
 // Serve static frontend files (HTML, CSS, JS, Images)
+app.use('/css', express.static(path.join(__dirname, 'css')));
+app.use('/js', express.static(path.join(__dirname, 'js')));
+app.use('/Images', express.static(path.join(__dirname, 'Images')));
+app.use('/Videos', express.static(path.join(__dirname, 'Videos')));
+app.use('/fonts', express.static(path.join(__dirname, 'fonts')));
 app.use(express.static(path.join(__dirname)));
 
 // File path for local offline fallback storage

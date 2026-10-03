@@ -1,4 +1,6 @@
 {
+  "framework": null,
+  "cleanUrls": true,
   "rewrites": [
     { "source": "/api/bookings", "destination": "/api/bookings.js" },
     { "source": "/api/subscribe", "destination": "/api/subscribe.js" },
