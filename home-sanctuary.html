@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Sanctuary | Hotel Thaprobane Sri Lanka - Ultra-Luxury Beachfront Resort</title>
+  <meta name="description"
+    content="Welcome to the Home Sanctuary at Hotel Thaprobane, Sri Lanka. Where Ceylon's ancient name meets modern luxury. Oceanfront plunge villas, timeless heritage, and bespoke coastal serenity.">
+  <meta name="keywords"
+    content="Home Sanctuary, Hotel Thaprobane, Taprobane Sri Lanka, Ceylon luxury resort, Bentota plunge villa, Galle boutique hotel">
+
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600&family=Lora:ital,wght@0,400;1,400;1,500&family=Montserrat:wght@200;300;400;500;600;700&family=Outfit:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@200;300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Core & Dedicated Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/home-sanctuary.css">
+</head>
+
+<body>
+
+  <!-- ==================== LUXURY TOP NAVIGATION BAR ==================== -->
+  <header class="luxury-top-nav site-header">
+    <!-- Left: Navigation Links -->
+    <div class="hero-left-nav">
+      <div class="nav-stack-divider"></div>
+      <a href="index.html#rooms" class="nav-stack-link">OFFERS</a>
+      <div class="nav-stack-divider"></div>
+      <a href="#sanctuary-booking" class="nav-stack-link">BOOK</a>
+      <div class="nav-stack-divider"></div>
+    </div>
+
+    <!-- Center: Hotel Brand Identity -->
+    <div class="hero-center-brand">
+      <span class="hero-brand-tag">HOTEL</span>
+      <a href="home-sanctuary.html" class="hero-brand-name">THAPROBANE</a>
+    </div>
+
+    <!-- Right: Language Picker & Hamburger -->
+    <div class="hero-right-nav">
+      <div class="hero-lang-picker" title="Language: English">
+        <span>EN</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+      <button class="hero-hamburger mobile-toggle" id="menuToggleBtn" aria-label="Toggle Luxury Navigation Menu">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==================== FULL-SCREEN SLIDE-OUT LUXURY MENU ==================== -->
+  <div class="luxury-menu-overlay" id="luxuryMenuOverlay">
+    <div class="menu-overlay-backdrop" id="menuCloseBackdrop"></div>
+    <div class="menu-drawer">
+      <div class="menu-drawer-header">
+        <div class="menu-brand">
+          <span class="menu-brand-sub">HOTEL</span>
+          <span class="menu-brand-title">THAPROBANE</span>
+        </div>
+        <button class="menu-close-btn" id="menuCloseBtn" aria-label="Close Menu">
+          <span>CLOSE</span>
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <nav class="luxury-drawer-nav">
+        <ul>
+          <li>
+            <a href="home-sanctuary.html" class="drawer-nav-item active" style="color:#38bdf8;">
+              <span class="nav-num">01</span>
+              <span class="nav-name">Home Sanctuary</span>
+            </a>
+          </li>
+          <li>
+            <a href="index.html#rooms" class="drawer-nav-item">
+              <span class="nav-num">02</span>
+              <span class="nav-name">Suites & Private Plunge Villas</span>
+            </a>
+          </li>
+          <li>
+            <a href="index.html#booking-section" class="drawer-nav-item">
+              <span class="nav-num">03</span>
+              <span class="nav-name">Exclusive Offers & Booking</span>
+            </a>
+          </li>
+          <li>
+            <a href="index.html#dining" class="drawer-nav-item">
+              <span class="nav-num">04</span>
+              <span class="nav-name">Culinary Heritage & Ocean Dining</span>
+            </a>
+          </li>
+          <li>
+            <a href="index.html#experiences" class="drawer-nav-item">
+              <span class="nav-num">05</span>
+              <span class="nav-name">Ayurveda Spa & Island Journeys</span>
+            </a>
+          </li>
+          <li>
+            <a href="index.html#gallery" class="drawer-nav-item">
+              <span class="nav-num">06</span>
+              <span class="nav-name">Visual Gallery & 360° Tours</span>
+            </a>
+          </li>
+          <li>
+            <a href="index.html#location" class="drawer-nav-item">
+              <span class="nav-num">07</span>
+              <span class="nav-name">Location & Concierge Contact</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="menu-drawer-footer">
+        <div class="drawer-contact-info">
+          <p><i class="fa-solid fa-location-dot"></i> Coastal Beachway, Galle Coast, Sri Lanka</p>
+          <p><i class="fa-solid fa-phone"></i> +94 (0) 91 223 4567 · 24/7 WhatsApp Concierge</p>
+        </div>
+        <a href="#sanctuary-booking" class="btn-gold drawer-cta" id="drawerBookBtn">Reserve Your Stay</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 1. HERO SECTION ==================== -->
+  <section class="sanctuary-hero" id="sanctuary-hero">
+    <div class="sanctuary-hero-media">
+      <!-- Ambient Resort Video Background with Photographic Fallback -->
+      <video class="sanctuary-hero-video" id="sanctuaryVideo" autoplay muted loop playsinline preload="auto"
+        poster="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1920&auto=format&fit=crop">
+        <source src="Videos/SSP_BRAND_HERO.mp4" type="video/mp4">
+        <source src="Videos/SSP_BRAND_%20HERO.mp4" type="video/mp4">
+        <source src="Videos/SSP_BRAND_ HERO.mp4" type="video/mp4">
+      </video>
+      <div class="sanctuary-hero-overlay"></div>
+    </div>
+
+    <div class="sanctuary-hero-content">
+      <div class="sanctuary-eyebrow">
+        <i class="fa-solid fa-compass"></i>
+        <span>CEYLON'S PREMIER OCEANFRONT SANCTUARY</span>
+      </div>
+
+      <h1 class="sanctuary-hero-title">Home Sanctuary</h1>
+
+      <p class="sanctuary-hero-tagline">
+        "Where Ceylon's ancient name meets modern luxury"
+      </p>
+
+      <p class="sanctuary-hero-desc">
+        More than a resort stay, Home Sanctuary is an intimate realm designed for soul restoration. An exclusive enclave of 28 freestanding villas nestled within wild frangipani and cinnamon groves, where private infinity plunge pools, unhurried living, and intuitive Ceylon warmth welcome you into profound stillness.
+      </p>
+
+      <div class="sanctuary-hero-actions">
+        <a href="#sanctuary-booking" class="sanctuary-btn-gold">
+          <i class="fa-solid fa-calendar-check"></i> Check Availability
+        </a>
+        <a href="#sanctuary-essence" class="sanctuary-btn-ghost">
+          <i class="fa-solid fa-gem"></i> The Sanctuary Promise
+        </a>
+        <a href="index.html#rooms" class="sanctuary-btn-primary">
+          <i class="fa-solid fa-door-open"></i> Explore Villas
+        </a>
+      </div>
+
+      <div class="sanctuary-hero-features-strip">
+        <div class="sanctuary-feature-pill">
+          <i class="fa-solid fa-water-ladder"></i>
+          <div>
+            <strong>Private Plunge Seclusion</strong>
+            <span>100% enclosed personal pool courtyards</span>
+          </div>
+        </div>
+        <div class="sanctuary-feature-pill">
+          <i class="fa-solid fa-moon"></i>
+          <div>
+            <strong>Circadian Living</strong>
+            <span>Natural ocean drafts & Vedic sleep rituals</span>
+          </div>
+        </div>
+        <div class="sanctuary-feature-pill">
+          <i class="fa-solid fa-bell-concierge"></i>
+          <div>
+            <strong>Sanctuary Butler</strong>
+            <span>Unobtrusive, bespoke in-villa hospitality</span>
+          </div>
+        </div>
+        <div class="sanctuary-feature-pill">
+          <i class="fa-solid fa-spa"></i>
+          <div>
+            <strong>Restorative Rhythms</strong>
+            <span>Sunrise tidal yoga & starlit flower baths</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sanctuary-hero-rating">
+        <span class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+        <span>5.0 / 5.0 · TripAdvisor Travelers' Choice & Condé Nast Johansens 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 3. QUICK BOOKING BAR ==================== -->
+  <div class="sanctuary-booking-bar-wrap" id="sanctuary-booking">
+    <form class="sanctuary-booking-bar" id="hero-booking-form">
+      <!-- Check In Date -->
+      <div class="sanctuary-field">
+        <label for="checkin-date"><i class="fa-regular fa-calendar"></i> Check-In</label>
+        <input type="date" id="checkin-date" required>
+      </div>
+
+      <!-- Check Out Date -->
+      <div class="sanctuary-field">
+        <label for="checkout-date"><i class="fa-regular fa-calendar-check"></i> Check-Out</label>
+        <input type="date" id="checkout-date" required>
+      </div>
+
+      <!-- Guests -->
+      <div class="sanctuary-field">
+        <label for="guests-count"><i class="fa-solid fa-user-group"></i> Guests</label>
+        <select id="guests-count">
+          <option value="1">1 Adult (Solo Retreat)</option>
+          <option value="2" selected>2 Adults (Couple)</option>
+          <option value="3">3 Adults</option>
+          <option value="4">2 Adults + 2 Children</option>
+          <option value="6">Family Suite (Up to 6)</option>
+        </select>
+      </div>
+
+      <!-- Villa Selection -->
+      <div class="sanctuary-field">
+        <label for="room-type"><i class="fa-solid fa-hotel"></i> Sanctuary Villa</label>
+        <select id="room-type">
+          <option value="ocean-suite" selected>Royal Oceanfront Penthouse ($480/nt)</option>
+          <option value="heritage-villa">Ceylon Heritage Plunge Villa ($360/nt)</option>
+          <option value="premium-view">Taprobane Premium Ocean King ($250/nt)</option>
+          <option value="cinnamon-pavilion">Cinnamon Garden Pavilion ($210/nt)</option>
+          <option value="presidential-villa">Imperial 3-Bedroom Estate ($890/nt)</option>
+        </select>
+      </div>
+
+      <!-- Submit CTA -->
+      <button type="submit" class="sanctuary-btn-primary sanctuary-bar-btn">
+        <i class="fa-solid fa-magnifying-glass"></i> Check Rates
+      </button>
+    </form>
+
+    <div class="sanctuary-bar-perks">
+      <span><i class="fa-solid fa-shield-halved"></i> Best Direct Rate Guaranteed</span>
+      <span><i class="fa-solid fa-mug-hot"></i> Daily Artisan Ceylon Breakfast Included</span>
+      <span><i class="fa-solid fa-car-side"></i> Complimentary Airport Chauffeur Transfer</span>
+      <span><i class="fa-solid fa-clock-rotate-left"></i> Flexible Free Cancellation</span>
+    </div>
+  </div>
+
+  <!-- ==================== THE ESSENCE OF HOME SANCTUARY ==================== -->
+  <section class="sanctuary-essence-section" id="sanctuary-essence">
+    <div class="container">
+      <div style="text-align: center; max-width: 720px; margin: 0 auto;">
+        <span class="section-tag">THE SANCTUARY PROMISE</span>
+        <h2 class="section-heading">Why Home Sanctuary Is Distinct</h2>
+        <p class="section-subtitle">
+          Engineered for privacy, natural restoration, and timeless ease, discover what separates our private sanctuary from any conventional 5-star resort.
+        </p>
+      </div>
+
+      <div class="sanctuary-essence-grid">
+        <!-- 01: Complete Spatial Seclusion -->
+        <div class="sanctuary-essence-card">
+          <span class="sanctuary-essence-num">01</span>
+          <h3>Absolute Spatial Seclusion</h3>
+          <p>
+            No shared corridors or crowded poolside loungers. Each villa is an independent architectural cocoon, enclosed by living walls of wild cinnamon and handcrafted stone, ensuring your private plunge pool and sun terraces remain entirely your own.
+          </p>
+          <ul class="sanctuary-essence-list">
+            <li><i class="fa-solid fa-check"></i> 100% Private, unoverlooked plunge pools</li>
+            <li><i class="fa-solid fa-check"></i> Open-to-sky tropical rain showers</li>
+            <li><i class="fa-solid fa-check"></i> Direct barefoot beach pathway through lush flora</li>
+          </ul>
+        </div>
+
+        <!-- 02: Circadian & Unhurried Living -->
+        <div class="sanctuary-essence-card">
+          <span class="sanctuary-essence-num">02</span>
+          <h3>Circadian & Unhurried Living</h3>
+          <p>
+            Forget strict breakfast hours or scheduled itineraries. Home Sanctuary moves at the pace of your own breath. Wake at noon, dine beneath the palms at 3 PM, or request a midnight oceanfront dessert by your private firepit.
+          </p>
+          <ul class="sanctuary-essence-list">
+            <li><i class="fa-solid fa-check"></i> 24/7 Any-time in-villa artisan breakfast</li>
+            <li><i class="fa-solid fa-check"></i> No formal front desk check-in delay</li>
+            <li><i class="fa-solid fa-check"></i> Optional digital-detox & mindful stargazing</li>
+          </ul>
+        </div>
+
+        <!-- 03: The Ancient Taprobane Touch -->
+        <div class="sanctuary-essence-card">
+          <span class="sanctuary-essence-num">03</span>
+          <h3>The Healing Spirit of Taprobane</h3>
+          <p>
+            Reviving the legendary sanctuary that sheltered ancient spice traders, your stay is subtly infused with therapeutic herbal aromas, dosha-balanced teas, warm oil foot soaks on arrival, and personal treatments performed in your pavilion.
+          </p>
+          <ul class="sanctuary-essence-list">
+            <li><i class="fa-solid fa-check"></i> Personalized Ayurvedic welcome foot bath</li>
+            <li><i class="fa-solid fa-check"></i> Nightly botanical pillow mist & calming tisane</li>
+            <li><i class="fa-solid fa-check"></i> In-villa therapists upon request</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 2. BRAND STORY ==================== -->
+  <section class="sanctuary-story" id="brand-story">
+    <div class="container">
+      <div class="sanctuary-story-grid">
+        <!-- Editorial Narrative -->
+        <div class="sanctuary-story-text">
+          <span class="section-tag">HERITAGE & IDENTITY</span>
+          <h2 class="section-heading" style="font-size:clamp(2rem, 3.2vw, 2.8rem);">
+            Taprobane: The World's First Recorded Haven of Healing & Sanctuary
+          </h2>
+
+          <div class="sanctuary-story-quote">
+            "To ancient seafaring voyagers navigating tumultuous Indian Ocean monsoon storms, the sheltered bays of Taprobane were never merely a port — they were a sacred sanctuary of deep healing, fragrant spice winds, and royal peace."
+          </div>
+
+          <p class="sanctuary-story-p">
+            In 300 BC, Greek cartographers and philosophers like Megasthenes documented our emerald island under the name <strong>Taprobane</strong>. Ancient records recount that exhausted sailors, after months tossed upon tempestuous seas, would weep with relief upon reaching these calm coral bays. Here, island healers offered wild cinnamon infusions, coconut elixirs, and restorative baths that restored their weary spirits.
+          </p>
+
+          <p class="sanctuary-story-p">
+            <strong>Home Sanctuary at Hotel Thaprobane</strong> was born to revive that exact sanctuary essence for today's traveler. We stripped away the pretenses of commercial luxury to give you what the modern soul craves most: genuine quietude, architectural harmony with the ocean, and the comforting feeling of coming home to a private haven of your own.
+          </p>
+
+          <div class="sanctuary-story-badges">
+            <div class="sanctuary-story-badge-item">
+              <i class="fa-solid fa-door-open"></i>
+              <div>
+                <h5>In-Villa Private Arrival</h5>
+                <p>Straight to your private villa; zero reception wait.</p>
+              </div>
+            </div>
+            <div class="sanctuary-story-badge-item">
+              <i class="fa-solid fa-wind"></i>
+              <div>
+                <h5>Biophilic Architecture</h5>
+                <p>Natural cooling sea breezes & open-air courtyards.</p>
+              </div>
+            </div>
+            <div class="sanctuary-story-badge-item">
+              <i class="fa-solid fa-fire-flame-curved"></i>
+              <div>
+                <h5>Twilight Lamp Ceremony</h5>
+                <p>Daily 6 PM oil lamps and acoustic temple flute.</p>
+              </div>
+            </div>
+            <div class="sanctuary-story-badge-item">
+              <i class="fa-solid fa-binoculars"></i>
+              <div>
+                <h5>Celestial Stargazing</h5>
+                <p>Brass telescopes for southern sky constellation maps.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Overlapping Visual Composition -->
+        <div class="sanctuary-story-images">
+          <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?q=80&w=1200&auto=format&fit=crop"
+            alt="Hotel Thaprobane Luxury Resort" class="sanctuary-img-large">
+          <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=800&auto=format&fit=crop"
+            alt="Sri Lanka Coastline & Frangipani" class="sanctuary-img-small">
+          <div class="sanctuary-seal">
+            <span class="seal-year">SINCE ANCIENT</span>
+            <span class="seal-title">TAPROBANE</span>
+            <span class="seal-sub">CEYLON SANCTUARY</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== THE DAILY RHYTHMS OF HOME SANCTUARY ==================== -->
+  <section class="sanctuary-rhythms-section" id="sanctuary-rhythms">
+    <div class="container">
+      <div style="text-align: center; max-width: 680px; margin: 0 auto;">
+        <span class="section-tag" style="color:var(--sanctuary-gold);">TIMELESS LIVING</span>
+        <h2 class="section-heading" style="color:#ffffff;">The Daily Rhythms of Home Sanctuary</h2>
+        <p class="section-subtitle" style="color:#94a3b8;">
+          A gentle choreography of restorative moments designed to synchronize your body and spirit with the tides of the Indian Ocean.
+        </p>
+      </div>
+
+      <div class="sanctuary-rhythms-grid">
+        <!-- Rhythm 1: Dawn -->
+        <div class="sanctuary-rhythm-card">
+          <span class="sanctuary-rhythm-time"><i class="fa-regular fa-sun"></i> 06:30 · DAWN</span>
+          <h4>The Golden Awakening</h4>
+          <p>Fresh king coconut water and warm wild ginger tea delivered to your private veranda as the morning light sparkles upon your plunge pool.</p>
+        </div>
+
+        <!-- Rhythm 2: Midday -->
+        <div class="sanctuary-rhythm-card">
+          <span class="sanctuary-rhythm-time"><i class="fa-solid fa-leaf"></i> 11:30 · MIDDAY</span>
+          <h4>Tidal Prana Rest</h4>
+          <p>Unwind with guided breathing by the shoreline pavilion, followed by a personalized Ayurvedic clay-pot lunch crafted to your wellness profile.</p>
+        </div>
+
+        <!-- Rhythm 3: Twilight -->
+        <div class="sanctuary-rhythm-card">
+          <span class="sanctuary-rhythm-time"><i class="fa-solid fa-fire"></i> 18:00 · TWILIGHT</span>
+          <h4>The Lotus & Fire Ceremony</h4>
+          <p>Traditional brass oil lamps are lit across the garden courtyards to the gentle melody of bamboo flutes, accompanied by sunset vintage pairings.</p>
+        </div>
+
+        <!-- Rhythm 4: Night -->
+        <div class="sanctuary-rhythm-card">
+          <span class="sanctuary-rhythm-time"><i class="fa-solid fa-moon"></i> 21:00 · NIGHT</span>
+          <h4>The Moonlight Soaking Ritual</h4>
+          <p>Your butler draws a warm botanical bath infused with blue water lilies and vetiver, preparing you for restorative sleep to the murmur of waves.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 4. SANCTUARY HIGHLIGHTS (PILLARS) ==================== -->
+  <section class="sanctuary-highlights" id="highlights">
+    <div class="container">
+      <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+        <span class="section-tag">SANCTUARY HIGHLIGHTS</span>
+        <h2 class="section-heading">Four Pillars of the Thaprobane Experience</h2>
+        <p class="section-subtitle">
+          A preview of our most cherished offerings, crafted to immerse your senses in the sublime soul of Sri Lanka.
+        </p>
+      </div>
+
+      <div class="sanctuary-highlights-grid">
+        <!-- 1. Private Plunge Villas -->
+        <a href="index.html#rooms" class="sanctuary-highlight-card">
+          <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=1000&auto=format&fit=crop"
+            alt="Private Plunge Villas" class="sanctuary-card-bg-img">
+          <div class="sanctuary-card-overlay"></div>
+          <div class="sanctuary-card-content">
+            <span class="sanctuary-card-tag">ACCOMMODATION</span>
+            <h3 class="sanctuary-card-title">Private Plunge Villas</h3>
+            <p class="sanctuary-card-sentence">
+              Secluded tropical pavilions featuring cobalt plunge pools, outdoor rainfall showers, and direct views of the rolling Indian Ocean.
+            </p>
+            <span class="sanctuary-card-link">Explore Suites & Villas <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- 2. Ocean Dining -->
+        <a href="index.html#dining" class="sanctuary-highlight-card">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1000&auto=format&fit=crop"
+            alt="Ocean Dining & Spice Route" class="sanctuary-card-bg-img">
+          <div class="sanctuary-card-overlay"></div>
+          <div class="sanctuary-card-content">
+            <span class="sanctuary-card-tag">GASTRONOMY</span>
+            <h3 class="sanctuary-card-title">Ocean Dining</h3>
+            <p class="sanctuary-card-sentence">
+              Indulge in fresh Ceylon lobster, lagoon mud crabs, and cinnamon-spiced culinary masterworks accompanied by sunset vintage wines.
+            </p>
+            <span class="sanctuary-card-link">Explore Ocean Dining <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- 3. Ayurveda Spa -->
+        <a href="index.html#experiences" class="sanctuary-highlight-card">
+          <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1000&auto=format&fit=crop"
+            alt="Ayurveda Wellness Spa" class="sanctuary-card-bg-img">
+          <div class="sanctuary-card-overlay"></div>
+          <div class="sanctuary-card-content">
+            <span class="sanctuary-card-tag">HOLISTIC WELLNESS</span>
+            <h3 class="sanctuary-card-title">Ayurveda Spa</h3>
+            <p class="sanctuary-card-sentence">
+              Centuries-old herbal steam rituals, dosha-balancing elixirs, and serene sunrise yoga pavilions guided by resident Ayurvedic doctors.
+            </p>
+            <span class="sanctuary-card-link">Explore Ayurveda Spa <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- 4. Island Journeys -->
+        <a href="index.html#experiences" class="sanctuary-highlight-card">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1000&auto=format&fit=crop"
+            alt="Island Journeys Sri Lanka" class="sanctuary-card-bg-img">
+          <div class="sanctuary-card-overlay"></div>
+          <div class="sanctuary-card-content">
+            <span class="sanctuary-card-tag">EXPEDITIONS</span>
+            <h3 class="sanctuary-card-title">Island Journeys</h3>
+            <p class="sanctuary-card-sentence">
+              Charter private luxury catamarans for blue whale watching, explore Dutch Galle Fort, or take a scenic flight over verdant tea hills.
+            </p>
+            <span class="sanctuary-card-link">Explore Island Journeys <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 5. KEY HOTEL ESSENTIALS (HOTEL FACTS) ==================== -->
+  <section class="sanctuary-facts" id="hotel-info">
+    <div class="container">
+      <div style="text-align: center; max-width: 650px; margin: 0 auto;">
+        <span class="section-tag">AT A GLANCE</span>
+        <h2 class="section-heading">Essential Sanctuary Information</h2>
+        <p class="section-subtitle">Everything you need to plan your seamless escape to Ceylon’s southern coast.</p>
+      </div>
+
+      <div class="sanctuary-facts-grid">
+        <!-- Fact 1: Location -->
+        <div class="sanctuary-fact-card">
+          <div class="sanctuary-fact-icon-wrap"><i class="fa-solid fa-map-location-dot"></i></div>
+          <h4>Location & Region</h4>
+          <div class="sanctuary-fact-highlight">Bentota – Galle Coastline</div>
+          <p class="sanctuary-fact-desc">
+            Nestled on Sri Lanka’s golden southern beach belt. 15 mins to historic UNESCO Galle Fort and 5 mins to Bentota river watersports.
+          </p>
+        </div>
+
+        <!-- Fact 2: Airport Distance -->
+        <div class="sanctuary-fact-card">
+          <div class="sanctuary-fact-icon-wrap"><i class="fa-solid fa-plane-arrival"></i></div>
+          <h4>Airport Distance & Time</h4>
+          <div class="sanctuary-fact-highlight">90 Mins from Colombo (CMB)</div>
+          <p class="sanctuary-fact-desc">
+            Directly connected via the smooth Southern Expressway. Also accessible via a 30-minute domestic scenic seaplane or helicopter flight.
+          </p>
+        </div>
+
+        <!-- Fact 3: Transfers -->
+        <div class="sanctuary-fact-card">
+          <div class="sanctuary-fact-icon-wrap"><i class="fa-solid fa-car-side"></i></div>
+          <h4>VIP Transfers & Helipad</h4>
+          <div class="sanctuary-fact-highlight">Chauffeur & Helipad On-Site</div>
+          <p class="sanctuary-fact-desc">
+            Complimentary luxury Mercedes-Benz airport pickup for direct bookings. On-site private helipad for effortless VIP arrivals.
+          </p>
+        </div>
+
+        <!-- Fact 4: Rooms & Villas -->
+        <div class="sanctuary-fact-card">
+          <div class="sanctuary-fact-icon-wrap"><i class="fa-solid fa-key"></i></div>
+          <h4>Villas & Sanctuaries</h4>
+          <div class="sanctuary-fact-highlight">28 Ultra-Exclusive Sanctuaries</div>
+          <p class="sanctuary-fact-desc">
+            Intimate boutique density ensuring complete seclusion, comprising Oceanfront Penthouses, Private Plunge Pool Villas, and 3-Bedroom Estates.
+          </p>
+        </div>
+
+        <!-- Fact 5: Timings -->
+        <div class="sanctuary-fact-card">
+          <div class="sanctuary-fact-icon-wrap"><i class="fa-solid fa-clock"></i></div>
+          <h4>Check-In & Check-Out</h4>
+          <div class="sanctuary-fact-highlight">In: 14:00 | Out: 12:00</div>
+          <p class="sanctuary-fact-desc">
+            Direct website bookings enjoy priority complimentary early check-in and leisurely late check-out (subject to villa availability).
+          </p>
+        </div>
+
+        <!-- Fact 6: Shoreline -->
+        <div class="sanctuary-fact-card">
+          <div class="sanctuary-fact-icon-wrap"><i class="fa-solid fa-water"></i></div>
+          <h4>Beach & Lagoon Access</h4>
+          <div class="sanctuary-fact-highlight">300m Private Secluded Beach</div>
+          <p class="sanctuary-fact-desc">
+            Gentle coral reef lagoon offering safe, year-round ocean swimming, sunset daybeds, and private candlelit dining directly upon the sand.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 6. EXCLUSIVE OFFERS TEASER BANNER ==================== -->
+  <section class="sanctuary-exclusive-offer">
+    <div class="container">
+      <div class="sanctuary-offer-banner">
+        <div class="sanctuary-offer-content">
+          <span class="sanctuary-offer-tag">SIGNATURE SANCTUARY OFFER</span>
+          <h3 class="sanctuary-offer-title">The Taprobane Honeymoon & Romance Escape</h3>
+          <p class="sanctuary-offer-desc">
+            Celebrate love upon our pristine shores with an all-inclusive romantic package designed for timeless memories.
+          </p>
+
+          <div class="sanctuary-offer-perks-list">
+            <div class="sanctuary-offer-perk"><i class="fa-solid fa-champagne-glasses"></i> Chilled Champagne on arrival</div>
+            <div class="sanctuary-offer-perk"><i class="fa-solid fa-heart"></i> Private Beach Candlelight 5-course Dinner</div>
+            <div class="sanctuary-offer-perk"><i class="fa-solid fa-spa"></i> 90-min Couples Ayurvedic Massage</div>
+            <div class="sanctuary-offer-perk"><i class="fa-solid fa-sailboat"></i> Sunset Private Catamaran Cruise</div>
+          </div>
+
+          <div style="display:flex; gap:16px; flex-wrap:wrap;">
+            <a href="#sanctuary-booking" class="sanctuary-btn-gold">
+              <i class="fa-solid fa-bolt"></i> Reserve Honeymoon Offer
+            </a>
+            <a href="https://wa.me/94771234567?text=Hello%2C%20I%20am%20interested%20in%20the%20Taprobane%20Honeymoon%20Offer"
+              target="_blank" rel="noopener noreferrer" class="sanctuary-btn-ghost">
+              <i class="fa-brands fa-whatsapp"></i> Inquire with Concierge
+            </a>
+          </div>
+        </div>
+
+        <div class="sanctuary-offer-img-box">
+          <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?q=80&w=1200&auto=format&fit=crop"
+            alt="Romantic Honeymoon Sanctuary Sri Lanka">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 7. TRUST & GUEST SOCIAL PROOF ==================== -->
+  <section class="sanctuary-reviews" id="reviews">
+    <div class="container">
+      <!-- Awards Bar -->
+      <div class="sanctuary-awards-row">
+        <div class="sanctuary-award-item">
+          <i class="fa-brands fa-tripadvisor"></i>
+          <div>
+            <h6>TripAdvisor Travelers' Choice</h6>
+            <span>#1 Luxury Boutique in Sri Lanka (5.0 / 5)</span>
+          </div>
+        </div>
+
+        <div class="sanctuary-award-item">
+          <i class="fa-solid fa-crown"></i>
+          <div>
+            <h6>Condé Nast Johansens 2026</h6>
+            <span>Excellence in Oceanfront Luxury & Spa</span>
+          </div>
+        </div>
+
+        <div class="sanctuary-award-item">
+          <i class="fa-solid fa-medal"></i>
+          <div>
+            <h6>Booking.com Traveler Review</h6>
+            <span>Rating 9.8 / 10 · Exceptional Quality</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; max-width: 650px; margin: 0 auto 50px;">
+        <span class="section-tag">TESTIMONIALS</span>
+        <h2 class="section-heading">Words From Our Cherished Guests</h2>
+        <p class="section-subtitle">Real experiences shared by travelers from across the globe who found their sanctuary in Taprobane.</p>
+      </div>
+
+      <div class="sanctuary-reviews-grid">
+        <!-- Review 1 -->
+        <div class="sanctuary-review-card">
+          <div class="sanctuary-review-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="sanctuary-review-quote">
+            "An ethereal sanctuary. Watching the sunset from our private plunge pool villa while listening to the rhythmic ocean waves was pure magic. The personalized butler service and Ceylon gastronomy are unmatched in South Asia."
+          </p>
+          <div class="sanctuary-reviewer">
+            <div class="sanctuary-reviewer-avatar">ES</div>
+            <div class="sanctuary-reviewer-info">
+              <h5>Lady Eleanor S.</h5>
+              <span>London, United Kingdom · Stayed in Ceylon Plunge Villa</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="sanctuary-review-card">
+          <div class="sanctuary-review-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="sanctuary-review-quote">
+            "True barefoot luxury at its finest. The historical connection to ancient Taprobane is felt in every architectural detail. The daily Ayurveda treatments and bespoke yoga sessions cured months of city burnout."
+          </p>
+          <div class="sanctuary-reviewer">
+            <div class="sanctuary-reviewer-avatar">HL</div>
+            <div class="sanctuary-reviewer-info">
+              <h5>Dr. Henrik & Clara L.</h5>
+              <span>Stockholm, Sweden · Stayed in Royal Oceanfront Penthouse</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="sanctuary-review-card">
+          <div class="sanctuary-review-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="sanctuary-review-quote">
+            "Hotel Thaprobane sets the benchmark for Sri Lankan hospitality. From the helicopter arrival on the private helipad to the private candlelit beach dinner under starry skies, every single moment was heavenly."
+          </p>
+          <div class="sanctuary-reviewer">
+            <div class="sanctuary-reviewer-avatar">JV</div>
+            <div class="sanctuary-reviewer-info">
+              <h5>Julian & Maya Vance</h5>
+              <span>Melbourne, Australia · Honeymoon Retreat</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 8. CURATED PACKAGES TEASER ==================== -->
+  <section class="sanctuary-packages" id="packages">
+    <div class="container">
+      <div style="text-align: center; max-width: 650px; margin: 0 auto;">
+        <span class="section-tag">CURATED STAYS</span>
+        <h2 class="section-heading">Sanctuary Experience Packages</h2>
+        <p class="section-subtitle">Tailored escapes harmonizing luxury accommodation, wellness, and island discovery.</p>
+      </div>
+
+      <div class="sanctuary-packages-grid">
+        <!-- Package 1: Honeymoon -->
+        <div class="sanctuary-package-card">
+          <div class="sanctuary-package-img-wrap">
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800&auto=format&fit=crop"
+              alt="Honeymoon Romance Sanctuary">
+            <span class="sanctuary-package-duration">3 TO 5 NIGHTS</span>
+          </div>
+          <div class="sanctuary-package-body">
+            <div>
+              <h3>Honeymoon Romance Sanctuary</h3>
+              <p>An intimate haven for newlyweds featuring oceanfront candlelight dining, vintage champagne, and couples rituals.</p>
+              <ul class="sanctuary-package-perks">
+                <li><i class="fa-solid fa-check"></i> Private Plunge Villa guaranteed upgrade</li>
+                <li><i class="fa-solid fa-check"></i> Beachfront 5-course candlelit dinner</li>
+                <li><i class="fa-solid fa-check"></i> 90-min couples Ayurvedic therapy</li>
+              </ul>
+            </div>
+            <div class="sanctuary-package-footer">
+              <div class="sanctuary-package-price">
+                <span>STARTING FROM</span>
+                <strong>$390 <small>/ night</small></strong>
+              </div>
+              <a href="#sanctuary-booking" class="sanctuary-btn-gold" style="padding:10px 20px; font-size:0.75rem;">
+                Reserve
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Package 2: Ayurveda & Wellness -->
+        <div class="sanctuary-package-card">
+          <div class="sanctuary-package-img-wrap">
+            <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=800&auto=format&fit=crop"
+              alt="Ayurveda Wellness Retreat">
+            <span class="sanctuary-package-duration">5 TO 7 NIGHTS</span>
+          </div>
+          <div class="sanctuary-package-body">
+            <div>
+              <h3>Ayurveda Rejuvenation Retreat</h3>
+              <p>Realign your body and soul through personalized Vedic healing, detox gastronomy, and ocean meditation.</p>
+              <ul class="sanctuary-package-perks">
+                <li><i class="fa-solid fa-check"></i> Full diagnostic by resident Ayurvedic Doctor</li>
+                <li><i class="fa-solid fa-check"></i> Daily 2-hour customized herbal treatments</li>
+                <li><i class="fa-solid fa-check"></i> Sunrise oceanfront yoga & meditation</li>
+              </ul>
+            </div>
+            <div class="sanctuary-package-footer">
+              <div class="sanctuary-package-price">
+                <span>STARTING FROM</span>
+                <strong>$320 <small>/ night</small></strong>
+              </div>
+              <a href="#sanctuary-booking" class="sanctuary-btn-gold" style="padding:10px 20px; font-size:0.75rem;">
+                Reserve
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Package 3: Family Estate -->
+        <div class="sanctuary-package-card">
+          <div class="sanctuary-package-img-wrap">
+            <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=800&auto=format&fit=crop"
+              alt="Family Ocean Estate">
+            <span class="sanctuary-package-duration">4 TO 6 NIGHTS</span>
+          </div>
+          <div class="sanctuary-package-body">
+            <div>
+              <h3>Family Ocean Heritage Haven</h3>
+              <p>A multi-generational luxury escape with inter-connected suites, private pool garden, and curated family excursions.</p>
+              <ul class="sanctuary-package-perks">
+                <li><i class="fa-solid fa-check"></i> Imperial 3-Bedroom Pool Estate</li>
+                <li><i class="fa-solid fa-check"></i> Baby sea turtle conservation expedition</li>
+                <li><i class="fa-solid fa-check"></i> Galle Fort private family guided walk</li>
+              </ul>
+            </div>
+            <div class="sanctuary-package-footer">
+              <div class="sanctuary-package-price">
+                <span>STARTING FROM</span>
+                <strong>$680 <small>/ night</small></strong>
+              </div>
+              <a href="#sanctuary-booking" class="sanctuary-btn-gold" style="padding:10px 20px; font-size:0.75rem;">
+                Reserve
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 8. FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1: About & Identity -->
+        <div class="footer-col">
+          <div class="logo" style="font-size:1.4rem; margin-bottom:15px; color:#ffffff;">HOTEL THAPROBANE</div>
+          <p>Hotel Thaprobane is an ultra-luxury sanctuary celebrating the heritage, architectural romance, and authentic hospitality of Sri Lanka's golden southern coast.</p>
+          <div class="footer-social-links">
+            <a href="#" class="social-icon-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-icon-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-icon-btn" aria-label="TripAdvisor"><i class="fa-brands fa-tripadvisor"></i></a>
+            <a href="#" class="social-icon-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <!-- Col 2: Sanctuaries Navigation -->
+        <div class="footer-col">
+          <h4>Sanctuaries</h4>
+          <div class="footer-links">
+            <a href="index.html#rooms">Royal Oceanfront Penthouse</a>
+            <a href="index.html#rooms">Ceylon Heritage Plunge Villa</a>
+            <a href="index.html#rooms">Taprobane Premium Ocean King</a>
+            <a href="index.html#rooms">Cinnamon Garden Pavilion</a>
+            <a href="index.html#rooms">Imperial 3-Bedroom Estate</a>
+            <a href="index.html#offers">Special Offers & Packages</a>
+          </div>
+        </div>
+
+        <!-- Col 3: Experiences -->
+        <div class="footer-col">
+          <h4>Experiences</h4>
+          <div class="footer-links">
+            <a href="index.html#dining">The Spice Route Seafood</a>
+            <a href="index.html#dining">Sunset Mixology Bar</a>
+            <a href="index.html#amenities">Ayurveda Spa & Yoga</a>
+            <a href="index.html#gallery"><i class="fa-solid fa-images"></i> Visual Gallery</a>
+          </div>
+        </div>
+
+        <!-- Col 4: Direct Concierge & Contact -->
+        <div class="footer-col">
+          <h4>Direct Concierge</h4>
+          <div class="footer-contact-info">
+            <div class="footer-contact-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <span>Galle Coastal Highway, Southern Province, Sri Lanka</span>
+            </div>
+            <div class="footer-contact-item">
+              <i class="fa-solid fa-phone"></i>
+              <span>+94 (0) 91 223 4567 / +94 77 987 6543</span>
+            </div>
+            <div class="footer-contact-item">
+              <i class="fa-solid fa-envelope"></i>
+              <span>concierge@hotelthaprobane.com</span>
+            </div>
+            <div class="footer-contact-item">
+              <i class="fa-brands fa-whatsapp"></i>
+              <span>24/7 Dedicated WhatsApp Butler</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Hotel Thaprobane Luxury Resort & Spa. All Rights Reserved.</p>
+        <p>Designed with Ceylon Elegance · Best Rate Guarantee</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== FLOATING WHATSAPP / LIVE CHAT BUTTON ==================== -->
+  <div class="floating-chat-container">
+    <a href="https://wa.me/94771234567?text=Hello%20Hotel%20Thaprobane%2C%20I%20would%20like%20to%20inquire%20about%20the%20Home%20Sanctuary%20stay."
+      target="_blank" rel="noopener noreferrer" class="floating-whatsapp-btn" aria-label="Chat on WhatsApp">
+      <div class="chat-ping-ring"></div>
+      <i class="fa-brands fa-whatsapp"></i>
+      <div class="chat-tooltip-popup">
+        <i class="fa-solid fa-headset" style="color:#25d366;"></i>
+        <span>Chat with Sanctuary Concierge</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- ==================== LIVE AVAILABILITY & PRICE CHECKER MODAL ==================== -->
+  <div class="modal-backdrop" id="booking-modal">
+    <div class="modal-container">
+      <button class="modal-close-btn" id="modal-close-btn" aria-label="Close Modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <span class="section-tag" style="margin-bottom:6px;">Instant Sanctuary Calculator</span>
+      <h3 style="font-size:1.6rem; color:#ffffff; margin-bottom:8px;">Live Availability & Pricing Breakdown</h3>
+      <p style="color:var(--text-muted); font-size:0.85rem;">Guaranteed Best Direct Booking Rate with complimentary gourmet breakfast & airport transfer.</p>
+
+      <div class="modal-pricing-summary">
+        <div class="modal-price-row">
+          <span style="font-weight:600;" id="modal-room-name">Royal Oceanfront Penthouse Suite</span>
+          <span style="color:var(--primary-gold); font-weight:600;" id="modal-nightly-rate">$480/night</span>
+        </div>
+        <div class="modal-price-row">
+          <span>Duration & Guests:</span>
+          <span id="modal-nights-count">3 Nights (2 Guests)</span>
+        </div>
+        <div class="modal-price-row">
+          <span>Subtotal Sanctuary Charge:</span>
+          <span id="modal-subtotal">$1,440</span>
+        </div>
+        <div class="modal-price-row">
+          <span>Government Taxes & Tourism Levy (12%):</span>
+          <span id="modal-taxes">$173</span>
+        </div>
+        <div class="modal-price-row total">
+          <span>Estimated Total Investment:</span>
+          <span id="modal-total">$1,613 USD</span>
+        </div>
+      </div>
+
+      <!-- Guest Details Form Fields -->
+      <div class="modal-guest-form" style="margin-bottom: 20px;">
+        <h4 style="font-size: 0.95rem; margin-bottom: 12px; color: var(--text-white); font-family: var(--font-sans); font-weight: 600;">
+          <i class="fa-solid fa-user-circle" style="color: var(--primary-gold);"></i> Guest Information
+        </h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+          <div>
+            <label for="modal-guest-name" style="display:block; font-size:0.75rem; color:var(--text-muted); margin-bottom:4px; font-weight:500;">Full Name *</label>
+            <input type="text" id="modal-guest-name" class="modal-input" placeholder="e.g. Alexander Weber" required
+              style="width:100%; padding:10px 12px; background:var(--bg-dark); border:1px solid var(--bg-card-border); border-radius:var(--radius-sm); color:var(--text-cream); font-size:0.85rem;">
+          </div>
+          <div>
+            <label for="modal-guest-email" style="display:block; font-size:0.75rem; color:var(--text-muted); margin-bottom:4px; font-weight:500;">Email Address *</label>
+            <input type="email" id="modal-guest-email" class="modal-input" placeholder="e.g. alex@example.com" required
+              style="width:100%; padding:10px 12px; background:var(--bg-dark); border:1px solid var(--bg-card-border); border-radius:var(--radius-sm); color:var(--text-cream); font-size:0.85rem;">
+          </div>
+        </div>
+        <div>
+          <label for="modal-guest-phone" style="display:block; font-size:0.75rem; color:var(--text-muted); margin-bottom:4px; font-weight:500;">Phone / WhatsApp (Optional)</label>
+          <input type="tel" id="modal-guest-phone" class="modal-input" placeholder="e.g. +94 77 123 4567"
+            style="width:100%; padding:10px 12px; background:var(--bg-dark); border:1px solid var(--bg-card-border); border-radius:var(--radius-sm); color:var(--text-cream); font-size:0.85rem;">
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <button class="btn-gold" id="modal-confirm-btn" style="width:100%; padding:14px; cursor:pointer;">
+          <i class="fa-solid fa-lock"></i> Reserve with Free Cancellation
+        </button>
+        <span style="font-size:0.75rem; text-align:center; color:var(--text-muted);">
+          <i class="fa-solid fa-shield-halved" style="color:#10b981;"></i> No upfront charge · Pay upon check-in at Hotel Thaprobane
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Files -->
+  <script src="js/app.js"></script>
+  <script>
+    // Ensure video autoplays smoothly
+    (function () {
+      var video = document.getElementById('sanctuaryVideo');
+      if (!video) return;
+      video.muted = true;
+      var playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(function () {
+          document.addEventListener('click', function tryPlay() {
+            video.play();
+            document.removeEventListener('click', tryPlay);
+          }, { once: true });
+        });
+      }
+    })();
+  </script>
+</body>
+
+</html>

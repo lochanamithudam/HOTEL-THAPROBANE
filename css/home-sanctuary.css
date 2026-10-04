@@ -1,0 +1,1244 @@
+/* ==========================================================================
+   HOTEL THAPROBANE - HOME SANCTUARY DEDICATED STYLESHEET
+   Aesthetic: Ultra-Luxury Ceylon Coastal Sanctuary, Editorial Typography & Glassmorphism
+   ========================================================================== */
+
+/* --- Sanctuary Specific Variables --- */
+:root {
+  --sanctuary-navy: #071520;
+  --sanctuary-deep-blue: #0b1d28;
+  --sanctuary-ocean: #0077b6;
+  --sanctuary-ocean-light: #0096c7;
+  --sanctuary-gold: #c89f53;
+  --sanctuary-gold-hover: #dfba73;
+  --sanctuary-gold-soft: #f7eedb;
+  --sanctuary-cream: #f8fafc;
+  --sanctuary-slate: #507088;
+  --sanctuary-border: rgba(0, 119, 182, 0.15);
+  --sanctuary-card-bg: #ffffff;
+  --sanctuary-shadow: 0 15px 45px rgba(11, 29, 40, 0.08);
+  --sanctuary-shadow-hover: 0 25px 60px rgba(0, 119, 182, 0.18);
+}
+
+/* --- Hero Section --- */
+.sanctuary-hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--sanctuary-navy);
+  overflow: hidden;
+  padding: 0 20px 40px;
+}
+
+.sanctuary-hero-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.sanctuary-hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+  transition: opacity 1s ease;
+}
+
+.sanctuary-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(7, 21, 32, 0.7) 0%,
+    rgba(7, 21, 32, 0.35) 45%,
+    rgba(7, 21, 32, 0.85) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.sanctuary-hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 960px;
+  margin: auto;
+  text-align: center;
+  padding: 140px 20px 60px;
+  color: #ffffff;
+}
+
+.sanctuary-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--sanctuary-gold);
+  background: rgba(200, 159, 83, 0.12);
+  border: 1px solid rgba(200, 159, 83, 0.35);
+  padding: 8px 22px;
+  border-radius: 50px;
+  backdrop-filter: blur(8px);
+  margin-bottom: 24px;
+}
+
+.sanctuary-hero-title {
+  font-family: 'Dahlia', 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.8rem, 6.5vw, 5.2rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: 2px;
+  margin-bottom: 18px;
+  color: #ffffff;
+  text-shadow: 0 4px 25px rgba(0, 0, 0, 0.6);
+}
+
+.sanctuary-hero-tagline {
+  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-style: italic;
+  font-weight: 400;
+  color: #f7eedb;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.sanctuary-hero-desc {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  line-height: 1.75;
+  color: #e2edf5;
+  max-width: 720px;
+  margin: 0 auto 36px;
+  font-weight: 300;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.sanctuary-hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.sanctuary-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #0096c7 0%, #0077b6 100%);
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  border-radius: 4px;
+  box-shadow: 0 8px 30px rgba(0, 119, 182, 0.4);
+  transition: all 0.35s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sanctuary-btn-primary:hover {
+  background: linear-gradient(135deg, #023e8a 0%, #0077b6 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(0, 119, 182, 0.6);
+  color: #ffffff;
+}
+
+.sanctuary-btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #dfba73 0%, #c89f53 100%);
+  color: #071520;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  border-radius: 4px;
+  box-shadow: 0 8px 30px rgba(200, 159, 83, 0.35);
+  transition: all 0.35s ease;
+}
+
+.sanctuary-btn-gold:hover {
+  background: linear-gradient(135deg, #e6c888 0%, #dfba73 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(200, 159, 83, 0.55);
+  color: #071520;
+}
+
+.sanctuary-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 15px 32px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.35s ease;
+}
+
+.sanctuary-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #ffffff;
+  transform: translateY(-3px);
+  color: #ffffff;
+}
+
+/* Trust Pill under Hero buttons */
+.sanctuary-hero-rating {
+  margin-top: 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(7, 21, 32, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  color: #e2edf5;
+}
+
+.sanctuary-hero-rating .stars {
+  color: #fbbf24;
+  letter-spacing: 2px;
+}
+
+/* Dedicated Home Sanctuary Hero Feature Pills */
+.sanctuary-hero-features-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 1050px;
+  margin: 35px auto 0;
+  width: 100%;
+}
+
+.sanctuary-feature-pill {
+  background: rgba(7, 21, 32, 0.75);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(200, 159, 83, 0.35);
+  border-radius: 10px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  transition: all 0.35s ease;
+}
+
+.sanctuary-feature-pill:hover {
+  background: rgba(7, 21, 32, 0.92);
+  border-color: var(--sanctuary-gold);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.sanctuary-feature-pill i {
+  font-size: 1.6rem;
+  color: var(--sanctuary-gold);
+  flex-shrink: 0;
+}
+
+.sanctuary-feature-pill strong {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  letter-spacing: 1px;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.sanctuary-feature-pill span {
+  display: block;
+  font-size: 0.74rem;
+  color: #cbd5e1;
+  line-height: 1.35;
+}
+
+/* --- What Defines Home Sanctuary (Distinct Essence) --- */
+.sanctuary-essence-section {
+  padding: 110px 0 80px;
+  background: #ffffff;
+}
+
+.sanctuary-essence-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.sanctuary-essence-card {
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 40px 32px;
+  border: 1px solid rgba(0, 119, 182, 0.12);
+  box-shadow: 0 10px 30px rgba(7, 21, 32, 0.04);
+  position: relative;
+  transition: all 0.35s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.sanctuary-essence-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--sanctuary-ocean);
+  box-shadow: 0 20px 45px rgba(0, 119, 182, 0.15);
+  background: #ffffff;
+}
+
+.sanctuary-essence-num {
+  font-family: 'Cinzel', serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: rgba(200, 159, 83, 0.35);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.sanctuary-essence-card h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.45rem;
+  color: var(--sanctuary-deep-blue);
+  margin-bottom: 14px;
+}
+
+.sanctuary-essence-card p {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: #334e68;
+  margin-bottom: 20px;
+}
+
+.sanctuary-essence-list {
+  list-style: none;
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid rgba(0, 119, 182, 0.1);
+}
+
+.sanctuary-essence-list li {
+  font-size: 0.85rem;
+  color: var(--sanctuary-deep-blue);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sanctuary-essence-list li i {
+  color: var(--sanctuary-ocean);
+  font-size: 0.8rem;
+}
+
+/* --- The Daily Rhythms of Home Sanctuary (24-Hour Timeline) --- */
+.sanctuary-rhythms-section {
+  padding: 100px 0;
+  background: #071520;
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.sanctuary-rhythms-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 55px;
+}
+
+.sanctuary-rhythm-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 30px 24px;
+  transition: all 0.35s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.sanctuary-rhythm-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--sanctuary-gold);
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.sanctuary-rhythm-time {
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  letter-spacing: 3px;
+  color: var(--sanctuary-gold);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sanctuary-rhythm-card h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.3rem;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.sanctuary-rhythm-card p {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: #94a3b8;
+}
+
+/* --- Quick Booking Bar (Right under Hero) --- */
+.sanctuary-booking-bar-wrap {
+  position: relative;
+  z-index: 20;
+  margin-top: -45px;
+  padding: 0 20px;
+}
+
+.sanctuary-booking-bar {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(7, 21, 32, 0.16);
+  border: 1px solid rgba(0, 119, 182, 0.18);
+  padding: 24px 30px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.sanctuary-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sanctuary-field label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--sanctuary-ocean);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sanctuary-field input,
+.sanctuary-field select {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  color: var(--sanctuary-deep-blue);
+  background: #f8fafc;
+  border: 1px solid rgba(0, 119, 182, 0.18);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  width: 100%;
+}
+
+.sanctuary-field input:focus,
+.sanctuary-field select:focus {
+  background: #ffffff;
+  border-color: var(--sanctuary-ocean);
+  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.15);
+}
+
+.sanctuary-bar-btn {
+  height: 48px;
+  align-self: flex-end;
+  white-space: nowrap;
+}
+
+.sanctuary-bar-perks {
+  max-width: 1200px;
+  margin: 14px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  color: var(--sanctuary-slate);
+}
+
+.sanctuary-bar-perks span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sanctuary-bar-perks i {
+  color: var(--sanctuary-ocean);
+}
+
+/* --- Brand Story Section --- */
+.sanctuary-story {
+  padding: 110px 0 90px;
+  background: #f8fafc;
+  position: relative;
+}
+
+.sanctuary-story-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.sanctuary-story-text {
+  padding-right: 15px;
+}
+
+.sanctuary-story-quote {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--sanctuary-deep-blue);
+  border-left: 3px solid var(--sanctuary-gold);
+  padding-left: 24px;
+  margin: 24px 0 28px;
+}
+
+.sanctuary-story-p {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: #334e68;
+  margin-bottom: 20px;
+  font-weight: 350;
+}
+
+.sanctuary-story-badges {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.sanctuary-story-badge-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: #ffffff;
+  padding: 18px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 119, 182, 0.12);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.sanctuary-story-badge-item i {
+  font-size: 1.5rem;
+  color: var(--sanctuary-ocean);
+  margin-top: 2px;
+}
+
+.sanctuary-story-badge-item h5 {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  color: var(--sanctuary-deep-blue);
+  margin-bottom: 4px;
+}
+
+.sanctuary-story-badge-item p {
+  font-size: 0.8rem;
+  color: var(--sanctuary-slate);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.sanctuary-story-images {
+  position: relative;
+}
+
+.sanctuary-img-large {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 25px 50px rgba(7, 21, 32, 0.15);
+}
+
+.sanctuary-img-small {
+  position: absolute;
+  bottom: -35px;
+  left: -35px;
+  width: 58%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 6px solid #ffffff;
+  box-shadow: 0 20px 45px rgba(7, 21, 32, 0.2);
+}
+
+.sanctuary-seal {
+  position: absolute;
+  top: -25px;
+  right: -25px;
+  width: 120px;
+  height: 120px;
+  background: var(--sanctuary-navy);
+  color: var(--sanctuary-gold);
+  border: 2px solid var(--sanctuary-gold);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  padding: 10px;
+}
+
+.sanctuary-seal .seal-year {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.sanctuary-seal .seal-title {
+  font-family: 'Dahlia', 'Playfair Display', serif;
+  font-size: 1.15rem;
+  line-height: 1;
+  margin: 3px 0;
+  color: #ffffff;
+}
+
+.sanctuary-seal .seal-sub {
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #e0f2fe;
+}
+
+/* --- Highlights Preview Section --- */
+.sanctuary-highlights {
+  padding: 100px 0;
+  background: #ffffff;
+}
+
+.sanctuary-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 50px;
+}
+
+.sanctuary-highlight-card {
+  position: relative;
+  height: 480px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 35px rgba(7, 21, 32, 0.08);
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 30px 24px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.sanctuary-highlight-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 55px rgba(0, 119, 182, 0.25);
+}
+
+.sanctuary-card-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+  z-index: 1;
+}
+
+.sanctuary-highlight-card:hover .sanctuary-card-bg-img {
+  transform: scale(1.08);
+}
+
+.sanctuary-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(7, 21, 32, 0.15) 0%,
+    rgba(7, 21, 32, 0.5) 45%,
+    rgba(7, 21, 32, 0.95) 100%
+  );
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+.sanctuary-highlight-card:hover .sanctuary-card-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(7, 21, 32, 0.1) 0%,
+    rgba(7, 21, 32, 0.4) 35%,
+    rgba(7, 21, 32, 0.98) 100%
+  );
+}
+
+.sanctuary-card-content {
+  position: relative;
+  z-index: 3;
+}
+
+.sanctuary-card-tag {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--sanctuary-gold);
+  margin-bottom: 8px;
+}
+
+.sanctuary-card-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.sanctuary-card-sentence {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #e2edf5;
+  margin-bottom: 18px;
+  opacity: 0.9;
+}
+
+.sanctuary-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #38bdf8;
+  transition: gap 0.25s ease, color 0.25s ease;
+}
+
+.sanctuary-highlight-card:hover .sanctuary-card-link {
+  gap: 12px;
+  color: #ffffff;
+}
+
+/* --- Key Facts Section (Hotel Info) --- */
+.sanctuary-facts {
+  padding: 90px 0;
+  background: #f0f5fa;
+}
+
+.sanctuary-facts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 45px;
+}
+
+.sanctuary-fact-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 32px 28px;
+  border: 1px solid rgba(0, 119, 182, 0.12);
+  box-shadow: 0 8px 25px rgba(7, 21, 32, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.sanctuary-fact-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--sanctuary-ocean);
+  box-shadow: 0 15px 35px rgba(0, 119, 182, 0.12);
+}
+
+.sanctuary-fact-icon-wrap {
+  width: 54px;
+  height: 54px;
+  border-radius: 10px;
+  background: rgba(0, 119, 182, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sanctuary-ocean);
+  font-size: 1.4rem;
+}
+
+.sanctuary-fact-card h4 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.05rem;
+  letter-spacing: 1px;
+  color: var(--sanctuary-deep-blue);
+}
+
+.sanctuary-fact-highlight {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--sanctuary-ocean);
+  margin-top: -6px;
+}
+
+.sanctuary-fact-desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--sanctuary-slate);
+}
+
+/* --- Exclusive Offers Banner Teaser --- */
+.sanctuary-exclusive-offer {
+  padding: 80px 0;
+  background: #ffffff;
+}
+
+.sanctuary-offer-banner {
+  background: linear-gradient(135deg, #071520 0%, #0d283d 60%, #071520 100%);
+  border-radius: 16px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
+  box-shadow: 0 25px 60px rgba(7, 21, 32, 0.25);
+  border: 1px solid rgba(200, 159, 83, 0.3);
+  position: relative;
+}
+
+.sanctuary-offer-content {
+  padding: 60px 50px;
+  color: #ffffff;
+}
+
+.sanctuary-offer-tag {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--sanctuary-gold);
+  background: rgba(200, 159, 83, 0.15);
+  padding: 6px 16px;
+  border-radius: 50px;
+  margin-bottom: 16px;
+}
+
+.sanctuary-offer-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  color: #ffffff;
+}
+
+.sanctuary-offer-desc {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #cbd5e1;
+  margin-bottom: 24px;
+}
+
+.sanctuary-offer-perks-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.sanctuary-offer-perk {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: #f1f5f9;
+}
+
+.sanctuary-offer-perk i {
+  color: var(--sanctuary-gold);
+}
+
+.sanctuary-offer-img-box {
+  position: relative;
+  height: 100%;
+  min-height: 380px;
+}
+
+.sanctuary-offer-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Social Proof & Guest Reviews --- */
+.sanctuary-reviews {
+  padding: 90px 0 100px;
+  background: #f8fafc;
+}
+
+.sanctuary-awards-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(0, 119, 182, 0.15);
+}
+
+.sanctuary-award-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--sanctuary-deep-blue);
+}
+
+.sanctuary-award-item i {
+  font-size: 2rem;
+  color: var(--sanctuary-gold);
+}
+
+.sanctuary-award-item h6 {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
+
+.sanctuary-award-item span {
+  font-size: 0.78rem;
+  color: var(--sanctuary-slate);
+}
+
+.sanctuary-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.sanctuary-review-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 35px 30px;
+  box-shadow: 0 10px 30px rgba(7, 21, 32, 0.05);
+  border: 1px solid rgba(0, 119, 182, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  position: relative;
+}
+
+.sanctuary-review-card::before {
+  content: '“';
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem;
+  color: rgba(200, 159, 83, 0.15);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.sanctuary-review-stars {
+  color: #fbbf24;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+}
+
+.sanctuary-review-quote {
+  font-family: 'Lora', Georgia, serif;
+  font-style: italic;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--sanctuary-deep-blue);
+}
+
+.sanctuary-reviewer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sanctuary-reviewer-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--sanctuary-navy);
+  color: var(--sanctuary-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid var(--sanctuary-gold);
+}
+
+.sanctuary-reviewer-info h5 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--sanctuary-deep-blue);
+  margin-bottom: 2px;
+}
+
+.sanctuary-reviewer-info span {
+  font-size: 0.75rem;
+  color: var(--sanctuary-slate);
+}
+
+/* --- Packages Teaser Section --- */
+.sanctuary-packages {
+  padding: 100px 0;
+  background: #ffffff;
+}
+
+.sanctuary-packages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.sanctuary-package-card {
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 119, 182, 0.15);
+  box-shadow: 0 12px 35px rgba(7, 21, 32, 0.06);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.sanctuary-package-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 22px 50px rgba(0, 119, 182, 0.18);
+}
+
+.sanctuary-package-img-wrap {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+}
+
+.sanctuary-package-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.sanctuary-package-card:hover .sanctuary-package-img-wrap img {
+  transform: scale(1.06);
+}
+
+.sanctuary-package-duration {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(7, 21, 32, 0.85);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 1.5px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sanctuary-package-body {
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.sanctuary-package-body h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.35rem;
+  color: var(--sanctuary-deep-blue);
+  margin-bottom: 10px;
+}
+
+.sanctuary-package-body p {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--sanctuary-slate);
+  margin-bottom: 18px;
+}
+
+.sanctuary-package-perks {
+  list-style: none;
+  margin-bottom: 22px;
+}
+
+.sanctuary-package-perks li {
+  font-size: 0.82rem;
+  color: #334e68;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sanctuary-package-perks li i {
+  color: var(--sanctuary-ocean);
+  font-size: 0.75rem;
+}
+
+.sanctuary-package-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 18px;
+  border-top: 1px solid rgba(0, 119, 182, 0.12);
+}
+
+.sanctuary-package-price {
+  display: flex;
+  flex-direction: column;
+}
+
+.sanctuary-package-price span {
+  font-size: 0.72rem;
+  color: var(--sanctuary-slate);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.sanctuary-package-price strong {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  color: var(--sanctuary-deep-blue);
+}
+
+/* --- Media Queries for Mobile Responsiveness --- */
+@media (max-width: 1024px) {
+  .sanctuary-hero-features-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .sanctuary-essence-grid {
+    grid-template-columns: 1fr;
+  }
+  .sanctuary-rhythms-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .sanctuary-booking-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .sanctuary-bar-btn {
+    grid-column: span 2;
+  }
+  .sanctuary-story-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+  .sanctuary-story-images {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .sanctuary-highlights-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .sanctuary-facts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .sanctuary-reviews-grid {
+    grid-template-columns: 1fr;
+  }
+  .sanctuary-packages-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 50px auto 0;
+  }
+  .sanctuary-offer-banner {
+    grid-template-columns: 1fr;
+  }
+  .sanctuary-offer-img-box {
+    min-height: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sanctuary-hero {
+    min-height: 85vh;
+  }
+  .sanctuary-hero-content {
+    padding-top: 120px;
+  }
+  .sanctuary-hero-features-strip {
+    grid-template-columns: 1fr;
+  }
+  .sanctuary-rhythms-grid {
+    grid-template-columns: 1fr;
+  }
+  .sanctuary-booking-bar {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+  .sanctuary-bar-btn {
+    grid-column: span 1;
+    width: 100%;
+  }
+  .sanctuary-highlights-grid {
+    grid-template-columns: 1fr;
+  }
+  .sanctuary-highlight-card {
+    height: 400px;
+  }
+  .sanctuary-facts-grid {
+    grid-template-columns: 1fr;
+  }
+  .sanctuary-story-badges {
+    grid-template-columns: 1fr;
+  }
+  .sanctuary-img-small {
+    display: none;
+  }
+  .sanctuary-offer-perks-list {
+    grid-template-columns: 1fr;
+  }
+}

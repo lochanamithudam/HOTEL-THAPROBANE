@@ -78,7 +78,18 @@ document.addEventListener('DOMContentLoaded', () => {
   if (menuToggleBtn) menuToggleBtn.addEventListener('click', openLuxuryMenu);
   if (menuCloseBtn) menuCloseBtn.addEventListener('click', closeLuxuryMenu);
   if (menuCloseBackdrop) menuCloseBackdrop.addEventListener('click', closeLuxuryMenu);
-  drawerLinks.forEach(link => link.addEventListener('click', closeLuxuryMenu));
+  drawerLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href && !href.startsWith('#')) {
+        e.preventDefault();
+        closeLuxuryMenu();
+        window.location.href = href;
+        return;
+      }
+      closeLuxuryMenu();
+    });
+  });
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && luxuryMenuOverlay && luxuryMenuOverlay.classList.contains('active')) {
@@ -110,11 +121,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function nextSlide() {
+    if (slides.length === 0) return;
     let next = (currentSlide + 1) % slides.length;
     showSlide(next);
   }
 
   function startSlideShow() {
+    if (slides.length === 0) return;
     slideInterval = setInterval(nextSlide, 6000);
   }
 
@@ -131,7 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  startSlideShow();
+  if (slides.length > 0) {
+    startSlideShow();
+  }
 
   // 3. Datepicker Setup with Local Timezone & Dynamic Min Date
   const checkinInput = document.getElementById('checkin-date');
