@@ -1,3 +1,7 @@
+:root {
+  --font-heading: 'Fraunces', Georgia, serif;
+}
+
 /* ==================== OFFICIAL SUN SIYAM PASIKUDAH DISPLAY FONT: DAHLIA ==================== */
 @font-face {
   font-family: 'Dahlia';
@@ -40,7 +44,7 @@
   --text-gold: #c89f53;
 
   /* ── FONTS ── */
-  --font-heading: 'Cinzel', serif;
+  --font-heading: 'Fraunces', Georgia, serif;
   --font-serif: 'Outfit', 'Plus Jakarta Sans', 'Lora', sans-serif;
   --font-sans: 'Outfit', 'Plus Jakarta Sans', -apple-system, sans-serif;
   --font-accent: 'Lora', serif;
@@ -135,7 +139,7 @@ h4 {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--font-heading);
+  font-family: 'Cinzel', serif;
   font-size: 0.78rem;
   letter-spacing: 4px;
   text-transform: uppercase;
@@ -152,10 +156,11 @@ h4 {
 }
 
 .section-heading {
+  font-family: var(--font-heading);
+  font-weight: 400;
   font-size: clamp(2rem, 3.8vw, 3.2rem);
   margin-bottom: 18px;
   line-height: 1.2;
-  font-weight: 300;
 }
 
 .section-subtitle {
@@ -211,7 +216,7 @@ h4 {
   padding: 13px 30px;
   background: linear-gradient(135deg, #0077b6, #023e8a);
   color: #ffffff;
-  font-family: var(--font-heading);
+  font-family: 'Cinzel', serif;
   font-size: 0.78rem;
   letter-spacing: 2px;
   font-weight: 700;
@@ -238,7 +243,7 @@ h4 {
   background: transparent;
   color: #0b1d28;
   border: 2px solid #0077b6;
-  font-family: var(--font-heading);
+  font-family: 'Cinzel', serif;
   font-size: 0.78rem;
   letter-spacing: 2px;
   font-weight: 600;
@@ -794,7 +799,7 @@ h4 {
 }
 
 .drawer-nav-item .nav-name {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 1.25rem;
   font-weight: 400;
   transition: color 0.3s ease, transform 0.3s ease;
@@ -975,7 +980,7 @@ h4 {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-family: var(--font-heading);
+  font-family: 'Cinzel', serif;
   font-weight: 600;
 }
 
@@ -1675,7 +1680,7 @@ h4 {
   right: 18px;
   background: linear-gradient(135deg, #c89f53, #b68d40);
   color: #ffffff;
-  font-family: var(--font-heading);
+  font-family: 'Cinzel', serif;
   font-size: 0.72rem;
   font-weight: 700;
   padding: 6px 14px;
@@ -1852,7 +1857,7 @@ h4 {
 }
 
 .author-name {
-  font-family: var(--font-heading);
+  font-family: 'Cinzel', serif;
   font-size: 0.95rem;
   color: #0b1d28;
 }
@@ -2030,7 +2035,7 @@ h4 {
 }
 
 .map-float-card h6 {
-  font-family: var(--font-heading);
+  font-family: 'Cinzel', serif;
   font-size: 0.85rem;
   color: #0b1d28;
 }
