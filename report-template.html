@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel Thaprobane - Backend Code Audit & Architecture Report</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  @page {
+    size: A4 portrait;
+    margin: 16mm 16mm 18mm 16mm;
+    @bottom-right {
+      content: counter(page);
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1e293b;
+    background: #ffffff;
+    line-height: 1.55;
+    font-size: 13px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .header-banner {
+    background: linear-gradient(135deg, #071520 0%, #0b1d28 60%, #0077b6 100%);
+    color: #ffffff;
+    padding: 32px 36px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    position: relative;
+    border-bottom: 3px solid #c89f53;
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+
+  .brand-badge {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c89f53;
+    font-weight: 700;
+  }
+
+  .report-tag {
+    background: rgba(200, 159, 83, 0.18);
+    border: 1px solid rgba(200, 159, 83, 0.4);
+    color: #dfba73;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .report-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #ffffff;
+    margin-bottom: 6px;
+  }
+
+  .report-subtitle {
+    font-size: 13px;
+    color: #94a3b8;
+    font-weight: 400;
+  }
+
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .meta-item .meta-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #94a3b8;
+    margin-bottom: 2px;
+  }
+
+  .meta-item .meta-value {
+    font-size: 12px;
+    font-weight: 600;
+    color: #f1f5f9;
+  }
+
+  /* Scorecard Grid */
+  .scorecard-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 26px;
+  }
+
+  .score-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+
+  .score-card.danger {
+    background: #fef2f2;
+    border-color: #fecaca;
+  }
+
+  .score-card.warning {
+    background: #fffbeb;
+    border-color: #fde68a;
+  }
+
+  .score-card.info {
+    background: #f0f9ff;
+    border-color: #bae6fd;
+  }
+
+  .score-number {
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+
+  .score-card.danger .score-number { color: #dc2626; }
+  .score-card.warning .score-number { color: #d97706; }
+  .score-card.info .score-number { color: #0284c7; }
+  .score-card .score-number { color: #475569; }
+
+  .score-label {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Section styles */
+  .section-block {
+    margin-bottom: 24px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .section-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #0b1d28;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #e2e8f0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .section-heading .pill {
+    background: #0077b6;
+    color: #fff;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  /* Issue Cards */
+  .issue-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #94a3b8;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 14px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .issue-card.critical {
+    border-left-color: #dc2626;
+    background: #fffdfd;
+  }
+
+  .issue-card.high {
+    border-left-color: #ea580c;
+  }
+
+  .issue-card.medium {
+    border-left-color: #d97706;
+  }
+
+  .issue-card.low {
+    border-left-color: #0284c7;
+  }
+
+  .issue-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .issue-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .badge.critical { background: #fee2e2; color: #b91c1c; }
+  .badge.high { background: #ffedd5; color: #c2410c; }
+  .badge.medium { background: #fef3c7; color: #b45309; }
+  .badge.low { background: #e0f2fe; color: #0369a1; }
+
+  .issue-loc {
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 11px;
+    color: #0077b6;
+    background: #f0f9ff;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+
+  .issue-desc {
+    font-size: 12.5px;
+    color: #334155;
+    margin-bottom: 10px;
+  }
+
+  .code-snippet {
+    background: #0f172a;
+    color: #f8fafc;
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 11px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin: 8px 0;
+    overflow-x: auto;
+    line-height: 1.45;
+  }
+
+  .code-snippet .hl-red { color: #f87171; font-weight: 600; }
+  .code-snippet .hl-green { color: #4ade80; font-weight: 600; }
+  .code-snippet .hl-comment { color: #64748b; }
+
+  .fix-box {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #166534;
+    margin-top: 8px;
+  }
+
+  .fix-box strong {
+    color: #14532d;
+  }
+
+  /* Table styling */
+  table.audit-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin: 14px 0;
+  }
+
+  table.audit-table th {
+    background: #0b1d28;
+    color: #ffffff;
+    text-align: left;
+    padding: 10px 12px;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  table.audit-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: top;
+  }
+
+  table.audit-table tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+
+  .mono {
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 11px;
+  }
+
+  /* Footer */
+  .report-footer {
+    margin-top: 30px;
+    padding-top: 14px;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: #64748b;
+  }
+
+  .page-break {
+    page-break-before: always;
+    break-before: always;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Header Banner -->
+  <div class="header-banner">
+    <div class="header-top">
+      <div class="brand-badge">★ ★ ★ ★ ★ Hotel Thaprobane · Luxury Beachfront Sanctuary</div>
+      <div class="report-tag">CONFIDENTIAL AUDIT REPORT</div>
+    </div>
+    <h1 class="report-title">Backend Architecture & Code Quality Audit</h1>
+    <div class="report-subtitle">Comprehensive error inspection, runtime stability analysis, schema validation, and serverless compatibility review.</div>
+    <div class="meta-grid">
+      <div class="meta-item">
+        <div class="meta-label">Audit Target</div>
+        <div class="meta-value">Node.js / Express / Vercel API</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Environment</div>
+        <div class="meta-value">Production & Local Hybrid</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Audit Date</div>
+        <div class="meta-value">October 2026</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Audit Verdict</div>
+        <div class="meta-value" style="color:#fca5a5;">Action Required (9 Findings)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scorecard -->
+  <div class="scorecard-grid">
+    <div class="score-card danger">
+      <div class="score-number">3</div>
+      <div class="score-label">Critical / High Severity</div>
+    </div>
+    <div class="score-card warning">
+      <div class="score-number">4</div>
+      <div class="score-label">Medium Severity</div>
+    </div>
+    <div class="score-card info">
+      <div class="score-number">2</div>
+      <div class="score-label">Low / Security Polish</div>
+    </div>
+    <div class="score-card">
+      <div class="score-number">6</div>
+      <div class="score-label">Files Evaluated</div>
+    </div>
+  </div>
+
+  <!-- Section 1: Executive Summary -->
+  <div class="section-block">
+    <div class="section-heading">
+      <span class="pill">01</span> Executive Summary
+    </div>
+    <p style="color:#334155; font-size:12.5px; line-height:1.6; margin-bottom:12px;">
+      A thorough static analysis and code review was conducted across the backend ecosystem of Hotel Thaprobane, comprising both the dedicated Express server (<code class="mono">server.js</code>), local diagnostic utilities (<code class="mono">test-backend.js</code>, <code class="mono">send-test-email.js</code>), and the Vercel serverless cloud endpoints (<code class="mono">api/bookings.js</code>, <code class="mono">api/subscribe.js</code>, <code class="mono">api/test-email.js</code>, <code class="mono">api/_lib/db.js</code>).
+    </p>
+    <p style="color:#334155; font-size:12.5px; line-height:1.6;">
+      While the dual-architecture (Express + Serverless fallback) and offline JSON persistence mechanism display thoughtful fault-tolerance, several critical bugs exist that lead to <strong>silent data loss in MongoDB</strong>, <strong>runtime process crashes on malformed requests</strong>, and <strong>broken serverless connection caching</strong>.
+    </p>
+  </div>
+
+  <!-- Section 2: Critical Bugs -->
+  <div class="section-block">
+    <div class="section-heading">
+      <span class="pill">02</span> Critical Runtime & Data Integrity Findings
+    </div>
+
+    <!-- Finding 1 -->
+    <div class="issue-card critical">
+      <div class="issue-header">
+        <div class="issue-title">1. Unhandled Request Body Destructuring Causing Crash (TypeError)</div>
+        <span class="badge critical">Critical Bug</span>
+      </div>
+      <div class="issue-loc">api/subscribe.js : Line 11 &nbsp;|&nbsp; server.js : Line 546</div>
+      <div class="issue-desc">
+        When an incoming HTTP POST arrives without an explicit JSON content-type header or with an empty payload, <code class="mono">req.body</code> evaluates to <code class="mono">undefined</code>. Destructuring directly causes an unhandled <code class="mono">TypeError</code>.
+      </div>
+      <div class="code-snippet">
+<span class="hl-comment">// Vulnerable code:</span>
+<span class="hl-red">const { email } = req.body;</span> <span class="hl-comment">// Throws: TypeError: Cannot destructure property 'email' of 'req.body'</span>
+
+<span class="hl-comment">// Required safe handling:</span>
+<span class="hl-green">const email = req.body?.email;</span>
+if (!email || typeof email !== 'string' || !email.includes('@')) {
+    return res.status(400).json({ success: false, message: 'Valid email required' });
+}
+      </div>
+      <div class="fix-box">
+        <strong>Fix:</strong> Add optional chaining (<code class="mono">req.body?.email</code>) and verify body existence before processing.
+      </div>
+    </div>
+
+    <!-- Finding 2 -->
+    <div class="issue-card high">
+      <div class="issue-header">
+        <div class="issue-title">2. Silent Data Loss: "roomName" Missing from Mongoose Schema</div>
+        <span class="badge high">Data Loss</span>
+      </div>
+      <div class="issue-loc">api/_lib/db.js : Lines 26–40 &nbsp;|&nbsp; server.js : Lines 81–94</div>
+      <div class="issue-desc">
+        The frontend reservation modal in <code class="mono">js/app.js</code> submits the room title as <code class="mono">roomName</code>. However, the Mongoose schema only declares <code class="mono">roomCategory: String</code>. Under Mongoose default <code class="mono">strict: true</code> mode, unmapped fields are quietly discarded upon document persistence.
+      </div>
+      <div class="code-snippet">
+<span class="hl-comment">// Schema definition in db.js & server.js:</span>
+const bookingSchema = new mongoose.Schema({
+    roomCategory: String, <span class="hl-comment">// Declared</span>
+    <span class="hl-red">/* roomName is missing! Dropped during new Booking(data).save() */</span>
+    checkIn: String, ...
+});
+      </div>
+      <div class="fix-box">
+        <strong>Fix:</strong> Explicitly declare <code class="mono">roomName: String</code> in both <code class="mono">api/_lib/db.js</code> and <code class="mono">server.js</code> schemas.
+      </div>
+    </div>
+
+    <!-- Finding 3 -->
+    <div class="issue-card high">
+      <div class="issue-header">
+        <div class="issue-title">3. "bookingRef" Not Declared in server.js Mongoose Schema</div>
+        <span class="badge high">Data Loss</span>
+      </div>
+      <div class="issue-loc">server.js : Lines 81–94 &amp; Line 221</div>
+      <div class="issue-desc">
+        In <code class="mono">server.js</code>, line 221 creates <code class="mono">new Booking({ ...bookingData, bookingRef })</code>, but <code class="mono">bookingRef</code> exists only in <code class="mono">api/_lib/db.js</code> schema and is absent from <code class="mono">server.js</code> schema. When running via Express locally, reference numbers (e.g., <code class="mono">HT-849201</code>) are never recorded in MongoDB.
+      </div>
+      <div class="fix-box">
+        <strong>Fix:</strong> Add <code class="mono">bookingRef: String</code> to <code class="mono">server.js</code> booking schema.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- Section 3: Architecture & Serverless Flaws -->
+  <div class="section-block">
+    <div class="section-heading">
+      <span class="pill">03</span> Architecture, Serverless & Environment Findings
+    </div>
+
+    <!-- Finding 4 -->
+    <div class="issue-card medium">
+      <div class="issue-header">
+        <div class="issue-title">4. Serverless Mongoose Connection Reuse Caching Bug</div>
+        <span class="badge medium">Performance &amp; Scale</span>
+      </div>
+      <div class="issue-loc">api/_lib/db.js : Lines 5, 8, 18</div>
+      <div class="issue-desc">
+        The variable <code class="mono">let cached = global._mongooseConnection;</code> is set once at module load time when <code class="mono">global._mongooseConnection</code> is undefined. Even though line 18 sets <code class="mono">global._mongooseConnection = true</code>, the local variable <code class="mono">cached</code> remains permanently undefined in that scope. As a result, warm serverless invocations fail to skip redundant connections.
+      </div>
+      <div class="code-snippet">
+<span class="hl-comment">// api/_lib/db.js current logic:</span>
+<span class="hl-red">let cached = global._mongooseConnection;</span> <span class="hl-comment">// Evaluated once as undefined</span>
+async function connectDB() {
+    <span class="hl-red">if (cached && mongoose.connection.readyState === 1) return;</span> <span class="hl-comment">// Always false!</span>
+    await mongoose.connect(uri);
+    global._mongooseConnection = true;
+}
+      </div>
+      <div class="fix-box">
+        <strong>Fix:</strong> Test <code class="mono">if (mongoose.connection.readyState === 1) return;</code> directly without relying on an un-updated local closure.
+      </div>
+    </div>
+
+    <!-- Finding 5 -->
+    <div class="issue-card medium">
+      <div class="issue-header">
+        <div class="issue-title">5. Missing dotenv Injection in Serverless Handlers</div>
+        <span class="badge medium">Configuration</span>
+      </div>
+      <div class="issue-loc">api/ Directory : All Handlers &amp; api/_lib/db.js</div>
+      <div class="issue-desc">
+        <code class="mono">require('dotenv').config()</code> is called only inside <code class="mono">server.js</code>. If a developer runs <code class="mono">node api/test-email.js</code> or invokes serverless functions in standalone test harnesses, all environment variables (<code class="mono">MONGO_URI</code>, <code class="mono">GMAIL_USER</code>, <code class="mono">GMAIL_PASS</code>) evaluate to <code class="mono">undefined</code>.
+      </div>
+      <div class="fix-box">
+        <strong>Fix:</strong> Add safe <code class="mono">if (process.env.NODE_ENV !== 'production') try { require('dotenv').config(); } catch(e){}</code> at top of <code class="mono">api/_lib/db.js</code>.
+      </div>
+    </div>
+
+    <!-- Finding 6 -->
+    <div class="issue-card medium">
+      <div class="issue-header">
+        <div class="issue-title">6. Mongoose OverwriteModelError on File Watcher / Reload</div>
+        <span class="badge medium">Stability</span>
+      </div>
+      <div class="issue-loc">server.js : Line 96</div>
+      <div class="issue-desc">
+        <code class="mono">server.js</code> compiles <code class="mono">Booking</code> directly with <code class="mono">mongoose.model('Booking', bookingSchema)</code>, whereas <code class="mono">Subscriber</code> correctly uses <code class="mono">mongoose.models.Subscriber || mongoose.model(...)</code>. Any re-execution throws <code class="mono">OverwriteModelError</code>.
+      </div>
+      <div class="fix-box">
+        <strong>Fix:</strong> Change line 96 to <code class="mono">const Booking = mongoose.models.Booking || mongoose.model('Booking', bookingSchema);</code>.
+      </div>
+    </div>
+
+    <!-- Finding 7 -->
+    <div class="issue-card medium">
+      <div class="issue-header">
+        <div class="issue-title">7. Hardcoded Global DNS Server Override</div>
+        <span class="badge medium">Network Reliability</span>
+      </div>
+      <div class="issue-loc">server.js : Lines 1–6</div>
+      <div class="issue-desc">
+        Forcing <code class="mono">dns.setServers(['8.8.8.8', '8.8.4.4'])</code> overrides OS, corporate, and VPN resolver tables. In networks where port 53 is intercepted or firewalled, Atlas SRV records (<code class="mono">mongodb+srv://</code>) fail to resolve completely.
+      </div>
+      <div class="fix-box">
+        <strong>Fix:</strong> Remove hardcoded DNS override or gate it behind an explicit debug environment flag.
+      </div>
+    </div>
+
+    <!-- Finding 8 & 9 -->
+    <div class="issue-card low">
+      <div class="issue-header">
+        <div class="issue-title">8. Email Template HTML/XSS Injection Vector</div>
+        <span class="badge low">Security Polish</span>
+      </div>
+      <div class="issue-loc">api/bookings.js : Lines 95, 114–177 &nbsp;|&nbsp; server.js : Lines 320–420</div>
+      <div class="issue-desc">
+        Unescaped user input (such as guest name and phone) is interpolated directly into outgoing HTML emails. While modern email clients sanitize script tags, unescaped quotes and markup can corrupt email layout or allow malicious link injection.
+      </div>
+      <div class="fix-box">
+        <strong>Fix:</strong> Pass user values through a basic HTML entity sanitizer (<code class="mono">&amp;amp;</code>, <code class="mono">&amp;lt;</code>, <code class="mono">&amp;gt;</code>) before injecting into email templates.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Section 4: Audit Matrix -->
+  <div class="section-block">
+    <div class="section-heading">
+      <span class="pill">04</span> Comprehensive File-by-File Audit Matrix
+    </div>
+
+    <table class="audit-table">
+      <thead>
+        <tr>
+          <th style="width:22%;">File Path</th>
+          <th style="width:12%;">Line(s)</th>
+          <th style="width:14%;">Severity</th>
+          <th style="width:30%;">Defect Description</th>
+          <th style="width:22%;">Impact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">api/subscribe.js</td>
+          <td class="mono">Line 11</td>
+          <td><span class="badge critical">Critical</span></td>
+          <td>Destructuring <code class="mono">{ email }</code> on unvalidated <code class="mono">req.body</code></td>
+          <td>500 Crash on malformed payload</td>
+        </tr>
+        <tr>
+          <td class="mono">server.js</td>
+          <td class="mono">Line 546</td>
+          <td><span class="badge critical">Critical</span></td>
+          <td>Direct destructuring of <code class="mono">req.body</code> without guard</td>
+          <td>Uncaught exception on missing body</td>
+        </tr>
+        <tr>
+          <td class="mono">api/_lib/db.js</td>
+          <td class="mono">Lines 26–40</td>
+          <td><span class="badge high">High</span></td>
+          <td><code class="mono">roomName</code> missing in Mongoose <code class="mono">bookingSchema</code></td>
+          <td>Room name stripped from MongoDB Atlas</td>
+        </tr>
+        <tr>
+          <td class="mono">server.js</td>
+          <td class="mono">Lines 81–94</td>
+          <td><span class="badge high">High</span></td>
+          <td><code class="mono">roomName</code> &amp; <code class="mono">bookingRef</code> missing in schema</td>
+          <td>Booking reference lost in local DB</td>
+        </tr>
+        <tr>
+          <td class="mono">api/_lib/db.js</td>
+          <td class="mono">Lines 5, 8, 18</td>
+          <td><span class="badge medium">Medium</span></td>
+          <td>Module-scoped <code class="mono">cached</code> variable evaluated once at import</td>
+          <td>Redundant reconnects in serverless</td>
+        </tr>
+        <tr>
+          <td class="mono">server.js</td>
+          <td class="mono">Line 96</td>
+          <td><span class="badge medium">Medium</span></td>
+          <td><code class="mono">Booking</code> lacks model compilation guard</td>
+          <td><code class="mono">OverwriteModelError</code> on reload</td>
+        </tr>
+        <tr>
+          <td class="mono">server.js</td>
+          <td class="mono">Lines 1–6</td>
+          <td><span class="badge medium">Medium</span></td>
+          <td>Global hardcoded DNS overrides system resolvers</td>
+          <td>Atlas SRV failure on restrictive networks</td>
+        </tr>
+        <tr>
+          <td class="mono">api/_lib/db.js</td>
+          <td class="mono">Lines 54–60</td>
+          <td><span class="badge medium">Medium</span></td>
+          <td>Nodemailer transporter initialized at module load</td>
+          <td>Empty credentials if env vars load late</td>
+        </tr>
+        <tr>
+          <td class="mono">api/bookings.js</td>
+          <td class="mono">Lines 95–177</td>
+          <td><span class="badge low">Low</span></td>
+          <td>Direct interpolation of guest input into email HTML</td>
+          <td>Email markup corruption / HTML injection</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Section 5: Remediation Priority Roadmap -->
+  <div class="section-block">
+    <div class="section-heading">
+      <span class="pill">05</span> Remediation Priority Checklist
+    </div>
+    <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:16px 20px; font-size:12px; color:#334155;">
+      <p style="margin-bottom:8px;"><strong>Phase 1 (Immediate - High Priority):</strong></p>
+      <ul style="padding-left:20px; margin-bottom:12px; line-height:1.7;">
+        <li>Add <code class="mono">roomName: String</code> and <code class="mono">bookingRef: String</code> to both schemas in <code class="mono">api/_lib/db.js</code> and <code class="mono">server.js</code>.</li>
+        <li>Protect <code class="mono">api/subscribe.js</code> and <code class="mono">server.js</code> from undefined <code class="mono">req.body</code> using optional chaining.</li>
+        <li>Update <code class="mono">server.js:96</code> to <code class="mono">mongoose.models.Booking || mongoose.model(...)</code>.</li>
+      </ul>
+      <p style="margin-bottom:8px;"><strong>Phase 2 (Architectural Optimization):</strong></p>
+      <ul style="padding-left:20px; line-height:1.7;">
+        <li>Simplify serverless DB connection check to <code class="mono">if (mongoose.connection.readyState === 1) return;</code>.</li>
+        <li>Remove or conditionally enable the hardcoded Google DNS override in <code class="mono">server.js</code>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="report-footer">
+    <div><strong>Hotel Thaprobane</strong> · Engineering & Quality Assurance</div>
+    <div>Document ID: <strong>HT-AUDIT-2026-001</strong> · Page 2 of 2</div>
+  </div>
+
+</body>
+</html>
