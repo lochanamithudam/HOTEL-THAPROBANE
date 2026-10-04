@@ -387,16 +387,121 @@
           </div>
         </div>
 
-        <!-- Overlapping Visual Composition -->
-        <div class="sanctuary-story-images">
-          <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?q=80&w=1200&auto=format&fit=crop"
-            alt="Hotel Thaprobane Luxury Resort" class="sanctuary-img-large">
-          <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=800&auto=format&fit=crop"
-            alt="Sri Lanka Coastline & Frangipani" class="sanctuary-img-small">
-          <div class="sanctuary-seal">
+        <!-- Overlapping Visual Collage Composition -->
+        <div class="sanctuary-story-images sanctuary-heritage-collage" id="heritageCollage" aria-label="Hotel Thaprobane Heritage & Haven of Healing Visual Gallery">
+          <!-- Circular Heritage Seal (Kept on top) -->
+          <div class="sanctuary-seal" aria-hidden="true">
             <span class="seal-year">SINCE ANCIENT</span>
             <span class="seal-title">TAPROBANE</span>
             <span class="seal-sub">CEYLON SANCTUARY</span>
+          </div>
+
+          <!-- 1. Large Main Hero Image (Oceanfront Resort & Infinity Pool) -->
+          <div class="collage-item collage-item--main" data-parallax-depth="0.03">
+            <div class="collage-item-inner">
+              <picture>
+                <source type="image/webp"
+                  srcset="assets/images/heritage/pasikuda_pool_view-480w.webp 480w,
+                          assets/images/heritage/pasikuda_pool_view-800w.webp 800w,
+                          assets/images/heritage/pasikuda_pool_view-1376w.webp 1376w"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 620px">
+                <source type="image/jpeg"
+                  srcset="assets/images/heritage/pasikuda_pool_view-480w.jpg 480w,
+                          assets/images/heritage/pasikuda_pool_view-800w.jpg 800w,
+                          assets/images/heritage/pasikuda_pool_view-1376w.jpg 1376w"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 620px">
+                <img src="assets/images/heritage/pasikuda_pool_view.jpg"
+                  alt="Hotel Thaprobane coastal infinity pool and calm turquoise ocean bay"
+                  class="collage-img"
+                  width="1376" height="768"
+                  loading="lazy" decoding="async">
+              </picture>
+              <div class="collage-item-caption">
+                <span class="collage-caption-tag">COASTAL HAVEN</span>
+                <span class="collage-caption-title">Ocean Infinity Pool</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Medium Image Overlapping Top Corner (Ayurvedic Wellness & Lotus Spa Pavilion) -->
+          <div class="collage-item collage-item--medium collage-item--top-right" data-parallax-depth="0.06">
+            <div class="collage-item-inner">
+              <picture>
+                <source type="image/webp"
+                  srcset="assets/images/heritage/hotel_spa_wellness-480w.webp 480w,
+                          assets/images/heritage/hotel_spa_wellness-800w.webp 800w,
+                          assets/images/heritage/hotel_spa_wellness-1376w.webp 1376w"
+                  sizes="(max-width: 768px) 50vw, 320px">
+                <source type="image/jpeg"
+                  srcset="assets/images/heritage/hotel_spa_wellness-480w.jpg 480w,
+                          assets/images/heritage/hotel_spa_wellness-800w.jpg 800w,
+                          assets/images/heritage/hotel_spa_wellness-1376w.jpg 1376w"
+                  sizes="(max-width: 768px) 50vw, 320px">
+                <img src="assets/images/heritage/hotel_spa_wellness.jpg"
+                  alt="Traditional Ayurvedic open-air thatched spa pavilion above sacred lily pond"
+                  class="collage-img"
+                  width="1376" height="768"
+                  loading="lazy" decoding="async">
+              </picture>
+              <div class="collage-item-caption">
+                <span class="collage-caption-tag">ANCIENT HEALING</span>
+                <span class="collage-caption-title">Ayurvedic Lotus Spa</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Medium Image Overlapping Bottom Corner (Romantic Candlelit Sunset Dining Deck) -->
+          <div class="collage-item collage-item--medium collage-item--bottom-left" data-parallax-depth="0.05">
+            <div class="collage-item-inner">
+              <picture>
+                <source type="image/webp"
+                  srcset="assets/images/heritage/hotel_dining_view-480w.webp 480w,
+                          assets/images/heritage/hotel_dining_view-800w.webp 800w,
+                          assets/images/heritage/hotel_dining_view-1376w.webp 1376w"
+                  sizes="(max-width: 768px) 50vw, 340px">
+                <source type="image/jpeg"
+                  srcset="assets/images/heritage/hotel_dining_view-480w.jpg 480w,
+                          assets/images/heritage/hotel_dining_view-800w.jpg 800w,
+                          assets/images/heritage/hotel_dining_view-1376w.jpg 1376w"
+                  sizes="(max-width: 768px) 50vw, 340px">
+                <img src="assets/images/heritage/hotel_dining_view.jpg"
+                  alt="Candlelit beachfront veranda dining with Ceylon culinary flavors at golden hour sunset"
+                  class="collage-img"
+                  width="1376" height="768"
+                  loading="lazy" decoding="async">
+              </picture>
+              <div class="collage-item-caption">
+                <span class="collage-caption-tag">CULINARY GRACE</span>
+                <span class="collage-caption-title">Twilight Ocean Veranda</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Small Accent Image (Luxury Oceanfront Private Plunge Villa Suite) -->
+          <div class="collage-item collage-item--accent" data-parallax-depth="0.08">
+            <div class="collage-item-inner">
+              <picture>
+                <source type="image/webp"
+                  srcset="assets/images/heritage/hotel_luxury_room-480w.webp 480w,
+                          assets/images/heritage/hotel_luxury_room-800w.webp 800w,
+                          assets/images/heritage/hotel_luxury_room-1376w.webp 1376w"
+                  sizes="(max-width: 768px) 50vw, 240px">
+                <source type="image/jpeg"
+                  srcset="assets/images/heritage/hotel_luxury_room-480w.jpg 480w,
+                          assets/images/heritage/hotel_luxury_room-800w.jpg 800w,
+                          assets/images/heritage/hotel_luxury_room-1376w.jpg 1376w"
+                  sizes="(max-width: 768px) 50vw, 240px">
+                <img src="assets/images/heritage/hotel_luxury_room.jpg"
+                  alt="Master ocean plunge sanctuary suite with teak high-ceiling architecture and sunset balcony"
+                  class="collage-img"
+                  width="1376" height="768"
+                  loading="lazy" decoding="async">
+              </picture>
+              <div class="collage-item-caption">
+                <span class="collage-caption-tag">SANCTUARY SUITE</span>
+                <span class="collage-caption-title">Master Ocean Villa</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -991,6 +1096,80 @@
             document.removeEventListener('click', tryPlay);
           }, { once: true });
         });
+      }
+    })();
+
+    // Heritage & Identity 4-Photo Luxury Collage: Staggered Scroll Reveal & Parallax
+    (function initHeritageCollage() {
+      const collage = document.getElementById('heritageCollage');
+      if (!collage) return;
+
+      const items = collage.querySelectorAll('.collage-item');
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (prefersReduced) {
+        items.forEach(el => el.classList.add('is-revealed'));
+        return;
+      }
+
+      // 1. Staggered IntersectionObserver reveal (~150ms delay)
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              items.forEach((item, index) => {
+                setTimeout(() => {
+                  item.classList.add('is-revealed');
+                }, index * 150);
+              });
+              obs.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.15
+        });
+        observer.observe(collage);
+      } else {
+        items.forEach(el => el.classList.add('is-revealed'));
+      }
+
+      // 2. Subtle Interactive Parallax (Desktop >992px)
+      if (window.innerWidth > 992) {
+        let ticking = false;
+
+        function onMouseMove(e) {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(() => {
+            const rect = collage.getBoundingClientRect();
+            // Normalized offset from container center (-1 to 1)
+            const normX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+            const normY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+
+            items.forEach(item => {
+              const depth = parseFloat(item.getAttribute('data-parallax-depth')) || 0.04;
+              const moveX = normX * depth * 24;
+              const moveY = normY * depth * 24;
+              const inner = item.querySelector('.collage-item-inner');
+              if (inner && !item.matches(':hover')) {
+                inner.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+              }
+            });
+            ticking = false;
+          });
+        }
+
+        function onMouseLeave() {
+          items.forEach(item => {
+            const inner = item.querySelector('.collage-item-inner');
+            if (inner) {
+              inner.style.transform = '';
+            }
+          });
+        }
+
+        collage.addEventListener('mousemove', onMouseMove, { passive: true });
+        collage.addEventListener('mouseleave', onMouseLeave, { passive: true });
       }
     })();
   </script>

@@ -575,47 +575,193 @@
   margin: 0;
 }
 
-.sanctuary-story-images {
+/* ========================================================
+   HERITAGE & IDENTITY: LUXURY 4-PHOTO EDITORIAL COLLAGE
+   ======================================================== */
+.sanctuary-heritage-collage {
   position: relative;
-}
-
-.sanctuary-img-large {
   width: 100%;
-  height: 480px;
-  object-fit: cover;
-  border-radius: 14px;
-  box-shadow: 0 25px 50px rgba(7, 21, 32, 0.15);
+  max-width: 620px;
+  height: 560px;
+  margin: 0 auto;
+  perspective: 1000px;
 }
 
-.sanctuary-img-small {
+/* Staggered Scroll Reveal Base */
+.sanctuary-heritage-collage .collage-item {
   position: absolute;
-  bottom: -35px;
-  left: -35px;
-  width: 58%;
-  height: 260px;
-  object-fit: cover;
-  border-radius: 12px;
-  border: 6px solid #ffffff;
-  box-shadow: 0 20px 45px rgba(7, 21, 32, 0.2);
+  opacity: 0;
+  transform: translateY(28px) scale(0.97);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
-.sanctuary-seal {
+.sanctuary-heritage-collage .collage-item.is-revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Stagger Delays on Initial Reveal */
+.sanctuary-heritage-collage .collage-item--main { transition-delay: 0ms; }
+.sanctuary-heritage-collage .collage-item--top-right { transition-delay: 150ms; }
+.sanctuary-heritage-collage .collage-item--bottom-left { transition-delay: 300ms; }
+.sanctuary-heritage-collage .collage-item--accent { transition-delay: 450ms; }
+
+/* Image Inner Card Container */
+.collage-item-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--sanctuary-navy, #071520);
+  border: 4px solid #ffffff;
+  box-shadow: 0 20px 50px rgba(7, 21, 32, 0.18),
+              0 0 0 1px rgba(201, 162, 75, 0.4);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s ease,
+              border-color 0.4s ease;
+  will-change: transform;
+}
+
+/* Individual Picture & Image */
+.collage-item-inner picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.collage-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.85s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+/* Hover States: Gentle Elevation & Subtle Zoom */
+.sanctuary-heritage-collage .collage-item:hover {
+  z-index: 9 !important;
+}
+
+.sanctuary-heritage-collage .collage-item:hover .collage-item-inner {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 65px rgba(7, 21, 32, 0.28),
+              0 0 0 2px var(--sanctuary-gold, #c89f53);
+  border-color: #ffffff;
+}
+
+.sanctuary-heritage-collage .collage-item:hover .collage-img {
+  transform: scale(1.05);
+}
+
+/* Editorial Floating Caption Overlay */
+.collage-item-caption {
   position: absolute;
-  top: -25px;
-  right: -25px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 30px 16px 12px;
+  background: linear-gradient(180deg, transparent 0%, rgba(7, 21, 32, 0.88) 100%);
+  color: #ffffff;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  z-index: 2;
+}
+
+.collage-caption-tag {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 2.5px;
+  color: var(--sanctuary-gold, #c89f53);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.collage-caption-title {
+  display: block;
+  font-family: 'Dahlia', 'Playfair Display', Georgia, serif;
+  font-size: 0.98rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+/* 1. Large Main Hero Image (Spans Upper-Center) */
+.sanctuary-heritage-collage .collage-item--main {
+  top: 55px;
+  left: 30px;
+  width: 76%;
+  height: 380px;
+  z-index: 1;
+}
+
+.sanctuary-heritage-collage .collage-item--main .collage-caption-title {
+  font-size: 1.25rem;
+}
+
+/* 2. Medium Top-Right Image (Overlaps Upper Right Corner) */
+.sanctuary-heritage-collage .collage-item--top-right {
+  top: 0;
+  right: 0;
+  width: 48%;
+  height: 205px;
+  z-index: 3;
+}
+
+/* 3. Medium Bottom-Left Image (Overlaps Lower Left Corner) */
+.sanctuary-heritage-collage .collage-item--bottom-left {
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  height: 215px;
+  z-index: 4;
+}
+
+/* 4. Small Accent Image (Editorial Bottom-Right Offset) */
+.sanctuary-heritage-collage .collage-item--accent {
+  bottom: 22px;
+  right: -10px;
+  width: 42%;
+  height: 180px;
+  z-index: 5;
+}
+
+.sanctuary-heritage-collage .collage-item--accent .collage-caption-title {
+  font-size: 0.88rem;
+}
+
+/* Circular Seal Badge */
+.sanctuary-heritage-collage .sanctuary-seal {
+  position: absolute;
+  top: -15px;
+  left: -5px;
   width: 120px;
   height: 120px;
-  background: var(--sanctuary-navy);
-  color: var(--sanctuary-gold);
-  border: 2px solid var(--sanctuary-gold);
+  background: var(--sanctuary-navy, #071520);
+  color: var(--sanctuary-gold, #c89f53);
+  border: 2px solid var(--sanctuary-gold, #c89f53);
   border-radius: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4),
+              0 0 0 4px rgba(200, 159, 83, 0.2);
   padding: 10px;
+  z-index: 10;
+  pointer-events: auto;
+  transition: transform 0.4s ease;
+}
+
+.sanctuary-heritage-collage .sanctuary-seal:hover {
+  transform: scale(1.06) rotate(3deg);
 }
 
 .sanctuary-seal .seal-year {
@@ -638,6 +784,165 @@
   letter-spacing: 1px;
   text-transform: uppercase;
   color: #e0f2fe;
+}
+
+/* Responsive: Tablet (769px to 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .sanctuary-heritage-collage {
+    max-width: 540px;
+    height: 490px;
+  }
+  .sanctuary-heritage-collage .collage-item--main {
+    top: 50px;
+    left: 20px;
+    width: 76%;
+    height: 330px;
+  }
+  .sanctuary-heritage-collage .collage-item--top-right {
+    width: 48%;
+    height: 180px;
+  }
+  .sanctuary-heritage-collage .collage-item--bottom-left {
+    width: 50%;
+    height: 190px;
+  }
+  .sanctuary-heritage-collage .collage-item--accent {
+    width: 42%;
+    height: 160px;
+    right: 0;
+    bottom: 15px;
+  }
+  .sanctuary-heritage-collage .sanctuary-seal {
+    width: 105px;
+    height: 105px;
+    top: -10px;
+    left: -10px;
+  }
+}
+
+/* Responsive: Mobile (<= 768px) - Clean, Non-Overlapping 2x2 Grid */
+@media (max-width: 768px) {
+  .sanctuary-heritage-collage {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    height: auto;
+    max-width: 100%;
+    margin: 40px auto 0;
+    position: relative;
+    perspective: none;
+  }
+
+  .sanctuary-heritage-collage .sanctuary-seal {
+    position: absolute;
+    top: -28px;
+    right: 12px;
+    left: auto;
+    width: 95px;
+    height: 95px;
+    z-index: 10;
+  }
+
+  .sanctuary-heritage-collage .collage-item {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .sanctuary-heritage-collage .collage-item--main {
+    grid-column: span 2;
+    height: 240px !important;
+  }
+
+  .sanctuary-heritage-collage .collage-item--top-right,
+  .sanctuary-heritage-collage .collage-item--bottom-left {
+    grid-column: span 1;
+    height: 170px !important;
+  }
+
+  .sanctuary-heritage-collage .collage-item--accent {
+    grid-column: span 2;
+    height: 200px !important;
+  }
+
+  .sanctuary-heritage-collage .collage-item-inner {
+    border-width: 3px;
+  }
+}
+
+/* Small Mobile Screens (<= 480px) */
+@media (max-width: 480px) {
+  .sanctuary-heritage-collage {
+    gap: 10px;
+  }
+
+  .sanctuary-heritage-collage .sanctuary-seal {
+    width: 82px;
+    height: 82px;
+    top: -24px;
+    right: 8px;
+    padding: 6px;
+  }
+
+  .sanctuary-seal .seal-year {
+    font-size: 0.52rem;
+    letter-spacing: 1px;
+  }
+
+  .sanctuary-seal .seal-title {
+    font-size: 0.88rem;
+  }
+
+  .sanctuary-seal .seal-sub {
+    font-size: 0.5rem;
+  }
+
+  .sanctuary-heritage-collage .collage-item--main {
+    height: 200px !important;
+  }
+
+  .sanctuary-heritage-collage .collage-item--top-right,
+  .sanctuary-heritage-collage .collage-item--bottom-left {
+    height: 140px !important;
+  }
+
+  .sanctuary-heritage-collage .collage-item--accent {
+    height: 170px !important;
+  }
+
+  .collage-caption-tag {
+    font-size: 0.52rem;
+    letter-spacing: 1.5px;
+  }
+
+  .collage-caption-title {
+    font-size: 0.82rem;
+  }
+}
+
+/* Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .sanctuary-heritage-collage .collage-item {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .sanctuary-heritage-collage .collage-item-inner {
+    transition: none !important;
+    transform: none !important;
+  }
+  .sanctuary-heritage-collage .collage-img {
+    transition: none !important;
+    transform: none !important;
+  }
+  .sanctuary-heritage-collage .sanctuary-seal {
+    transition: none !important;
+  }
 }
 
 /* --- Highlights Preview Section --- */
@@ -1234,9 +1539,6 @@
   }
   .sanctuary-story-badges {
     grid-template-columns: 1fr;
-  }
-  .sanctuary-img-small {
-    display: none;
   }
   .sanctuary-offer-perks-list {
     grid-template-columns: 1fr;
