@@ -8,9 +8,9 @@ module.exports = async function handler(req, res) {
 
     await connectDB();
 
-    const { email } = req.body;
-    if (!email || !email.includes('@')) {
-        return res.status(400).json({ success: false, message: 'Valid email address is required.' });
+    const email = req.body?.email;
+    if (!email || typeof email !== 'string' || !email.includes('@')) {
+        return res.status(400).json({ success: false, message: 'Valid email required' });
     }
 
     const cleanEmail = email.trim().toLowerCase();

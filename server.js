@@ -207,7 +207,7 @@ function getRoomBannerImage(category) {
 
 // 5. API Routes
 app.post('/api/bookings', async (req, res) => {
-    const bookingData = req.body;
+    const bookingData = req.body || {};
     let savedToCloud = false;
     let emailSent = false;
     let emailErrorMessage = null;
@@ -543,10 +543,10 @@ app.post('/api/bookings', async (req, res) => {
 // Subscription API Endpoint
 // ==========================================
 app.post('/api/subscribe', async (req, res) => {
-    const { email } = req.body;
+    const email = req.body?.email;
 
-    if (!email || !email.includes('@')) {
-        return res.status(400).json({ success: false, message: 'Valid email address is required.' });
+    if (!email || typeof email !== 'string' || !email.includes('@')) {
+        return res.status(400).json({ success: false, message: 'Valid email required' });
     }
 
     const cleanEmail = email.trim().toLowerCase();
@@ -654,36 +654,40 @@ app.post('/api/subscribe', async (req, res) => {
         // Send email
         let emailSent = false;
         if (mailUser && mailPass) {
-            // Send to subscriber
-            await transporter.sendMail({
-                from: `"Hotel Thaprobane" <${adminEmail}>`,
-                to: cleanEmail,
-                subject: `✨ Welcome to Thaprobane Club Privileges (${timeStr})`,
-                html: newsletterHtml
-            });
+            try {
+                // Send to subscriber
+                await transporter.sendMail({
+                    from: `"Hotel Thaprobane" <${adminEmail}>`,
+                    to: cleanEmail,
+                    subject: `✨ Welcome to Thaprobane Club Privileges (${timeStr})`,
+                    html: newsletterHtml
+                });
 
-            // Also send notification to admin if different
-            if (cleanEmail !== adminEmail.toLowerCase()) {
-                try {
-                    await transporter.sendMail({
-                        from: `"Hotel Thaprobane" <${adminEmail}>`,
-                        to: adminEmail,
-                        subject: `📬 New Newsletter Subscriber: ${cleanEmail} (${timeStr})`,
-                        html: `<p>New subscriber registered on Hotel Thaprobane website:</p><p><strong>Email:</strong> ${cleanEmail}</p><p><strong>Date:</strong> ${new Date().toLocaleString()}</p>`
-                    });
-                } catch (adminErr) {
-                    console.warn('Could not notify admin of subscriber:', adminErr.message);
+                // Also send notification to admin if different
+                if (cleanEmail !== adminEmail.toLowerCase()) {
+                    try {
+                        await transporter.sendMail({
+                            from: `"Hotel Thaprobane" <${adminEmail}>`,
+                            to: adminEmail,
+                            subject: `📬 New Newsletter Subscriber: ${cleanEmail} (${timeStr})`,
+                            html: `<p>New subscriber registered on Hotel Thaprobane website:</p><p><strong>Email:</strong> ${cleanEmail}</p><p><strong>Date:</strong> ${new Date().toLocaleString()}</p>`
+                        });
+                    } catch (adminErr) {
+                        console.warn('Could not notify admin of subscriber:', adminErr.message);
+                    }
                 }
-            }
 
-            emailSent = true;
-            console.log(`📧 Confirmation email sent successfully to ${cleanEmail}`);
+                emailSent = true;
+                console.log(`📧 Confirmation email sent successfully to ${cleanEmail}`);
+            } catch (mailErr) {
+                console.error('❌ Subscription email failed:', mailErr.message);
+            }
         }
 
         return res.status(200).json({
             success: true,
             emailSent,
-            message: 'Subscription successful! Check your email for confirmation.',
+            message: emailSent ? 'Subscription successful! Check your email for confirmation.' : 'Subscribed successfully'
         });
     } catch (error) {
         console.error('❌ Error processing subscription:', error);

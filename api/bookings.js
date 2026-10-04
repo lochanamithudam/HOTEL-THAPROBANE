@@ -9,7 +9,7 @@ module.exports = async function handler(req, res) {
 
     await connectDB();
 
-    const bookingData = req.body;
+    const bookingData = req.body || {};
     let savedToCloud = false;
     let emailSent = false;
     let emailErrorMessage = null;
