@@ -31,6 +31,24 @@ body.villas-page {
   overflow-x: hidden;
 }
 
+/* ── GLASSMORPHISM NAV OVERRIDE FOR SUITES PAGE ── */
+body.villas-page .luxury-top-nav.site-header {
+  position: fixed;
+  background: rgba(6, 17, 26, 0.55);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(200, 159, 83, 0.15);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+body.villas-page .luxury-top-nav.site-header.scrolled {
+  background: rgba(6, 17, 26, 0.80);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(200, 159, 83, 0.22);
+  box-shadow: 0 6px 40px rgba(0, 0, 0, 0.45);
+}
+
 /* -------------------------------------------------------------
    1. HERO SECTION
    ------------------------------------------------------------- */
