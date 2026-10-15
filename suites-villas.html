@@ -665,9 +665,213 @@
             </div>
           </div>
 
-          <!-- LUXURY VILLA PHOTO GALLERY -->
-          <!-- TODO: Add photos to images/royal-oceanfront-suite/ and configure in js/gallery.js -->
-          <div class="premium-gallery-wrapper is-hidden" data-gallery-id="ocean-suite" style="display: none;"></div>
+          <!-- LUXURY VILLA PHOTO GALLERY SHOWCASE -->
+          <div class="premium-gallery-wrapper" data-gallery-id="ocean-suite">
+            <!-- 1. Gallery Header Toolbar -->
+            <div class="gallery-toolbar">
+              <div class="gallery-tabs-scroll">
+                <div class="gallery-room-tabs" role="tablist">
+                  <button class="gallery-room-tab active" data-index="0" role="tab" aria-selected="true">
+                    <i class="fa-solid fa-bed"></i>
+                    <span>Master Bedroom</span>
+                  </button>
+                  <button class="gallery-room-tab" data-index="1" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-hot-tub-person"></i>
+                    <span>Ocean Jacuzzi</span>
+                  </button>
+                  <button class="gallery-room-tab" data-index="2" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-couch"></i>
+                    <span>Living Salon</span>
+                  </button>
+                  <button class="gallery-room-tab" data-index="3" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-bath"></i>
+                    <span>Marble En-Suite</span>
+                  </button>
+                </div>
+              </div>
+              <div class="gallery-view-actions">
+                <button class="gallery-mode-toggle" aria-label="Switch between single showcase and all photos grid">
+                  <i class="fa-solid fa-table-cells-large"></i>
+                  <span class="mode-text">View All 4 Photos</span>
+                </button>
+                <button class="gallery-fullscreen-action" aria-label="Open Fullscreen Lightbox">
+                  <i class="fa-solid fa-expand"></i>
+                  <span>Fullscreen</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 2. Single Photo Showcase Stage (Default & Interactive) -->
+            <div class="gallery-showcase-view active">
+              <div class="gallery-showcase-stage" role="region" aria-label="Villa Photo Showcase">
+                <div class="stage-top-bar">
+                  <div class="stage-counter-badge">
+                    <span class="counter-curr">01</span>
+                    <span class="counter-sep">/</span>
+                    <span class="counter-total">04</span>
+                    <span class="counter-dot">•</span>
+                    <span class="counter-room-name">Master Bedroom</span>
+                  </div>
+                  <button class="stage-expand-btn" aria-label="Open Fullscreen Lightbox">
+                    <i class="fa-solid fa-expand"></i>
+                    <span>VIEW FULLSCREEN</span>
+                  </button>
+                </div>
+
+                <button class="stage-nav-arrow prev" aria-label="Previous Photo">
+                  <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button class="stage-nav-arrow next" aria-label="Next Photo">
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <div class="stage-slides-container">
+                  <div class="stage-slide active" data-index="0">
+                    <img src="images/royal-oceanfront-suite/penthouse_master_bedroom.jpg"
+                      alt="Royal Oceanfront Penthouse master bedroom with bespoke teak King bed, soaring vaulted ceiling, and sliding glass doors opening to wrap-around ocean veranda"
+                      class="stage-slide-img" fetchpriority="high" decoding="async">
+                  </div>
+                  <div class="stage-slide" data-index="1">
+                    <img src="images/royal-oceanfront-suite/penthouse_jacuzzi_terrace.jpg"
+                      alt="Top-floor wrap-around teak veranda with sunken marble hydrotherapy Jacuzzi overlooking the turquoise ocean with champagne setup"
+                      class="stage-slide-img" loading="lazy" decoding="async">
+                  </div>
+                  <div class="stage-slide" data-index="2">
+                    <img src="images/royal-oceanfront-suite/penthouse_living_salon.jpg"
+                      alt="Double-height luxury penthouse living room with designer curved sofas, marble coffee table, and panoramic floor-to-ceiling glass ocean walls"
+                      class="stage-slide-img" loading="lazy" decoding="async">
+                  </div>
+                  <div class="stage-slide" data-index="3">
+                    <img src="images/royal-oceanfront-suite/penthouse_ensuite_bathroom.jpg"
+                      alt="Penthouse master ensuite bathroom featuring a freestanding marble soaking tub beside floor-to-ceiling glass overlooking the turquoise ocean"
+                      class="stage-slide-img" loading="lazy" decoding="async">
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. Bottom Filmstrip Thumbnails Row (4 Distinct Room Cards) -->
+              <div class="gallery-thumbnail-filmstrip" role="tablist" aria-label="Photo Thumbnails">
+                <button class="thumb-card active" data-index="0" role="tab" aria-selected="true" aria-label="View Master Bedroom">
+                  <div class="thumb-img-box">
+                    <img src="images/royal-oceanfront-suite/penthouse_master_bedroom.jpg" alt="Master Bedroom thumbnail" loading="lazy">
+                    <span class="thumb-num">01</span>
+                  </div>
+                  <div class="thumb-info">
+                    <span class="thumb-label">Master Bedroom</span>
+                    <span class="thumb-sub">Oceanfront King Suite</span>
+                  </div>
+                  <div class="thumb-active-indicator"></div>
+                </button>
+
+                <button class="thumb-card" data-index="1" role="tab" aria-selected="false" aria-label="View Ocean Jacuzzi">
+                  <div class="thumb-img-box">
+                    <img src="images/royal-oceanfront-suite/penthouse_jacuzzi_terrace.jpg" alt="Ocean Jacuzzi thumbnail" loading="lazy">
+                    <span class="thumb-num">02</span>
+                  </div>
+                  <div class="thumb-info">
+                    <span class="thumb-label">Ocean Jacuzzi</span>
+                    <span class="thumb-sub">Wrap-Around Terrace</span>
+                  </div>
+                  <div class="thumb-active-indicator"></div>
+                </button>
+
+                <button class="thumb-card" data-index="2" role="tab" aria-selected="false" aria-label="View Living Salon">
+                  <div class="thumb-img-box">
+                    <img src="images/royal-oceanfront-suite/penthouse_living_salon.jpg" alt="Living Salon thumbnail" loading="lazy">
+                    <span class="thumb-num">03</span>
+                  </div>
+                  <div class="thumb-info">
+                    <span class="thumb-label">Living Salon</span>
+                    <span class="thumb-sub">Top-Floor Lounge</span>
+                  </div>
+                  <div class="thumb-active-indicator"></div>
+                </button>
+
+                <button class="thumb-card" data-index="3" role="tab" aria-selected="false" aria-label="View Marble En-Suite">
+                  <div class="thumb-img-box">
+                    <img src="images/royal-oceanfront-suite/penthouse_ensuite_bathroom.jpg" alt="Marble En-Suite thumbnail" loading="lazy">
+                    <span class="thumb-num">04</span>
+                  </div>
+                  <div class="thumb-info">
+                    <span class="thumb-label">Marble En-Suite</span>
+                    <span class="thumb-sub">Spa Sanctuary</span>
+                  </div>
+                  <div class="thumb-active-indicator"></div>
+                </button>
+              </div>
+            </div>
+
+            <!-- 4. "All Photos" Expansive Grid View (4 Separate Luxury Cards) -->
+            <div class="gallery-all-grid-view">
+              <!-- Card 0 -->
+              <article class="all-grid-card" data-index="0" tabindex="0" role="button" aria-label="Open Master Bedroom photo">
+                <div class="all-grid-img-wrap">
+                  <img src="images/royal-oceanfront-suite/penthouse_master_bedroom.jpg" alt="Royal Oceanfront Penthouse master bedroom" loading="lazy">
+                  <span class="all-grid-badge">01 · Master Bedroom</span>
+                  <span class="all-grid-zoom-pill"><i class="fa-solid fa-expand"></i> Inspect</span>
+                </div>
+                <div class="all-grid-body">
+                  <h3 class="all-grid-title">PANORAMIC OCEANFRONT MASTER BEDROOM</h3>
+                  <p class="all-grid-desc">Handcrafted teak King bed with crisp Italian linen, soaring vaulted timber ceiling & wrap-around ocean balcony walkout.</p>
+                  <div class="all-grid-footer">
+                    <span class="all-grid-room-tag"><i class="fa-solid fa-bed"></i> Oceanfront King Suite</span>
+                    <span class="all-grid-cta">View High-Res <i class="fa-solid fa-arrow-right"></i></span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 1 -->
+              <article class="all-grid-card" data-index="1" tabindex="0" role="button" aria-label="Open Ocean Jacuzzi photo">
+                <div class="all-grid-img-wrap">
+                  <img src="images/royal-oceanfront-suite/penthouse_jacuzzi_terrace.jpg" alt="Open-Air Marble Jacuzzi & Sunset Veranda" loading="lazy">
+                  <span class="all-grid-badge">02 · Ocean Jacuzzi</span>
+                  <span class="all-grid-zoom-pill"><i class="fa-solid fa-expand"></i> Inspect</span>
+                </div>
+                <div class="all-grid-body">
+                  <h3 class="all-grid-title">OPEN-AIR MARBLE JACUZZI & SUNSET VERANDA</h3>
+                  <p class="all-grid-desc">Sunken marble hydrotherapy Jacuzzi perched above the sea with teak sundeck, plush loungers & golden sunset vistas.</p>
+                  <div class="all-grid-footer">
+                    <span class="all-grid-room-tag"><i class="fa-solid fa-hot-tub-person"></i> Wrap-Around Terrace</span>
+                    <span class="all-grid-cta">View High-Res <i class="fa-solid fa-arrow-right"></i></span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 2 -->
+              <article class="all-grid-card" data-index="2" tabindex="0" role="button" aria-label="Open Living Salon photo">
+                <div class="all-grid-img-wrap">
+                  <img src="images/royal-oceanfront-suite/penthouse_living_salon.jpg" alt="Double-Height Living Salon" loading="lazy">
+                  <span class="all-grid-badge">03 · Living Salon</span>
+                  <span class="all-grid-zoom-pill"><i class="fa-solid fa-expand"></i> Inspect</span>
+                </div>
+                <div class="all-grid-body">
+                  <h3 class="all-grid-title">DOUBLE-HEIGHT LIVING SALON & OCEAN HORIZON</h3>
+                  <p class="all-grid-desc">Expansive double-height penthouse salon with curved cream sofas, bespoke teak-marble table & 270° uninterrupted ocean horizon.</p>
+                  <div class="all-grid-footer">
+                    <span class="all-grid-room-tag"><i class="fa-solid fa-couch"></i> Top-Floor Lounge</span>
+                    <span class="all-grid-cta">View High-Res <i class="fa-solid fa-arrow-right"></i></span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 3 -->
+              <article class="all-grid-card" data-index="3" tabindex="0" role="button" aria-label="Open Marble En-Suite photo">
+                <div class="all-grid-img-wrap">
+                  <img src="images/royal-oceanfront-suite/penthouse_ensuite_bathroom.jpg" alt="Panoramic Marble Soaking Tub & En-Suite" loading="lazy">
+                  <span class="all-grid-badge">04 · Marble En-Suite</span>
+                  <span class="all-grid-zoom-pill"><i class="fa-solid fa-expand"></i> Inspect</span>
+                </div>
+                <div class="all-grid-body">
+                  <h3 class="all-grid-title">PANORAMIC MARBLE SOAKING TUB & EN-SUITE</h3>
+                  <p class="all-grid-desc">Freestanding marble soaking tub, carved natural stone double vanity, brushed brass fixtures & sweeping ocean views.</p>
+                  <div class="all-grid-footer">
+                    <span class="all-grid-room-tag"><i class="fa-solid fa-bath"></i> Spa Sanctuary</span>
+                    <span class="all-grid-cta">View High-Res <i class="fa-solid fa-arrow-right"></i></span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
         </article>
 
         <!-- ==================== VILLA 3: OCEAN HORIZON INFINITY PLUNGE VILLA ==================== -->
@@ -1305,7 +1509,7 @@
       </button>
 
       <span class="section-tag" style="margin-bottom:6px;">Instant Sanctuary Reservation</span>
-      <h3 style="font-size:1.6rem; color:#ffffff; margin-bottom:8px;">Live Availability & Pricing Breakdown</h3>
+      <h3 style="font-size:1.6rem; color:var(--text-white); margin-bottom:8px;">Live Availability & Pricing Breakdown</h3>
       <p style="color:var(--text-muted); font-size:0.85rem;">Guaranteed Best Direct Booking Rate with complimentary
         gourmet breakfast & airport transfer.</p>
 

@@ -61,7 +61,44 @@ const VILLA_GALLERIES = {
     }
   ],
 
-  'ocean-suite': [],
+  'ocean-suite': [
+    {
+      src: 'images/royal-oceanfront-suite/penthouse_master_bedroom.jpg',
+      caption: 'PANORAMIC OCEANFRONT MASTER BEDROOM',
+      alt: 'Royal Oceanfront Penthouse master bedroom with bespoke teak King bed, soaring vaulted ceiling, and sliding glass doors opening to wrap-around ocean veranda',
+      tag: 'Master Bedroom',
+      sub: 'Oceanfront King Suite',
+      icon: 'fa-bed',
+      desc: 'Handcrafted teak King bed with crisp Italian linen, soaring vaulted timber ceiling & wrap-around ocean balcony walkout.'
+    },
+    {
+      src: 'images/royal-oceanfront-suite/penthouse_jacuzzi_terrace.jpg',
+      caption: 'OPEN-AIR MARBLE JACUZZI & SUNSET VERANDA',
+      alt: 'Top-floor wrap-around teak veranda with sunken marble hydrotherapy Jacuzzi overlooking the turquoise ocean with champagne setup',
+      tag: 'Ocean Jacuzzi',
+      sub: 'Wrap-Around Terrace',
+      icon: 'fa-hot-tub-person',
+      desc: 'Sunken marble hydrotherapy Jacuzzi perched above the sea with teak sundeck, plush loungers & golden sunset vistas.'
+    },
+    {
+      src: 'images/royal-oceanfront-suite/penthouse_living_salon.jpg',
+      caption: 'DOUBLE-HEIGHT LIVING SALON & OCEAN HORIZON',
+      alt: 'Double-height luxury penthouse living room with designer curved sofas, marble coffee table, and panoramic floor-to-ceiling glass ocean walls',
+      tag: 'Living Salon',
+      sub: 'Top-Floor Lounge',
+      icon: 'fa-couch',
+      desc: 'Expansive double-height penthouse salon with curved cream sofas, bespoke teak-marble table & 270° uninterrupted ocean horizon.'
+    },
+    {
+      src: 'images/royal-oceanfront-suite/penthouse_ensuite_bathroom.jpg',
+      caption: 'PANORAMIC MARBLE SOAKING TUB & EN-SUITE',
+      alt: 'Penthouse master ensuite bathroom featuring a freestanding marble soaking tub beside floor-to-ceiling glass overlooking the turquoise ocean',
+      tag: 'Marble En-Suite',
+      sub: 'Spa Sanctuary',
+      icon: 'fa-bath',
+      desc: 'Freestanding marble soaking tub, carved natural stone double vanity, brushed brass fixtures & sweeping ocean views.'
+    }
+  ],
   'premium-view': [],
   'cinnamon-pavilion': [],
   'presidential-villa': [],
@@ -404,7 +441,7 @@ class LuxuryGallerySystem {
         <div class="gallery-view-actions">
           <button class="gallery-mode-toggle" aria-label="Switch between single showcase and all photos grid">
             <i class="fa-solid fa-table-cells-large"></i>
-            <span class="mode-text">View All 5 Photos</span>
+            <span class="mode-text">View All ${photos.length} Photos</span>
           </button>
           <button class="gallery-fullscreen-action" aria-label="Open Fullscreen Lightbox">
             <i class="fa-solid fa-expand"></i>
@@ -623,7 +660,7 @@ class LuxuryGallerySystem {
       } else {
         allGridView.classList.remove('active');
         showcaseView.classList.add('active');
-        modeText.textContent = 'View All 5 Photos';
+        modeText.textContent = `View All ${photos.length} Photos`;
         modeIcon.className = 'fa-solid fa-table-cells-large';
         goToIndex(currentIndex, true);
       }
