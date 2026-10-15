@@ -52,22 +52,22 @@ body.villas-page .luxury-top-nav.site-header {
   left: 0;
   width: 100%;
   padding: 22px 50px;
-  background: rgba(0, 0, 0, 0.22);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+  background: rgba(4, 13, 21, 0.35);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.20);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 1000;
 }
 
 body.villas-page .luxury-top-nav.site-header.scrolled {
   padding: 9px 45px !important;
-  background: rgba(0, 0, 0, 0.50) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35) !important;
+  background: rgba(4, 13, 21, 0.65) !important;
+  backdrop-filter: blur(34px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(34px) saturate(190%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45) !important;
   z-index: 1000 !important;
 }
 
