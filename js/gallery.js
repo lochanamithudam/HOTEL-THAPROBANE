@@ -441,18 +441,7 @@ class LuxuryGallerySystem {
             ${slidesHtml}
           </div>
 
-          <div class="stage-gradient-overlay"></div>
 
-          <div class="stage-caption-card">
-            <div class="caption-tag-pill">
-              <i class="fa-solid ${photos[0].icon || 'fa-camera'}"></i>
-              <span class="caption-tag-text">${photos[0].caption}</span>
-            </div>
-            <p class="caption-desc-text">${photos[0].desc || photos[0].alt}</p>
-            <div class="caption-click-hint">
-              <i class="fa-solid fa-magnifying-glass-plus"></i> Click photo to view high-resolution cinema lightbox
-            </div>
-          </div>
         </div>
 
         <!-- Bottom Filmstrip Thumbnails Row -->
@@ -483,23 +472,77 @@ class LuxuryGallerySystem {
 
     const counterCurr = wrapper.querySelector('.counter-curr');
     const counterRoomName = wrapper.querySelector('.counter-room-name');
-    const captionTagText = wrapper.querySelector('.caption-tag-text');
-    const captionTagIcon = wrapper.querySelector('.caption-tag-pill i');
-    const captionDescText = wrapper.querySelector('.caption-desc-text');
+
 
     const prevBtn = wrapper.querySelector('.stage-nav-arrow.prev');
     const nextBtn = wrapper.querySelector('.stage-nav-arrow.next');
     const stage = wrapper.querySelector('.gallery-showcase-stage');
 
-    // Function to set active photo index
-    const goToIndex = (index, fromUser = false) => {
+    let transitionLock = false;
+
+    // Function to set active photo index with 3D page-flip book-turn animation
+    const goToIndex = (index, fromUser = false, direction = 1) => {
+      if (transitionLock) return;
+      const prevIndex = currentIndex;
       currentIndex = (index + photos.length) % photos.length;
+      if (currentIndex === prevIndex) return;
       const photo = photos[currentIndex];
 
-      // Update slides
-      slides.forEach((sl, idx) => {
-        sl.classList.toggle('active', idx === currentIndex);
-      });
+      transitionLock = true;
+
+      const incoming = slides[currentIndex];
+      const outgoing = slides[prevIndex];
+
+      // Outgoing fold-away direction
+      const foldExit   = direction > 0 ? 'rotateY(-90deg)' : 'rotateY(90deg)';
+      // Incoming unfold start position
+      const unfoldFrom = direction > 0 ? 'rotateY(90deg)'  : 'rotateY(-90deg)';
+
+      // --- Phase 1: Fold the outgoing page away ---
+      if (outgoing) {
+        outgoing.style.transition = 'none';
+        outgoing.style.transform  = 'rotateY(0deg)';
+        outgoing.style.opacity    = '1';
+        outgoing.style.visibility = 'visible';
+        outgoing.style.zIndex     = '3';
+        outgoing.getBoundingClientRect(); // reflow
+        outgoing.style.transition = 'transform 0.32s cubic-bezier(0.55, 0, 1, 0.45), opacity 0.28s ease';
+        outgoing.style.transform  = foldExit;
+        outgoing.style.opacity    = '0.3';
+      }
+
+      // --- Phase 2: After half-flip, unfold the incoming page ---
+      setTimeout(() => {
+        // Snap incoming into starting (off-screen rotated) position instantly
+        incoming.style.transition = 'none';
+        incoming.style.transform  = unfoldFrom;
+        incoming.style.opacity    = '0.3';
+        incoming.style.visibility = 'visible';
+        incoming.style.zIndex     = '4';
+        incoming.getBoundingClientRect(); // reflow
+
+        // Unfold into full view
+        incoming.style.transition = 'transform 0.34s cubic-bezier(0, 0.55, 0.45, 1), opacity 0.28s ease';
+        incoming.style.transform  = 'rotateY(0deg)';
+        incoming.style.opacity    = '1';
+
+        // Clean up after animation ends
+        setTimeout(() => {
+          slides.forEach((sl, idx) => {
+            if (idx === currentIndex) {
+              sl.classList.add('active');
+            } else {
+              sl.classList.remove('active');
+            }
+            sl.style.transition = '';
+            sl.style.transform  = '';
+            sl.style.opacity    = '';
+            sl.style.visibility = '';
+            sl.style.zIndex     = '';
+          });
+          transitionLock = false;
+        }, 360);
+      }, 300);
 
       // Update tabs
       tabs.forEach((tb, idx) => {
@@ -521,23 +564,20 @@ class LuxuryGallerySystem {
         }
       });
 
-      // Update Stage Overlay texts
+      // Update counter
       if (counterCurr) counterCurr.textContent = (currentIndex + 1).toString().padStart(2, '0');
       if (counterRoomName) counterRoomName.textContent = photo.tag || photo.caption;
-      if (captionTagText) captionTagText.textContent = photo.caption;
-      if (captionTagIcon) captionTagIcon.className = `fa-solid ${photo.icon || 'fa-camera'}`;
-      if (captionDescText) captionDescText.textContent = photo.desc || photo.alt;
     };
 
     // Navigation buttons
     prevBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      goToIndex(currentIndex - 1, true);
+      goToIndex(currentIndex - 1, true, -1);
     });
 
     nextBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      goToIndex(currentIndex + 1, true);
+      goToIndex(currentIndex + 1, true, 1);
     });
 
     // Room tab clicks
@@ -570,33 +610,7 @@ class LuxuryGallerySystem {
     let isDragging = false;
     let dragStartX = 0;
 
-    // Open lightbox on stage click (or expand button)
-    stage.addEventListener('click', (e) => {
-      if (e.target.closest('.stage-nav-arrow') || e.target.closest('.stage-expand-btn')) return;
-      if (didSwipe) {
-        didSwipe = false;
-        return;
-      }
-      this.lightbox.open(photos, currentIndex, villaTitle);
-    });
 
-    stageExpandBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      this.lightbox.open(photos, currentIndex, villaTitle);
-    });
-
-    fullscreenActionBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      this.lightbox.open(photos, currentIndex, villaTitle);
-    });
-
-    // Grid card click -> open lightbox at clicked card
-    gridCards.forEach(card => {
-      card.addEventListener('click', () => {
-        const idx = parseInt(card.dataset.index, 10);
-        this.lightbox.open(photos, idx, villaTitle);
-      });
-    });
 
     // Toggle Between Single Showcase & All Photos Grid
     const toggleMode = () => {
@@ -638,8 +652,8 @@ class LuxuryGallerySystem {
       const diff = dragStartX - e.clientX;
       if (Math.abs(diff) > 40) {
         didSwipe = true;
-        if (diff > 0) goToIndex(currentIndex + 1, true);
-        else goToIndex(currentIndex - 1, true);
+        if (diff > 0) goToIndex(currentIndex + 1, true, 1);
+        else goToIndex(currentIndex - 1, true, -1);
       }
     };
 
@@ -657,8 +671,8 @@ class LuxuryGallerySystem {
       const diff = touchStartX - touchEndX;
       if (Math.abs(diff) > 40) {
         didSwipe = true;
-        if (diff > 0) goToIndex(currentIndex + 1, true);
-        else goToIndex(currentIndex - 1, true);
+        if (diff > 0) goToIndex(currentIndex + 1, true, 1);
+        else goToIndex(currentIndex - 1, true, -1);
       }
     }, { passive: true });
 
@@ -670,9 +684,9 @@ class LuxuryGallerySystem {
       if (!inView) return;
 
       if (e.key === 'ArrowRight') {
-        goToIndex(currentIndex + 1, true);
+        goToIndex(currentIndex + 1, true, 1);
       } else if (e.key === 'ArrowLeft') {
-        goToIndex(currentIndex - 1, true);
+        goToIndex(currentIndex - 1, true, -1);
       }
     });
   }
