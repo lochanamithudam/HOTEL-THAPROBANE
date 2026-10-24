@@ -92,13 +92,31 @@ app.use(cors({
     credentials: true
 }));
 
-// Serve static frontend files (HTML, CSS, JS, Images)
-app.use('/css', express.static(path.join(__dirname, 'css')));
-app.use('/js', express.static(path.join(__dirname, 'js')));
-app.use('/Images', express.static(path.join(__dirname, 'Images')));
-app.use('/Videos', express.static(path.join(__dirname, 'Videos')));
-app.use('/fonts', express.static(path.join(__dirname, 'fonts')));
-app.use(express.static(path.join(__dirname)));
+// Serve static frontend files (HTML, CSS, JS, Images, Videos) with optimized caching
+const staticOptions = {
+    maxAge: '1d',
+    setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.html')) {
+            // Never cache HTML so users always get fresh markup immediately
+            res.setHeader('Cache-Control', 'no-cache');
+        }
+    }
+};
+
+const mediaStaticOptions = {
+    maxAge: '7d',
+    setHeaders: (res) => {
+        res.setHeader('Accept-Ranges', 'bytes');
+        res.setHeader('Cache-Control', 'public, max-age=604800, immutable');
+    }
+};
+
+app.use('/css', express.static(path.join(__dirname, 'css'), staticOptions));
+app.use('/js', express.static(path.join(__dirname, 'js'), staticOptions));
+app.use('/Images', express.static(path.join(__dirname, 'Images'), mediaStaticOptions));
+app.use('/Videos', express.static(path.join(__dirname, 'Videos'), mediaStaticOptions));
+app.use('/fonts', express.static(path.join(__dirname, 'fonts'), mediaStaticOptions));
+app.use(express.static(path.join(__dirname), staticOptions));
 
 // File path for local offline fallback storage
 const OFFLINE_STORAGE_FILE = path.join(__dirname, 'offline_bookings.json');

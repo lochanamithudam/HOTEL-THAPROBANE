@@ -104,21 +104,40 @@ document.addEventListener('DOMContentLoaded', () => {
     heroBgVideo.play().catch(() => {});
   }
 
-  // 2. Hero Carousel Slider
+  // 2. Hero Carousel Slider with on-demand background image loading
   const slides = document.querySelectorAll('.hero-slide');
   const dots = document.querySelectorAll('.hero-dot');
   let currentSlide = 0;
   let slideInterval;
 
+  function loadSlideBg(slide) {
+    if (!slide) return;
+    const bgEl = slide.querySelector('.hero-slide-bg[data-bg]');
+    if (bgEl) {
+      bgEl.style.backgroundImage = `url('${bgEl.dataset.bg}')`;
+      bgEl.removeAttribute('data-bg');
+    }
+  }
+
   function showSlide(index) {
     slides.forEach((s, i) => {
       s.classList.toggle('active', i === index);
+      if (i === index) {
+        loadSlideBg(s);
+      }
     });
     dots.forEach((d, i) => {
       d.classList.toggle('active', i === index);
     });
     currentSlide = index;
   }
+
+  // Pre-warm remaining slides in background after initial page load settles
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      slides.forEach(loadSlideBg);
+    }, 2000);
+  });
 
   function nextSlide() {
     if (slides.length === 0) return;

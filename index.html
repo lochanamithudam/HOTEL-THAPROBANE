@@ -44,32 +44,30 @@
     <!-- Hero Slider & Video Background Container -->
     <div class="hero-slider-wrapper">
       <!-- Full-Screen Background Video Support -->
-      <video class="hero-bg-video" id="heroBgVideo" autoplay muted loop playsinline preload="auto"
-        poster="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1920&auto=format&fit=crop">
+      <video class="hero-bg-video" id="heroBgVideo" autoplay muted loop playsinline preload="metadata"
+        poster="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=75&w=1280&auto=format&fit=crop">
         <source src="Videos/SSP_BRAND_HERO.mp4" type="video/mp4">
-        <source src="Videos/SSP_BRAND_%20HERO.mp4" type="video/mp4">
-        <source src="Videos/SSP_BRAND_ HERO.mp4" type="video/mp4">
       </video>
 
-      <!-- Fallback High-Res Photographic Slides -->
+      <!-- Fallback Photographic Slides (Lazy loaded to prioritize Video & Page Render) -->
       <div class="hero-slide active">
         <div class="hero-slide-bg"
-          style="background-image: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1920&auto=format&fit=crop');">
+          style="background-image: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=75&w=1280&auto=format&fit=crop');">
         </div>
       </div>
       <div class="hero-slide">
         <div class="hero-slide-bg"
-          style="background-image: url('https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=2000&auto=format&fit=crop');">
+          data-bg="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=75&w=1280&auto=format&fit=crop">
         </div>
       </div>
       <div class="hero-slide">
         <div class="hero-slide-bg"
-          style="background-image: url('https://images.unsplash.com/photo-1546708973-b339540b5162?q=80&w=2000&auto=format&fit=crop');">
+          data-bg="https://images.unsplash.com/photo-1546708973-b339540b5162?q=75&w=1280&auto=format&fit=crop">
         </div>
       </div>
       <div class="hero-slide">
         <div class="hero-slide-bg"
-          style="background-image: url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=2000&auto=format&fit=crop');">
+          data-bg="https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=75&w=1280&auto=format&fit=crop">
         </div>
       </div>
     </div>
