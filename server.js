@@ -16,6 +16,11 @@ const path = require('path');
 
 const app = express();
 
+// Security: Trust exactly 1 upstream reverse proxy (Cloudflare / Nginx / Vercel).
+// This ensures req.ip reflects the real client IP from X-Forwarded-For safely,
+// preventing attackers from spoofing the header to bypass rate limits. (SEC-03)
+app.set('trust proxy', 1);
+
 // Security: Helmet for HTTP headers protection with custom CSP for fonts/CDNs
 app.use(
     helmet({
@@ -43,7 +48,8 @@ const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute window
 const MAX_API_REQUESTS = 30; // Max 30 requests per minute per IP
 
 const apiRateLimiter = (req, res, next) => {
-    const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '127.0.0.1';
+    // req.ip is safe because trust proxy is configured above (SEC-03)
+    const clientIp = req.ip || req.socket.remoteAddress || '127.0.0.1';
     const now = Date.now();
     const clientData = apiRateLimitMap.get(clientIp) || { count: 0, resetTime: now + RATE_LIMIT_WINDOW_MS };
 
@@ -784,14 +790,16 @@ app.all('/api/test-email', async (req, res) => {
     const adminEmail = (mailUser || 'lochanamithudam097@gmail.com').trim().toLowerCase();
     const requestedEmail = (req.query.email || req.body?.email || '').trim().toLowerCase();
     const adminKey = req.headers['x-admin-key'] || req.query.key;
-    const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
-    const isLocal = clientIp === '127.0.0.1' || clientIp === '::1' || clientIp.includes('127.0.0.1');
+    // req.ip is trustworthy because trust proxy is configured at app startup (SEC-03)
+    const clientIp = req.ip || req.socket.remoteAddress || '';
+    const isLocal = clientIp === '127.0.0.1' || clientIp === '::1';
 
-    // Security: Only allow sending test emails to the hotel administrator's address
-    // unless authenticated by admin key or executed locally. This prevents external open-relay spam.
+    // Security: Fail-closed — require ADMIN_KEY env var to be explicitly set.
+    // No hardcoded fallback allowed. (SEC-02)
+    const configuredAdminKey = process.env.ADMIN_KEY;
     let targetEmail = adminEmail;
     if (requestedEmail && requestedEmail !== adminEmail) {
-        if (!isLocal && adminKey !== (process.env.ADMIN_KEY || 'thaprobane_admin_2026')) {
+        if (!isLocal && (!configuredAdminKey || adminKey !== configuredAdminKey)) {
             return res.status(403).json({
                 success: false,
                 message: 'Forbidden: Test email can only be dispatched to the verified administrator address.'

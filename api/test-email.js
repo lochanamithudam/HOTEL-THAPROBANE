@@ -9,10 +9,12 @@ module.exports = async function handler(req, res) {
     const requestedEmail = (req.query.email || req.body?.email || '').trim().toLowerCase();
     const adminKey = req.headers['x-admin-key'] || req.query.key;
 
-    // Security: Only allow sending test emails to the hotel admin address unless authenticated
+    // Security: Fail-closed — require ADMIN_KEY env var to be explicitly set.
+    // No hardcoded fallback allowed. (SEC-02)
+    const configuredAdminKey = process.env.ADMIN_KEY;
     let targetEmail = adminEmail;
     if (requestedEmail && requestedEmail !== adminEmail) {
-        if (adminKey !== (process.env.ADMIN_KEY || 'thaprobane_admin_2026')) {
+        if (!configuredAdminKey || adminKey !== configuredAdminKey) {
             return res.status(403).json({
                 success: false,
                 message: 'Forbidden: Test email can only be dispatched to the verified administrator address.'
