@@ -790,16 +790,13 @@ app.all('/api/test-email', async (req, res) => {
     const adminEmail = (mailUser || 'lochanamithudam097@gmail.com').trim().toLowerCase();
     const requestedEmail = (req.query.email || req.body?.email || '').trim().toLowerCase();
     const adminKey = req.headers['x-admin-key'] || req.query.key;
-    // req.ip is trustworthy because trust proxy is configured at app startup (SEC-03)
-    const clientIp = req.ip || req.socket.remoteAddress || '';
-    const isLocal = clientIp === '127.0.0.1' || clientIp === '::1';
 
-    // Security: Fail-closed — require ADMIN_KEY env var to be explicitly set.
-    // No hardcoded fallback allowed. (SEC-02)
+    // Security (SEC-02): ADMIN_KEY is ALWAYS required to send to any address
+    // other than the configured admin. No localhost/IP exception — fail-closed.
     const configuredAdminKey = process.env.ADMIN_KEY;
     let targetEmail = adminEmail;
     if (requestedEmail && requestedEmail !== adminEmail) {
-        if (!isLocal && (!configuredAdminKey || adminKey !== configuredAdminKey)) {
+        if (!configuredAdminKey || adminKey !== configuredAdminKey) {
             return res.status(403).json({
                 success: false,
                 message: 'Forbidden: Test email can only be dispatched to the verified administrator address.'
