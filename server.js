@@ -6,6 +6,7 @@ try {
 }
 
 const express = require('express');
+const helmet = require('helmet');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
@@ -14,10 +15,69 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-app.use(express.json());
+
+// Security: Helmet for HTTP headers protection with custom CSP for fonts/CDNs
+app.use(
+    helmet({
+        contentSecurityPolicy: {
+            directives: {
+                defaultSrc: ["'self'"],
+                scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+                styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdnjs.cloudflare.com"],
+                fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com", "data:"],
+                imgSrc: ["'self'", "data:", "blob:", "https:"],
+                mediaSrc: ["'self'", "blob:", "data:"],
+                connectSrc: ["'self'", "https:"],
+            },
+        },
+        crossOriginEmbedderPolicy: false,
+    })
+);
+
+// Security: Prevent large payload DOS attacks
+app.use(express.json({ limit: '100kb' }));
+
+// Security: In-Memory Rate Limiter for API endpoints (prevents spam bots & DOS)
+const apiRateLimitMap = new Map();
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute window
+const MAX_API_REQUESTS = 30; // Max 30 requests per minute per IP
+
+const apiRateLimiter = (req, res, next) => {
+    const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '127.0.0.1';
+    const now = Date.now();
+    const clientData = apiRateLimitMap.get(clientIp) || { count: 0, resetTime: now + RATE_LIMIT_WINDOW_MS };
+
+    if (now > clientData.resetTime) {
+        clientData.count = 1;
+        clientData.resetTime = now + RATE_LIMIT_WINDOW_MS;
+    } else {
+        clientData.count++;
+    }
+
+    apiRateLimitMap.set(clientIp, clientData);
+
+    // Housekeeping: clean up stale entries periodically
+    if (apiRateLimitMap.size > 1000) {
+        for (const [ip, data] of apiRateLimitMap.entries()) {
+            if (now > data.resetTime) apiRateLimitMap.delete(ip);
+        }
+    }
+
+    if (clientData.count > MAX_API_REQUESTS) {
+        return res.status(429).json({
+            success: false,
+            message: 'Too many requests. Please wait a minute and try again.'
+        });
+    }
+
+    next();
+};
+
+app.use('/api/', apiRateLimiter);
+
 app.use(cors({
     origin: function (origin, callback) {
-        // Allow requests with no origin (curl, Postman, server-to-server)
+        // Allow requests with no origin (curl, Postman, mobile, server-to-server)
         if (!origin) return callback(null, true);
         // Allow any localhost / 127.0.0.1 port (covers Live Server, file://, etc.)
         if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) {
@@ -28,7 +88,7 @@ app.use(cors({
         callback(null, true); // Allow all origins in development
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-admin-key'],
     credentials: true
 }));
 
@@ -703,7 +763,25 @@ app.post('/api/subscribe', async (req, res) => {
 // Instant Diagnostic / Test Email Endpoint
 // ==========================================
 app.all('/api/test-email', async (req, res) => {
-    const targetEmail = req.query.email || req.body?.email || mailUser || 'lochanamithudam097@gmail.com';
+    const adminEmail = (mailUser || 'lochanamithudam097@gmail.com').trim().toLowerCase();
+    const requestedEmail = (req.query.email || req.body?.email || '').trim().toLowerCase();
+    const adminKey = req.headers['x-admin-key'] || req.query.key;
+    const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
+    const isLocal = clientIp === '127.0.0.1' || clientIp === '::1' || clientIp.includes('127.0.0.1');
+
+    // Security: Only allow sending test emails to the hotel administrator's address
+    // unless authenticated by admin key or executed locally. This prevents external open-relay spam.
+    let targetEmail = adminEmail;
+    if (requestedEmail && requestedEmail !== adminEmail) {
+        if (!isLocal && adminKey !== (process.env.ADMIN_KEY || 'thaprobane_admin_2026')) {
+            return res.status(403).json({
+                success: false,
+                message: 'Forbidden: Test email can only be dispatched to the verified administrator address.'
+            });
+        }
+        targetEmail = requestedEmail;
+    }
+
     const timeStr = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
     if (!mailUser || !mailPass) {

@@ -63,7 +63,9 @@ const transporter = nodemailer.createTransport({
 function setCors(res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-admin-key');
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-Frame-Options', 'SAMEORIGIN');
 }
 
 // ─── Room Banner Image Helper ─────────────────────────────────────────────────

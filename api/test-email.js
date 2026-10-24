@@ -5,7 +5,22 @@ module.exports = async function handler(req, res) {
 
     if (req.method === 'OPTIONS') return res.status(200).end();
 
-    const targetEmail = req.query.email || req.body?.email || mailUser || 'lochanamithudam097@gmail.com';
+    const adminEmail = (mailUser || 'lochanamithudam097@gmail.com').trim().toLowerCase();
+    const requestedEmail = (req.query.email || req.body?.email || '').trim().toLowerCase();
+    const adminKey = req.headers['x-admin-key'] || req.query.key;
+
+    // Security: Only allow sending test emails to the hotel admin address unless authenticated
+    let targetEmail = adminEmail;
+    if (requestedEmail && requestedEmail !== adminEmail) {
+        if (adminKey !== (process.env.ADMIN_KEY || 'thaprobane_admin_2026')) {
+            return res.status(403).json({
+                success: false,
+                message: 'Forbidden: Test email can only be dispatched to the verified administrator address.'
+            });
+        }
+        targetEmail = requestedEmail;
+    }
+
     const timeStr = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
     if (!mailUser || !mailPass) {
