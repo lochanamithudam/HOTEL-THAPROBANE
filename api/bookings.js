@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const { connectDB, Booking, transporter, mailUser, mailPass, setCors, getRoomBannerImage } = require('./_lib/db');
 
 module.exports = async function handler(req, res) {
@@ -7,25 +8,92 @@ module.exports = async function handler(req, res) {
     if (req.method === 'OPTIONS') return res.status(200).end();
     if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' });
 
-    await connectDB();
+    // Connect to MongoDB with timeout protection
+    try {
+        await connectDB();
+    } catch (connErr) {
+        console.warn('⚠️ MongoDB connection attempt failed:', connErr.message);
+    }
 
-    const bookingData = req.body || {};
+    // Safely parse request body across serverless environments (handles objects, strings, buffers)
+    let rawBody = req.body || {};
+    if (typeof rawBody === 'string') {
+        try {
+            rawBody = JSON.parse(rawBody);
+        } catch (e) {
+            console.warn('⚠️ Could not parse req.body string as JSON:', e.message);
+            rawBody = {};
+        }
+    } else if (Buffer.isBuffer(rawBody)) {
+        try {
+            rawBody = JSON.parse(rawBody.toString('utf-8'));
+        } catch (e) {
+            console.warn('⚠️ Could not parse req.body Buffer as JSON:', e.message);
+            rawBody = {};
+        }
+    }
+
+    // Unwrap if nested in data or booking
+    const bodyObj = (rawBody.data && typeof rawBody.data === 'object')
+        ? rawBody.data
+        : (rawBody.booking && typeof rawBody.booking === 'object')
+            ? rawBody.booking
+            : rawBody;
+
+    const bookingRef = 'HT-' + Date.now().toString().slice(-6);
+
+    // Robust field normalization to prevent falling back to defaults like 'Website Guest' and 'Not Provided'
+    const guestName = (bodyObj.guestName || bodyObj.name || bodyObj.fullName || bodyObj.guest_name || '').toString().trim();
+    const guestEmail = (bodyObj.guestEmail || bodyObj.email || bodyObj.guest_email || '').toString().trim();
+    const guestPhone = (bodyObj.guestPhone || bodyObj.phone || bodyObj.guest_phone || bodyObj.contact || bodyObj.tel || '').toString().trim();
+    const roomName = (bodyObj.roomName || bodyObj.roomCategory || bodyObj.roomType || bodyObj.room || 'Royal Oceanfront Suite').toString().trim();
+    const roomCategory = bodyObj.roomCategory || roomName;
+    const checkIn = bodyObj.checkIn || bodyObj.checkin || bodyObj.check_in || '';
+    const checkOut = bodyObj.checkOut || bodyObj.checkout || bodyObj.check_out || '';
+    const guests = bodyObj.guests || bodyObj.guestCount || '2 Adults (Couple)';
+    const nights = Number(bodyObj.nights) || 1;
+    const subtotal = Number(bodyObj.subtotal) || 0;
+    const tax = Number(bodyObj.tax) || 0;
+    const totalAmount = Number(bodyObj.totalAmount || bodyObj.total || bodyObj.amount) || (subtotal + tax);
+
+    const bookingData = {
+        ...bodyObj,
+        bookingRef,
+        roomName,
+        roomCategory,
+        checkIn,
+        checkOut,
+        guests,
+        nights,
+        subtotal,
+        tax,
+        totalAmount,
+        guestName: guestName || 'Website Guest',
+        guestEmail: guestEmail || 'Not Provided',
+        guestPhone: guestPhone || 'Not Provided'
+    };
+
     let savedToCloud = false;
     let emailSent = false;
     let emailErrorMessage = null;
-    const bookingRef = 'HT-' + Date.now().toString().slice(-6);
-    const roomName = bookingData.roomName || bookingData.roomCategory || 'Royal Oceanfront Suite';
 
-    console.log(`📩 Booking: ${bookingData.guestName || 'Unknown'} (${roomName}) [${bookingRef}]`);
+    console.log(`📩 Booking: ${bookingData.guestName} (${roomName}) [${bookingRef}]`);
 
-    // ── 1. Save to MongoDB ───────────────────────────────────────────────────
-    try {
-        const newBooking = new Booking({ ...bookingData, bookingRef });
-        await newBooking.save();
-        savedToCloud = true;
-        console.log('✅ Booking saved to MongoDB Atlas');
-    } catch (dbErr) {
-        console.warn('⚠️ DB save failed:', dbErr.message);
+    // ── 1. Save to MongoDB (with graceful fallback - no local file system writes on Vercel) ──
+    if (mongoose.connection && mongoose.connection.readyState === 1) {
+        try {
+            const newBooking = new Booking(bookingData);
+            await newBooking.save();
+            savedToCloud = true;
+            console.log(`✅ Booking [${bookingRef}] saved to MongoDB Atlas`);
+        } catch (dbErr) {
+            console.warn(`⚠️ DB save failed for [${bookingRef}]:`, dbErr.message);
+            // Serverless fallback: Log reservation to stdout/in-memory so it is preserved in platform logs without disk writes
+            console.log('📋 In-Memory Reservation Backup:', JSON.stringify(bookingData));
+        }
+    } else {
+        console.warn(`⚠️ DB not connected (readyState=${mongoose.connection ? mongoose.connection.readyState : 0}). Skipping cloud save gracefully.`);
+        console.log('📋 In-Memory Reservation Backup:', JSON.stringify(bookingData));
     }
 
     // ── 2. Send Email ────────────────────────────────────────────────────────

@@ -4,6 +4,13 @@ const nodemailer = require('nodemailer');
 // ─── MongoDB Connection (cached for serverless warm reuse) ───────────────────
 let cached = global._mongooseConnection;
 
+const MONGO_OPTIONS = {
+    serverSelectionTimeoutMS: 5000,
+    connectTimeoutMS: 5000,
+    socketTimeoutMS: 10000,
+    bufferCommands: false
+};
+
 async function connectDB() {
     if (cached && mongoose.connection.readyState === 1) return;
 
@@ -14,17 +21,18 @@ async function connectDB() {
     }
 
     try {
-        await mongoose.connect(uri);
+        await mongoose.connect(uri, MONGO_OPTIONS);
         global._mongooseConnection = true;
         console.log('✅ MongoDB Atlas connected');
     } catch (err) {
-        console.error('❌ MongoDB connection failed:', err.message);
+        console.warn('⚠️ MongoDB connection failed / timed out:', err.message);
     }
 }
 
 // ─── Schemas & Models ────────────────────────────────────────────────────────
 const bookingSchema = new mongoose.Schema({
     roomCategory:  String,
+    roomName:      String,
     checkIn:       String,
     checkOut:      String,
     guests:        String,

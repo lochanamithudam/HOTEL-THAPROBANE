@@ -7,3 +7,6 @@ node_modules/
 Thumbs.db
 *.bak
 offline_bookings.json
+
+.vercel
+.env*

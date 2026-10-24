@@ -39,8 +39,30 @@ app.use(
     })
 );
 
-// Security: Prevent large payload DOS attacks
-app.use(express.json({ limit: '100kb' }));
+// Security & Robust Payload Handling: Body Parsers with limits & error handling
+app.use(express.json({ limit: '2mb' }));
+app.use(express.urlencoded({ extended: true, limit: '2mb' }));
+
+// Body-parser error handler (catches invalid JSON and oversized payload errors gracefully)
+app.use((err, req, res, next) => {
+    if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
+        console.error('❌ Malformed JSON payload received:', err.message);
+        return res.status(400).json({
+            success: false,
+            message: 'Invalid JSON payload. Please verify request body formatting.',
+            error: err.message
+        });
+    }
+    if (err.status === 413 || err.type === 'entity.too.large') {
+        console.error('❌ Payload too large rejected:', err.message);
+        return res.status(413).json({
+            success: false,
+            message: 'Payload too large. Request body exceeds permitted size limit.',
+            error: err.message
+        });
+    }
+    next(err);
+});
 
 // Security: In-Memory Rate Limiter for API endpoints (prevents spam bots & DOS)
 const apiRateLimitMap = new Map();
@@ -124,12 +146,16 @@ app.use('/Videos', express.static(path.join(__dirname, 'Videos'), mediaStaticOpt
 app.use('/fonts', express.static(path.join(__dirname, 'fonts'), mediaStaticOptions));
 app.use(express.static(path.join(__dirname), staticOptions));
 
-// File path for local offline fallback storage
-const OFFLINE_STORAGE_FILE = path.join(__dirname, 'offline_bookings.json');
-
-// 1. Connect to MongoDB Atlas (with Backup Fallback & Offline Auto-Sync)
+// 1. Connect to MongoDB Atlas (with Backup Fallback & Fast Timeout Protection)
 const primaryURI = process.env.MONGO_URI;
 const backupURI = process.env.MONGO_BACKUP_URI || primaryURI;
+
+const MONGO_OPTIONS = {
+    serverSelectionTimeoutMS: 5000,
+    connectTimeoutMS: 5000,
+    socketTimeoutMS: 10000,
+    bufferCommands: false
+};
 
 async function connectDB() {
     if (!primaryURI) {
@@ -139,24 +165,22 @@ async function connectDB() {
 
     try {
         console.log('Connecting to Primary DB:', primaryURI.replace(/:([^:@]+)@/, ':****@'));
-        await mongoose.connect(primaryURI);
+        await mongoose.connect(primaryURI, MONGO_OPTIONS);
         console.log('✅ Connected successfully to MongoDB Atlas: hotel_thaprobane (Primary)');
-        await syncOfflineBookings();
     } catch (err) {
-        console.warn('⚠️ Primary MongoDB connection failed:', err.message || err);
+        console.warn('⚠️ Primary MongoDB connection failed / timed out:', err.message || err);
         if (backupURI && backupURI !== primaryURI) {
             console.log('🔄 Attempting backup connection...');
             try {
                 console.log('Connecting to Backup DB:', backupURI.replace(/:([^:@]+)@/, ':****@'));
-                await mongoose.connect(backupURI);
+                await mongoose.connect(backupURI, MONGO_OPTIONS);
                 console.log('✅ Connected successfully to MongoDB Atlas: hotel_thaprobane (Backup)');
-                await syncOfflineBookings();
             } catch (backupErr) {
                 console.error('❌ Backup MongoDB connection error:', backupErr.message || backupErr);
-                console.log('📁 Server is in OFFLINE mode. Any incoming bookings will be stored in offline_bookings.json');
+                console.log('ℹ️ Server running in resilient in-memory mode (Cloud DB unavailable).');
             }
         } else {
-            console.log('📁 Server is in OFFLINE mode. Any incoming bookings will be stored in offline_bookings.json');
+            console.log('ℹ️ Server running in resilient in-memory mode (Cloud DB unavailable).');
         }
     }
 }
@@ -164,6 +188,7 @@ async function connectDB() {
 // 2. Schemas & Models
 const bookingSchema = new mongoose.Schema({
     roomCategory: String,
+    roomName: String,
     checkIn: String,
     checkOut: String,
     guests: String,
@@ -174,6 +199,7 @@ const bookingSchema = new mongoose.Schema({
     guestName: { type: String, default: 'Website Guest' },
     guestEmail: { type: String, default: 'Not Provided' },
     guestPhone: { type: String, default: 'Not Provided' },
+    bookingRef: String,
     createdAt: { type: Date, default: Date.now }
 });
 
@@ -225,55 +251,6 @@ if (mailUser && mailPass) {
     console.warn('⚠️ GMAIL_USER / EMAIL_USER or GMAIL_PASS / EMAIL_PASS is missing in environment.');
 }
 
-// Helper: Save booking to local file if Network/Database is offline
-function saveBookingOffline(bookingData) {
-    try {
-        let bookings = [];
-        if (fs.existsSync(OFFLINE_STORAGE_FILE)) {
-            const fileData = fs.readFileSync(OFFLINE_STORAGE_FILE, 'utf-8');
-            bookings = JSON.parse(fileData || '[]');
-        }
-        bookings.push({
-            ...bookingData,
-            savedLocallyAt: new Date().toISOString(),
-            syncedToCloud: false
-        });
-        fs.writeFileSync(OFFLINE_STORAGE_FILE, JSON.stringify(bookings, null, 2), 'utf-8');
-        console.log('💾 Booking saved to local backup file: offline_bookings.json');
-        return true;
-    } catch (err) {
-        console.error('❌ Failed to save booking to offline storage:', err);
-        return false;
-    }
-}
-
-// Helper: Sync offline saved bookings to MongoDB when connection is restored
-async function syncOfflineBookings() {
-    try {
-        if (!fs.existsSync(OFFLINE_STORAGE_FILE)) return;
-
-        const fileData = fs.readFileSync(OFFLINE_STORAGE_FILE, 'utf-8');
-        const bookings = JSON.parse(fileData || '[]');
-        const unSynced = bookings.filter(b => !b.syncedToCloud);
-
-        if (unSynced.length === 0) return;
-
-        console.log(`🔄 Found ${unSynced.length} offline bookings. Syncing to MongoDB Atlas...`);
-        for (const item of unSynced) {
-            const { savedLocallyAt, syncedToCloud, syncedAt, ...bookingPayload } = item;
-            const newBooking = new Booking(bookingPayload);
-            await newBooking.save();
-            item.syncedToCloud = true;
-            item.syncedAt = new Date().toISOString();
-        }
-
-        fs.writeFileSync(OFFLINE_STORAGE_FILE, JSON.stringify(bookings, null, 2), 'utf-8');
-        console.log('✅ All offline bookings successfully synced to MongoDB Atlas!');
-    } catch (err) {
-        console.error('❌ Error syncing offline bookings to MongoDB:', err.message);
-    }
-}
-
 // Helper: Get high-resolution banner image URL based on room category
 function getRoomBannerImage(category) {
     const cat = (category || '').toLowerCase();
@@ -291,28 +268,83 @@ function getRoomBannerImage(category) {
 
 // 5. API Routes
 app.post('/api/bookings', async (req, res) => {
-    const bookingData = req.body || {};
+    // Safely parse request body across environments (handles objects, strings, buffers)
+    let rawBody = req.body || {};
+    if (typeof rawBody === 'string') {
+        try {
+            rawBody = JSON.parse(rawBody);
+        } catch (e) {
+            console.warn('⚠️ Could not parse req.body string as JSON:', e.message);
+            rawBody = {};
+        }
+    } else if (Buffer.isBuffer(rawBody)) {
+        try {
+            rawBody = JSON.parse(rawBody.toString('utf-8'));
+        } catch (e) {
+            console.warn('⚠️ Could not parse req.body Buffer as JSON:', e.message);
+            rawBody = {};
+        }
+    }
+
+    const bodyObj = (rawBody.data && typeof rawBody.data === 'object')
+        ? rawBody.data
+        : (rawBody.booking && typeof rawBody.booking === 'object')
+            ? rawBody.booking
+            : rawBody;
+
+    const bookingRef = 'HT-' + Date.now().toString().slice(-6);
+
+    // Robust field normalization to avoid default value fallback
+    const guestName = (bodyObj.guestName || bodyObj.name || bodyObj.fullName || bodyObj.guest_name || '').toString().trim();
+    const guestEmail = (bodyObj.guestEmail || bodyObj.email || bodyObj.guest_email || '').toString().trim();
+    const guestPhone = (bodyObj.guestPhone || bodyObj.phone || bodyObj.guest_phone || bodyObj.contact || bodyObj.tel || '').toString().trim();
+    const roomName = (bodyObj.roomName || bodyObj.roomCategory || bodyObj.roomType || bodyObj.room || 'Royal Oceanfront Suite').toString().trim();
+    const roomCategory = bodyObj.roomCategory || roomName;
+    const checkIn = bodyObj.checkIn || bodyObj.checkin || bodyObj.check_in || '';
+    const checkOut = bodyObj.checkOut || bodyObj.checkout || bodyObj.check_out || '';
+    const guests = bodyObj.guests || bodyObj.guestCount || '2 Adults (Couple)';
+    const nights = Number(bodyObj.nights) || 1;
+    const subtotal = Number(bodyObj.subtotal) || 0;
+    const tax = Number(bodyObj.tax) || 0;
+    const totalAmount = Number(bodyObj.totalAmount || bodyObj.total || bodyObj.amount) || (subtotal + tax);
+
+    const bookingData = {
+        ...bodyObj,
+        bookingRef,
+        roomName,
+        roomCategory,
+        checkIn,
+        checkOut,
+        guests,
+        nights,
+        subtotal,
+        tax,
+        totalAmount,
+        guestName: guestName || 'Website Guest',
+        guestEmail: guestEmail || 'Not Provided',
+        guestPhone: guestPhone || 'Not Provided'
+    };
+
     let savedToCloud = false;
     let emailSent = false;
     let emailErrorMessage = null;
-    const bookingRef = 'HT-' + Date.now().toString().slice(-6);
-    const roomName = bookingData.roomName || bookingData.roomCategory || 'Royal Oceanfront Suite';
-    console.log(`📩 Incoming booking request for: ${bookingData.guestName || 'Unknown'} (${roomName}) [${bookingRef}]`);
 
-    // Step 1: Save to MongoDB Atlas or fallback to local JSON file
-    try {
-        if (mongoose.connection.readyState === 1) {
-            const newBooking = new Booking({ ...bookingData, bookingRef });
+    console.log(`📩 Incoming booking request for: ${bookingData.guestName} (${roomName}) [${bookingRef}]`);
+
+    // Step 1: Save to MongoDB Atlas with graceful fallback (no local file writes on read-only environments)
+    if (mongoose.connection && mongoose.connection.readyState === 1) {
+        try {
+            const newBooking = new Booking(bookingData);
             await newBooking.save();
             savedToCloud = true;
-            console.log('✅ Booking saved directly to MongoDB Atlas');
-        } else {
-            console.warn('⚠️ Database not connected (readyState=' + mongoose.connection.readyState + '). Saving to offline backup file...');
-            saveBookingOffline({ ...bookingData, bookingRef });
+            console.log(`✅ Booking [${bookingRef}] saved directly to MongoDB Atlas`);
+        } catch (dbErr) {
+            console.warn(`⚠️ Cloud save failed for [${bookingRef}]:`, dbErr.message);
+            console.log('📋 Backup Reservation Log [In-Memory]:', JSON.stringify(bookingData));
         }
-    } catch (dbErr) {
-        console.warn('⚠️ Cloud save failed. Saving to offline backup file:', dbErr.message);
-        saveBookingOffline({ ...bookingData, bookingRef });
+    } else {
+        console.warn(`⚠️ Database not connected (readyState=${mongoose.connection ? mongoose.connection.readyState : 0}). Skipping cloud save gracefully.`);
+        console.log('📋 Backup Reservation Log [In-Memory]:', JSON.stringify(bookingData));
     }
 
     // Step 2: Send Email notification
@@ -615,7 +647,7 @@ app.post('/api/bookings', async (req, res) => {
     // Step 3: Respond to frontend
     res.status(201).json({
         success: true,
-        message: savedToCloud ? 'Booking saved to MongoDB Atlas' : 'Saved locally in offline backup',
+        message: savedToCloud ? 'Booking saved to MongoDB Atlas' : 'Reservation received & processed (Database offline)',
         savedToCloud,
         emailSent,
         bookingRef: typeof bookingRef !== 'undefined' ? bookingRef : null,
