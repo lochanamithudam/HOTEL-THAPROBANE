@@ -7,7 +7,7 @@ node_modules/
 Thumbs.db
 offline_bookings*.json
 temp_edge_profile/
-Videos/
+
 scripts/
 *.pdf
 security-audit-report.html
