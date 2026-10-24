@@ -1243,10 +1243,17 @@
           }, { once: true });
         });
       }
-      // Show video once it can play
-      video.addEventListener('canplay', function () {
+      // Reveal video instantly as soon as frames are ready or already buffered
+      function revealVideo() {
         video.style.opacity = '1';
-      });
+      }
+      if (video.readyState >= 2) {
+        revealVideo();
+      } else {
+        video.addEventListener('canplay', revealVideo, { once: true });
+        video.addEventListener('playing', revealVideo, { once: true });
+        video.addEventListener('loadeddata', revealVideo, { once: true });
+      }
     })();
   </script>
 
