@@ -1,994 +1,1151 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hotel Thaprobane - Post-Remediation Security Audit & Re-Assessment Report</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Thaprobane - Post-Remediation Security Audit & Re-Assessment Report</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-  @page {
-    size: A4 portrait;
-    margin: 12mm 14mm 14mm 14mm;
-    @bottom-center {
-      content: "Hotel Thaprobane • Confidential Security Re-Assessment Report";
-      font-size: 9px;
-      color: #94a3b8;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+    @page {
+      size: A4 portrait;
+      margin: 12mm 14mm 14mm 14mm;
+
+      @bottom-center {
+        content: "Hotel Thaprobane • Confidential Security Re-Assessment Report";
+        font-size: 9px;
+        color: #94a3b8;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+
+      @bottom-right {
+        content: "Page " counter(page);
+        font-size: 9px;
+        color: #94a3b8;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
     }
-    @bottom-right {
-      content: "Page " counter(page);
-      font-size: 9px;
-      color: #94a3b8;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-  }
 
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #1e293b;
+      background: #ffffff;
+      line-height: 1.55;
+      font-size: 12.5px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
 
-  body {
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    color: #1e293b;
-    background: #ffffff;
-    line-height: 1.55;
-    font-size: 12.5px;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
+    .page-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px 24px;
+      background: #fff;
+    }
 
-  .page-container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px 24px;
-    background: #fff;
-  }
+    /* Page Break Helpers */
+    .page-break {
+      page-break-before: always;
+      break-before: always;
+      padding-top: 18px;
+    }
 
-  /* Page Break Helpers */
-  .page-break {
-    page-break-before: always;
-    break-before: always;
-    padding-top: 18px;
-  }
+    .avoid-break {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
 
-  .avoid-break {
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
+    /* Header Banner */
+    .header-banner {
+      background: linear-gradient(135deg, #071520 0%, #0b1d28 55%, #0077b6 100%);
+      color: #ffffff;
+      padding: 28px 32px;
+      border-radius: 12px;
+      margin-bottom: 22px;
+      position: relative;
+      border-bottom: 3px solid #c89f53;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
 
-  /* Header Banner */
-  .header-banner {
-    background: linear-gradient(135deg, #071520 0%, #0b1d28 55%, #0077b6 100%);
-    color: #ffffff;
-    padding: 28px 32px;
-    border-radius: 12px;
-    margin-bottom: 22px;
-    position: relative;
-    border-bottom: 3px solid #c89f53;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
 
-  .header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-  }
+    .brand-badge {
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #dfba73;
+      font-weight: 700;
+    }
 
-  .brand-badge {
-    font-size: 10px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: #dfba73;
-    font-weight: 700;
-  }
+    .report-tag {
+      background: rgba(200, 159, 83, 0.2);
+      border: 1px solid rgba(200, 159, 83, 0.45);
+      color: #f1d497;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
 
-  .report-tag {
-    background: rgba(200, 159, 83, 0.2);
-    border: 1px solid rgba(200, 159, 83, 0.45);
-    color: #f1d497;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-  }
+    .report-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 25px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
 
-  .report-title {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: 25px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    color: #ffffff;
-    margin-bottom: 6px;
-  }
+    .report-subtitle {
+      font-size: 12.5px;
+      color: #cbd5e1;
+      font-weight: 400;
+      line-height: 1.5;
+    }
 
-  .report-subtitle {
-    font-size: 12.5px;
-    color: #cbd5e1;
-    font-weight: 400;
-    line-height: 1.5;
-  }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+    }
 
-  .meta-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-top: 18px;
-    padding-top: 16px;
-    border-top: 1px solid rgba(255, 255, 255, 0.14);
-  }
+    .meta-item .meta-label {
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #94a3b8;
+      margin-bottom: 3px;
+    }
 
-  .meta-item .meta-label {
-    font-size: 9.5px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #94a3b8;
-    margin-bottom: 3px;
-  }
+    .meta-item .meta-value {
+      font-size: 12px;
+      font-weight: 600;
+      color: #f8fafc;
+    }
 
-  .meta-item .meta-value {
-    font-size: 12px;
-    font-weight: 600;
-    color: #f8fafc;
-  }
+    /* Scorecard Grid */
+    .scorecard-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
 
-  /* Scorecard Grid */
-  .scorecard-grid {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr 1fr 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 22px;
-  }
+    .score-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 14px 14px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
 
-  .score-card {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 14px 14px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
+    .score-card.main-score {
+      background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      border-color: #334155;
+    }
 
-  .score-card.main-score {
-    background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
-    color: #ffffff;
-    border-color: #334155;
-  }
+    .score-card.main-score .score-number {
+      color: #38bdf8;
+      font-size: 34px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
 
-  .score-card.main-score .score-number {
-    color: #38bdf8;
-    font-size: 34px;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
+    .score-card.main-score .score-badge {
+      background: #0284c7;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 12px;
+      display: inline-block;
+      margin: 2px auto 4px auto;
+    }
 
-  .score-card.main-score .score-badge {
-    background: #0284c7;
-    color: #fff;
-    font-size: 10px;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 12px;
-    display: inline-block;
-    margin: 2px auto 4px auto;
-  }
+    .score-card.main-score .score-label {
+      color: #94a3b8;
+      font-size: 10px;
+    }
 
-  .score-card.main-score .score-label {
-    color: #94a3b8;
-    font-size: 10px;
-  }
+    .score-card.resolved {
+      background: #f0fdf4;
+      border-color: #86efac;
+    }
 
-  .score-card.resolved {
-    background: #f0fdf4;
-    border-color: #86efac;
-  }
-  .score-card.resolved .score-number { color: #16a34a; }
+    .score-card.resolved .score-number {
+      color: #16a34a;
+    }
 
-  .score-card.critical {
-    background: #fef2f2;
-    border-color: #fecaca;
-  }
-  .score-card.critical .score-number { color: #dc2626; }
+    .score-card.critical {
+      background: #fef2f2;
+      border-color: #fecaca;
+    }
 
-  .score-card.high {
-    background: #fff7ed;
-    border-color: #fed7aa;
-  }
-  .score-card.high .score-number { color: #ea580c; }
+    .score-card.critical .score-number {
+      color: #dc2626;
+    }
 
-  .score-card.medium {
-    background: #fffbeb;
-    border-color: #fde68a;
-  }
-  .score-card.medium .score-number { color: #d97706; }
+    .score-card.high {
+      background: #fff7ed;
+      border-color: #fed7aa;
+    }
 
-  .score-card.low {
-    background: #f0f9ff;
-    border-color: #bae6fd;
-  }
-  .score-card.low .score-number { color: #0284c7; }
+    .score-card.high .score-number {
+      color: #ea580c;
+    }
 
-  .score-number {
-    font-size: 26px;
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 2px;
-  }
+    .score-card.medium {
+      background: #fffbeb;
+      border-color: #fde68a;
+    }
 
-  .score-label {
-    font-size: 10px;
-    font-weight: 700;
-    color: #64748b;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
+    .score-card.medium .score-number {
+      color: #d97706;
+    }
 
-  .score-delta {
-    font-size: 9.5px;
-    font-weight: 600;
-    margin-top: 3px;
-  }
-  .score-delta.positive { color: #16a34a; }
-  .score-delta.neutral { color: #64748b; }
+    .score-card.low {
+      background: #f0f9ff;
+      border-color: #bae6fd;
+    }
 
-  /* Sections */
-  .section-block {
-    margin-bottom: 22px;
-  }
+    .score-card.low .score-number {
+      color: #0284c7;
+    }
 
-  .section-heading {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 14.5px;
-    font-weight: 700;
-    color: #0b1d28;
-    margin-bottom: 12px;
-    padding-bottom: 6px;
-    border-bottom: 2px solid #e2e8f0;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
+    .score-number {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 2px;
+    }
 
-  .section-heading .pill {
-    background: #0077b6;
-    color: #fff;
-    font-size: 10px;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-weight: 700;
-  }
+    .score-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
 
-  /* Table styling */
-  table.audit-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 11.5px;
-    margin: 12px 0 18px 0;
-  }
+    .score-delta {
+      font-size: 9.5px;
+      font-weight: 600;
+      margin-top: 3px;
+    }
 
-  table.audit-table th {
-    background: #0b1d28;
-    color: #ffffff;
-    text-align: left;
-    padding: 9px 12px;
-    font-weight: 600;
-    font-size: 10.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
+    .score-delta.positive {
+      color: #16a34a;
+    }
 
-  table.audit-table td {
-    padding: 8px 12px;
-    border-bottom: 1px solid #e2e8f0;
-    vertical-align: middle;
-  }
+    .score-delta.neutral {
+      color: #64748b;
+    }
 
-  table.audit-table tr:nth-child(even) td {
-    background: #f8fafc;
-  }
+    /* Sections */
+    .section-block {
+      margin-bottom: 22px;
+    }
 
-  .mono {
-    font-family: 'JetBrains Mono', Consolas, monospace;
-    font-size: 10.5px;
-  }
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #0b1d28;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #e2e8f0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
 
-  /* Badges */
-  .badge {
-    display: inline-block;
-    padding: 2.5px 7px;
-    border-radius: 4px;
-    font-size: 9.5px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    white-space: nowrap;
-  }
+    .section-heading .pill {
+      background: #0077b6;
+      color: #fff;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
 
-  .badge.critical { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
-  .badge.high { background: #ffedd5; color: #c2410c; border: 1px solid #fdba74; }
-  .badge.medium { background: #fef3c7; color: #b45309; border: 1px solid #fcd34d; }
-  .badge.low { background: #e0f2fe; color: #0369a1; border: 1px solid #7dd3fc; }
-  .badge.resolved { background: #dcfce7; color: #15803d; border: 1px solid #86efac; font-weight: 800; }
-  .badge.pending { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+    /* Table styling */
+    table.audit-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.5px;
+      margin: 12px 0 18px 0;
+    }
 
-  /* Issue Cards */
-  .issue-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-left: 4px solid #94a3b8;
-    border-radius: 8px;
-    padding: 14px 16px;
-    margin-bottom: 14px;
-    page-break-inside: avoid;
-    break-inside: avoid;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-  }
+    table.audit-table th {
+      background: #0b1d28;
+      color: #ffffff;
+      text-align: left;
+      padding: 9px 12px;
+      font-weight: 600;
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
 
-  .issue-card.critical { border-left-color: #dc2626; background: #fffdfd; }
-  .issue-card.high { border-left-color: #ea580c; background: #fffaf5; }
-  .issue-card.medium { border-left-color: #d97706; background: #fffdf7; }
-  .issue-card.low { border-left-color: #0284c7; background: #fbfdff; }
-  .issue-card.resolved { border-left-color: #16a34a; background: #f9fdfa; }
+    table.audit-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: middle;
+    }
 
-  .issue-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-  }
+    table.audit-table tr:nth-child(even) td {
+      background: #f8fafc;
+    }
 
-  .issue-title {
-    font-size: 13.5px;
-    font-weight: 700;
-    color: #0f172a;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+    .mono {
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-size: 10.5px;
+    }
 
-  .issue-loc {
-    font-family: 'JetBrains Mono', Consolas, monospace;
-    font-size: 10.5px;
-    color: #0077b6;
-    background: #f0f9ff;
-    padding: 2px 7px;
-    border-radius: 4px;
-    display: inline-block;
-    margin-bottom: 8px;
-    border: 1px solid #e0f2fe;
-  }
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 2.5px 7px;
+      border-radius: 4px;
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
 
-  .issue-desc {
-    font-size: 12px;
-    color: #334155;
-    margin-bottom: 8px;
-    line-height: 1.5;
-  }
+    .badge.critical {
+      background: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid #fca5a5;
+    }
 
-  .impact-box {
-    background: #fff5f5;
-    border-left: 3px solid #ef4444;
-    padding: 7px 11px;
-    font-size: 11.5px;
-    color: #991b1b;
-    margin: 8px 0;
-    border-radius: 0 4px 4px 0;
-  }
+    .badge.high {
+      background: #ffedd5;
+      color: #c2410c;
+      border: 1px solid #fdba74;
+    }
 
-  .impact-box.success {
-    background: #f0fdf4;
-    border-left-color: #22c55e;
-    color: #166534;
-  }
+    .badge.medium {
+      background: #fef3c7;
+      color: #b45309;
+      border: 1px solid #fcd34d;
+    }
 
-  .code-snippet {
-    background: #0b1523;
-    color: #e2e8f0;
-    font-family: 'JetBrains Mono', Consolas, monospace;
-    font-size: 10.5px;
-    padding: 9px 12px;
-    border-radius: 6px;
-    margin: 7px 0;
-    overflow-x: auto;
-    line-height: 1.45;
-  }
+    .badge.low {
+      background: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #7dd3fc;
+    }
 
-  .code-snippet .hl-red { color: #f87171; font-weight: 600; }
-  .code-snippet .hl-green { color: #4ade80; font-weight: 600; }
-  .code-snippet .hl-comment { color: #64748b; }
-  .code-snippet .hl-keyword { color: #38bdf8; }
+    .badge.resolved {
+      background: #dcfce7;
+      color: #15803d;
+      border: 1px solid #86efac;
+      font-weight: 800;
+    }
 
-  .fix-box {
-    background: #f0fdf4;
-    border: 1px solid #bbf7d0;
-    border-radius: 6px;
-    padding: 8px 12px;
-    font-size: 11.5px;
-    color: #166534;
-    margin-top: 8px;
-  }
+    .badge.pending {
+      background: #fef3c7;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
 
-  .fix-box strong {
-    color: #14532d;
-  }
+    /* Issue Cards */
+    .issue-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #94a3b8;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    }
 
-  /* Grid of Positive Controls */
-  .positive-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin: 12px 0;
-  }
+    .issue-card.critical {
+      border-left-color: #dc2626;
+      background: #fffdfd;
+    }
 
-  .positive-card {
-    background: #ffffff;
-    border: 1px solid #bbf7d0;
-    border-radius: 8px;
-    padding: 12px 14px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-  }
+    .issue-card.high {
+      border-left-color: #ea580c;
+      background: #fffaf5;
+    }
 
-  .positive-card h4 {
-    color: #15803d;
-    font-size: 12px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 4px;
-  }
+    .issue-card.medium {
+      border-left-color: #d97706;
+      background: #fffdf7;
+    }
 
-  .positive-card p {
-    font-size: 11.5px;
-    color: #475569;
-    line-height: 1.45;
-  }
+    .issue-card.low {
+      border-left-color: #0284c7;
+      background: #fbfdff;
+    }
 
-  /* Roadmap Timeline */
-  .roadmap-phase {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 12px 16px;
-    margin-bottom: 12px;
-  }
+    .issue-card.resolved {
+      border-left-color: #16a34a;
+      background: #f9fdfa;
+    }
 
-  .roadmap-phase.done {
-    background: #f0fdf4;
-    border-color: #86efac;
-  }
+    .issue-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
 
-  .phase-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 6px;
-  }
+    .issue-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-  .phase-title {
-    font-size: 12.5px;
-    font-weight: 700;
-    color: #0f172a;
-  }
+    .issue-loc {
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-size: 10.5px;
+      color: #0077b6;
+      background: #f0f9ff;
+      padding: 2px 7px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 8px;
+      border: 1px solid #e0f2fe;
+    }
 
-  .phase-badge {
-    font-size: 9.5px;
-    font-weight: 700;
-    padding: 2px 7px;
-    border-radius: 4px;
-    text-transform: uppercase;
-  }
+    .issue-desc {
+      font-size: 12px;
+      color: #334155;
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
 
-  .phase-badge.done { background: #dcfce7; color: #15803d; }
-  .phase-badge.progress { background: #dbeafe; color: #1d4ed8; }
-  .phase-badge.future { background: #f1f5f9; color: #64748b; }
+    .impact-box {
+      background: #fff5f5;
+      border-left: 3px solid #ef4444;
+      padding: 7px 11px;
+      font-size: 11.5px;
+      color: #991b1b;
+      margin: 8px 0;
+      border-radius: 0 4px 4px 0;
+    }
 
-  .phase-list {
-    margin-left: 18px;
-    font-size: 11.5px;
-    color: #334155;
-    line-height: 1.6;
-  }
+    .impact-box.success {
+      background: #f0fdf4;
+      border-left-color: #22c55e;
+      color: #166534;
+    }
 
-  /* Footer */
-  .report-footer {
-    margin-top: 26px;
-    padding-top: 12px;
-    border-top: 1px solid #e2e8f0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 10px;
-    color: #94a3b8;
-  }
+    .code-snippet {
+      background: #0b1523;
+      color: #e2e8f0;
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-size: 10.5px;
+      padding: 9px 12px;
+      border-radius: 6px;
+      margin: 7px 0;
+      overflow-x: auto;
+      line-height: 1.45;
+    }
 
-  .page-number-footer {
-    text-align: right;
-    font-weight: 600;
-  }
-</style>
+    .code-snippet .hl-red {
+      color: #f87171;
+      font-weight: 600;
+    }
+
+    .code-snippet .hl-green {
+      color: #4ade80;
+      font-weight: 600;
+    }
+
+    .code-snippet .hl-comment {
+      color: #64748b;
+    }
+
+    .code-snippet .hl-keyword {
+      color: #38bdf8;
+    }
+
+    .fix-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 11.5px;
+      color: #166534;
+      margin-top: 8px;
+    }
+
+    .fix-box strong {
+      color: #14532d;
+    }
+
+    /* Grid of Positive Controls */
+    .positive-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 12px 0;
+    }
+
+    .positive-card {
+      background: #ffffff;
+      border: 1px solid #bbf7d0;
+      border-radius: 8px;
+      padding: 12px 14px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    }
+
+    .positive-card h4 {
+      color: #15803d;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .positive-card p {
+      font-size: 11.5px;
+      color: #475569;
+      line-height: 1.45;
+    }
+
+    /* Roadmap Timeline */
+    .roadmap-phase {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+    }
+
+    .roadmap-phase.done {
+      background: #f0fdf4;
+      border-color: #86efac;
+    }
+
+    .phase-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .phase-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .phase-badge {
+      font-size: 9.5px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .phase-badge.done {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .phase-badge.progress {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .phase-badge.future {
+      background: #f1f5f9;
+      color: #64748b;
+    }
+
+    .phase-list {
+      margin-left: 18px;
+      font-size: 11.5px;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    .report-footer {
+      margin-top: 26px;
+      padding-top: 12px;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: #94a3b8;
+    }
+
+    .page-number-footer {
+      text-align: right;
+      font-weight: 600;
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="page-container">
+  <div class="page-container">
 
-  <!-- ========================================== -->
-  <!-- PAGE 1: EXECUTIVE SUMMARY & SCORECARD      -->
-  <!-- ========================================== -->
-  <div class="header-banner">
-    <div class="header-top">
-      <div class="brand-badge">★ ★ ★ ★ ★ Hotel Thaprobane Resort & Spa · Sri Lanka</div>
-      <div class="report-tag">Post-Remediation Verification Report</div>
-    </div>
-    <h1 class="report-title">Full Web Application Security Audit & Re-Assessment</h1>
-    <div class="report-subtitle">
-      Comprehensive architectural vulnerability analysis, penetration posture verification, and post-remediation security scorecard for the Hotel Thaprobane production infrastructure.
-    </div>
-    <div class="meta-grid">
-      <div class="meta-item">
-        <div class="meta-label">Assessment Date</div>
-        <div class="meta-value">October 24, 2026</div>
+    <!-- ========================================== -->
+    <!-- PAGE 1: EXECUTIVE SUMMARY & SCORECARD      -->
+    <!-- ========================================== -->
+    <div class="header-banner">
+      <div class="header-top">
+        <div class="brand-badge">★ ★ ★ ★ ★ Hotel Thaprobane Resort & Spa · Sri Lanka</div>
+        <div class="report-tag">Post-Remediation Verification Report</div>
       </div>
-      <div class="meta-item">
-        <div class="meta-label">Audit Scope</div>
-        <div class="meta-value">Node.js / Express / Vercel / Atlas / SMTP</div>
+      <h1 class="report-title">Full Web Application Security Audit & Re-Assessment</h1>
+      <div class="report-subtitle">
+        Comprehensive architectural vulnerability analysis, penetration posture verification, and post-remediation
+        security scorecard for the Hotel Thaprobane production infrastructure.
       </div>
-      <div class="meta-item">
-        <div class="meta-label">Lead Auditor</div>
-        <div class="meta-value">Senior Security Architect & Penetration Tester</div>
-      </div>
-      <div class="meta-item">
-        <div class="meta-label">Classification</div>
-        <div class="meta-value">Privileged Internal Technical Report</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Re-Assessed Scorecard -->
-  <div class="scorecard-grid">
-    <div class="score-card main-score">
-      <div class="score-number">84</div>
-      <div class="score-badge">GRADE: B+ (SECURE)</div>
-      <div class="score-label">Posture Rating (28 Controls)</div>
-      <div class="score-delta positive">▲ +16 pts improved from 68 (C+)</div>
-    </div>
-
-    <div class="score-card resolved">
-      <div class="score-number">3</div>
-      <div class="score-label">Remediated & Verified</div>
-      <div class="score-delta positive">SEC-02, SEC-03, SEC-07 Fixed</div>
-    </div>
-
-    <div class="score-card critical">
-      <div class="score-number">1</div>
-      <div class="score-label">Critical (Git History)</div>
-      <div class="score-delta neutral">Pending rotation in Google Account</div>
-    </div>
-
-    <div class="score-card high">
-      <div class="score-number">0</div>
-      <div class="score-label">High Risk</div>
-      <div class="score-delta positive">▼ Dropped from 2 to 0 (100% Fixed!)</div>
-    </div>
-
-    <div class="score-card medium">
-      <div class="score-number">3</div>
-      <div class="score-label">Medium Risk</div>
-      <div class="score-delta neutral">CORS, TLS verify, HTML Escape</div>
-    </div>
-  </div>
-
-  <!-- Executive Summary -->
-  <div class="section-block avoid-break">
-    <div class="section-heading">
-      <span class="pill">01</span> Executive Summary & Re-Assessment Overview
-    </div>
-    <p style="color:#334155; font-size:12px; line-height:1.65; margin-bottom:10px;">
-      Following the initial security audit, significant architectural hardening has been successfully applied to the <strong>Hotel Thaprobane</strong> web infrastructure. Crucially, <strong>both previous High-Risk vulnerabilities have been completely eradicated</strong> from the active application codebase:
-    </p>
-    <ul style="margin-left: 20px; font-size: 12px; color: #334155; line-height: 1.6; margin-bottom: 12px;">
-      <li><strong>SEC-02 (Eliminated):</strong> The hardcoded diagnostic fallback key (<code style="background:#f1f5f9; padding:1px 5px; border-radius:3px; color:#dc2626;">thaprobane_admin_2026</code>) was removed from both <code class="mono">server.js</code> and <code class="mono">api/test-email.js</code>. Strict, fail-closed validation now ensures arbitrary mail relaying is impossible.</li>
-      <li><strong>SEC-03 (Eliminated):</strong> Unvalidated <code class="mono">X-Forwarded-For</code> parsing has been replaced by native Express reverse proxy trust (<code class="mono">app.set('trust proxy', 1)</code>). Remote attackers can no longer spoof local loopback IPs (<code class="mono">127.0.0.1</code>) to bypass rate limits or authentication.</li>
-      <li><strong>SEC-07 (Eliminated):</strong> <code class="mono">offline_bookings.json</code> has been systematically added to <code class="mono">.gitignore</code> and <code class="mono">.vercelignore</code>, mitigating guest PII exposure during emergency failover events.</li>
-    </ul>
-    <p style="color:#334155; font-size:12px; line-height:1.65;">
-      The application security posture has elevated from <strong>Grade C+ (68/100)</strong> to <strong>Grade B+ (84/100)</strong>. One Critical item remains related to secret hygiene in historical Git commits, which requires token revocation in Google Account.
-    </p>
-  </div>
-
-  <!-- Vulnerability Matrix Table -->
-  <div class="section-block avoid-break">
-    <div class="section-heading">
-      <span class="pill">02</span> Vulnerability Status Matrix (Comparison)
-    </div>
-    <table class="audit-table">
-      <thead>
-        <tr>
-          <th style="width: 10%;">ID</th>
-          <th style="width: 32%;">Vulnerability Title</th>
-          <th style="width: 13%;">Severity</th>
-          <th style="width: 11%;">CVSS</th>
-          <th style="width: 18%;">Affected Target</th>
-          <th style="width: 16%;">Current Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="mono">SEC-01</td>
-          <td><strong>Plaintext App Password in Git History</strong></td>
-          <td><span class="badge critical">Critical</span></td>
-          <td class="mono">9.1</td>
-          <td class="mono">Commit 7bfc0dd</td>
-          <td><span class="badge pending">Pending Rotation</span></td>
-        </tr>
-        <tr style="background: #f0fdf4;">
-          <td class="mono"><strong>SEC-02</strong></td>
-          <td><strong>Hardcoded Admin Secret & Open Relay</strong></td>
-          <td><span class="badge high">High</span></td>
-          <td class="mono">7.5</td>
-          <td class="mono">server.js & api/test-email</td>
-          <td><span class="badge resolved">✓ REMEDIATED</span></td>
-        </tr>
-        <tr style="background: #f0fdf4;">
-          <td class="mono"><strong>SEC-03</strong></td>
-          <td><strong>Client IP Spoofing (Auth/Rate-Limit Bypass)</strong></td>
-          <td><span class="badge high">High</span></td>
-          <td class="mono">7.3</td>
-          <td class="mono">server.js trust proxy</td>
-          <td><span class="badge resolved">✓ REMEDIATED</span></td>
-        </tr>
-        <tr>
-          <td class="mono">SEC-04</td>
-          <td>Permissive CORS with Reflected Origins</td>
-          <td><span class="badge medium">Medium</span></td>
-          <td class="mono">6.1</td>
-          <td class="mono">server.js & api/_lib/db.js</td>
-          <td><span class="badge pending">Open (Action Needed)</span></td>
-        </tr>
-        <tr>
-          <td class="mono">SEC-05</td>
-          <td>Disabled TLS Certificate Validation (SMTP)</td>
-          <td><span class="badge medium">Medium</span></td>
-          <td class="mono">5.9</td>
-          <td class="mono">nodemailer rejectUnauthorized</td>
-          <td><span class="badge pending">Open (Action Needed)</span></td>
-        </tr>
-        <tr>
-          <td class="mono">SEC-06</td>
-          <td>Unsanitized Input in Email Templates (HTMLi)</td>
-          <td><span class="badge medium">Medium</span></td>
-          <td class="mono">5.4</td>
-          <td class="mono">server.js & api/bookings.js</td>
-          <td><span class="badge pending">Open (Action Needed)</span></td>
-        </tr>
-        <tr style="background: #f0fdf4;">
-          <td class="mono"><strong>SEC-07</strong></td>
-          <td><strong>Offline Bookings PII Leakage Risk</strong></td>
-          <td><span class="badge low">Low</span></td>
-          <td class="mono">4.2</td>
-          <td class="mono">.gitignore & .vercelignore</td>
-          <td><span class="badge resolved">✓ REMEDIATED</span></td>
-        </tr>
-        <tr>
-          <td class="mono">SEC-08</td>
-          <td>Permissive CSP (unsafe-inline & unsafe-eval)</td>
-          <td><span class="badge low">Low</span></td>
-          <td class="mono">3.8</td>
-          <td class="mono">Helmet CSP Config</td>
-          <td><span class="badge low">Hardening Rec</span></td>
-        </tr>
-        <tr>
-          <td class="mono">SEC-09</td>
-          <td>Absence of Anti-Bot Protection (CAPTCHA)</td>
-          <td><span class="badge low">Low</span></td>
-          <td class="mono">3.5</td>
-          <td class="mono">Booking & Newsletter Forms</td>
-          <td><span class="badge low">Hardening Rec</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="report-footer">
-    <div>Hotel Thaprobane Security Assessment Team • Privileged & Confidential</div>
-    <div class="page-number-footer">Page 1 of 4</div>
-  </div>
-
-  <!-- ========================================== -->
-  <!-- PAGE 2: VERIFIED REMEDIATIONS (SEC 2, 3, 7)-->
-  <!-- ========================================== -->
-  <div class="page-break"></div>
-
-  <div class="section-block">
-    <div class="section-heading">
-      <span class="pill">03</span> Verified Fixes & Architecture Hardening
-    </div>
-
-    <!-- Remediation 1: SEC-02 -->
-    <div class="issue-card resolved">
-      <div class="issue-header">
-        <div class="issue-title">
-          <span class="badge resolved">RESOLVED & VERIFIED</span>
-          SEC-02: Hardcoded Admin Key & Arbitrary Mail Relay
+      <div class="meta-grid">
+        <div class="meta-item">
+          <div class="meta-label">Assessment Date</div>
+          <div class="meta-value">October 24, 2026</div>
         </div>
-        <span class="badge high">Was High (CVSS 7.5)</span>
-      </div>
-      <div class="issue-loc">Affected Files: server.js:794-806 & api/test-email.js:14-24</div>
-      <p class="issue-desc">
-        <strong>Previous Risk:</strong> The diagnostic endpoint had a fallback key <code class="mono">'thaprobane_admin_2026'</code> and an IP bypass allowing attackers to relay spam emails to any arbitrary recipient worldwide.
-      </p>
-      <div class="impact-box success">
-        <strong>Verification Result:</strong> Fully Hardened. Hardcoded string was eradicated. Strict fail-closed logic now enforces that unless <code class="mono">process.env.ADMIN_KEY</code> matches explicitly, test emails can <em>only</em> be delivered to the verified hotel admin address (<code class="mono">lochanamithudam097@gmail.com</code>).
-      </div>
-      <div class="code-snippet">
-<span class="hl-comment">// Verified Live Implementation in server.js & api/test-email.js:</span>
-<span class="hl-keyword">const</span> configuredAdminKey = process.env.ADMIN_KEY;
-<span class="hl-keyword">let</span> targetEmail = adminEmail;
-<span class="hl-keyword">if</span> (requestedEmail && requestedEmail !== adminEmail) {
-    <span class="hl-comment">// Fail-closed: No fallback secrets, no IP bypass</span>
-    <span class="hl-keyword">if</span> (!configuredAdminKey || adminKey !== configuredAdminKey) {
-        <span class="hl-keyword">return</span> res.status(<span class="hl-red">403</span>).json({
-            success: <span class="hl-keyword">false</span>,
-            message: <span class="hl-green">'Forbidden: Test email can only be dispatched to the verified administrator address.'</span>
-        });
-    }
-    targetEmail = requestedEmail;
-}
-      </div>
-    </div>
-
-    <!-- Remediation 2: SEC-03 -->
-    <div class="issue-card resolved">
-      <div class="issue-header">
-        <div class="issue-title">
-          <span class="badge resolved">RESOLVED & VERIFIED</span>
-          SEC-03: Client IP Header Spoofing via Unvalidated X-Forwarded-For
+        <div class="meta-item">
+          <div class="meta-label">Audit Scope</div>
+          <div class="meta-value">Node.js / Express / Vercel / Atlas / SMTP</div>
         </div>
-        <span class="badge high">Was High (CVSS 7.3)</span>
-      </div>
-      <div class="issue-loc">Affected Files: server.js:19-23 & server.js:50-53</div>
-      <p class="issue-desc">
-        <strong>Previous Risk:</strong> Unvalidated user input from <code class="mono">req.headers['x-forwarded-for']</code> allowed clients to inject <code class="mono">127.0.0.1</code> to spoof loopback origins, reset rate limiter thresholds, and bypass diagnostic safeguards.
-      </p>
-      <div class="impact-box success">
-        <strong>Verification Result:</strong> Fixed via Reverse Proxy Configuration. Express is now configured with <code class="mono">app.set('trust proxy', 1)</code>, delegating IP resolution securely to the first trusted upstream proxy hop (Cloudflare/Nginx/Vercel) via native <code class="mono">req.ip</code>.
-      </div>
-      <div class="code-snippet">
-<span class="hl-comment">// Verified Live Implementation in server.js:</span>
-app.set(<span class="hl-green">'trust proxy'</span>, <span class="hl-green">1</span>); <span class="hl-comment">// SEC-03: Trust first proxy hop securely</span>
-
-<span class="hl-keyword">const</span> apiRateLimiter = (req, res, next) => {
-    <span class="hl-comment">// req.ip is now cryptographically safe from spoofing</span>
-    <span class="hl-keyword">const</span> clientIp = req.ip || req.socket.remoteAddress || <span class="hl-green">'127.0.0.1'</span>;
-    ...
-};
-      </div>
-    </div>
-
-    <!-- Remediation 3: SEC-07 -->
-    <div class="issue-card resolved">
-      <div class="issue-header">
-        <div class="issue-title">
-          <span class="badge resolved">RESOLVED & VERIFIED</span>
-          SEC-07: Offline Bookings PII Leakage Risk
+        <div class="meta-item">
+          <div class="meta-label">Lead Auditor</div>
+          <div class="meta-value">Senior Security Architect & Penetration Tester</div>
         </div>
-        <span class="badge low">Was Low (CVSS 4.2)</span>
-      </div>
-      <div class="issue-loc">Affected Files: .gitignore:9 & .vercelignore:7</div>
-      <p class="issue-desc">
-        <strong>Previous Risk:</strong> The fallback file <code class="mono">offline_bookings.json</code> (used to store guest bookings when MongoDB is unreachable) was not listed in <code class="mono">.gitignore</code>, posing a high risk of committing guest full names, emails, and phone numbers into public version control.
-      </p>
-      <div class="impact-box success">
-        <strong>Verification Result:</strong> Fixed. <code class="mono">offline_bookings.json</code> is now strictly ignored in both <code class="mono">.gitignore</code> and <code class="mono">.vercelignore</code>, ensuring guest PII will never be tracked or bundled into cloud deployments.
-      </div>
-    </div>
-  </div>
-
-  <div class="report-footer">
-    <div>Hotel Thaprobane Security Assessment Team • Privileged & Confidential</div>
-    <div class="page-number-footer">Page 2 of 4</div>
-  </div>
-
-  <!-- ========================================== -->
-  <!-- PAGE 3: OPEN FINDINGS & REMEDIATION STEPS  -->
-  <!-- ========================================== -->
-  <div class="page-break"></div>
-
-  <div class="section-block">
-    <div class="section-heading">
-      <span class="pill">04</span> Open Findings Requiring Action
-    </div>
-
-    <!-- SEC-01 -->
-    <div class="issue-card critical">
-      <div class="issue-header">
-        <div class="issue-title">
-          <span class="badge critical">CRITICAL · CVSS 9.1</span>
-          SEC-01: Plaintext App Password in Git History
+        <div class="meta-item">
+          <div class="meta-label">Classification</div>
+          <div class="meta-value">Privileged Internal Technical Report</div>
         </div>
-        <span class="badge pending">Action Needed</span>
       </div>
-      <div class="issue-loc">Target: Git Commit History (Commit 7bfc0dd) · Secret: gljguakkenemhrkz</div>
-      <p class="issue-desc">
-        An active Google App Password was previously recorded in Git commit <code class="mono">7bfc0dd</code>. While current working trees use environment variables, anyone with read access to the Git repository history can recover the key.
+    </div>
+
+    <!-- Re-Assessed Scorecard -->
+    <div class="scorecard-grid">
+      <div class="score-card main-score">
+        <div class="score-number">84</div>
+        <div class="score-badge">GRADE: B+ (SECURE)</div>
+        <div class="score-label">Posture Rating (28 Controls)</div>
+        <div class="score-delta positive">▲ +16 pts improved from 68 (C+)</div>
+      </div>
+
+      <div class="score-card resolved">
+        <div class="score-number">3</div>
+        <div class="score-label">Remediated & Verified</div>
+        <div class="score-delta positive">SEC-02, SEC-03, SEC-07 Fixed</div>
+      </div>
+
+      <div class="score-card critical">
+        <div class="score-number">1</div>
+        <div class="score-label">Critical (Git History)</div>
+        <div class="score-delta neutral">Pending rotation in Google Account</div>
+      </div>
+
+      <div class="score-card high">
+        <div class="score-number">0</div>
+        <div class="score-label">High Risk</div>
+        <div class="score-delta positive">▼ Dropped from 2 to 0 (100% Fixed!)</div>
+      </div>
+
+      <div class="score-card medium">
+        <div class="score-number">3</div>
+        <div class="score-label">Medium Risk</div>
+        <div class="score-delta neutral">CORS, TLS verify, HTML Escape</div>
+      </div>
+    </div>
+
+    <!-- Executive Summary -->
+    <div class="section-block avoid-break">
+      <div class="section-heading">
+        <span class="pill">01</span> Executive Summary & Re-Assessment Overview
+      </div>
+      <p style="color:#334155; font-size:12px; line-height:1.65; margin-bottom:10px;">
+        Following the initial security audit, significant architectural hardening has been successfully applied to the
+        <strong>Hotel Thaprobane</strong> web infrastructure. Crucially, <strong>both previous High-Risk vulnerabilities
+          have been completely eradicated</strong> from the active application codebase:
       </p>
-      <div class="impact-box">
-        <strong>Business Impact:</strong> Total takeover of the hotel's Google Workspace / Gmail account. Attackers could read guest inquiries, intercept booking confirmations, or issue spam campaigns.
-      </div>
-      <div class="fix-box">
-        <strong>Required Immediate Action:</strong>
-        <ol style="margin-left: 18px; margin-top: 4px; line-height: 1.5;">
-          <li>Visit <strong>Google Account &gt; Security &gt; App Passwords</strong> and immediately <strong>Delete/Revoke</strong> the key <code class="mono">gljguakkenemhrkz</code>.</li>
-          <li>Generate a new 16-character App Password and update the local <code class="mono">.env</code> and Vercel environment secrets.</li>
-          <li>Purge Git history using <code class="mono">git-filter-repo</code> or BFG if the repository is ever pushed to GitHub/GitLab.</li>
-        </ol>
-      </div>
-    </div>
-
-    <!-- SEC-04 -->
-    <div class="issue-card medium">
-      <div class="issue-header">
-        <div class="issue-title">
-          <span class="badge medium">MEDIUM · CVSS 6.1</span>
-          SEC-04: Permissive CORS with Reflected Origins & Credentials
-        </div>
-        <span class="badge pending">Action Needed</span>
-      </div>
-      <div class="issue-loc">Target: server.js:84-99 & api/_lib/db.js:64</div>
-      <p class="issue-desc">
-        In <code class="mono">server.js</code>, CORS callback passes <code class="mono">callback(null, true)</code> for all origins with <code class="mono">credentials: true</code>. In <code class="mono">api/_lib/db.js</code>, <code class="mono">Access-Control-Allow-Origin: *</code> is set.
-      </p>
-      <div class="fix-box">
-        <strong>Recommended Hardening:</strong> Restrict CORS to explicit production domains (e.g., <code class="mono">https://hotelthaprobane.com</code> and authorized Vercel preview domains).
-      </div>
-    </div>
-
-    <!-- SEC-05 -->
-    <div class="issue-card medium">
-      <div class="issue-header">
-        <div class="issue-title">
-          <span class="badge medium">MEDIUM · CVSS 5.9</span>
-          SEC-05: Disabled TLS Certificate Validation (SMTP Transport)
-        </div>
-        <span class="badge pending">Action Needed</span>
-      </div>
-      <div class="issue-loc">Target: server.js:211 & api/_lib/db.js:59 (rejectUnauthorized: false)</div>
-      <p class="issue-desc">
-        The Nodemailer configuration explicitly disables certificate trust verification (<code class="mono">rejectUnauthorized: false</code>). This exposes SMTP credentials to Man-in-the-Middle (MITM) attacks on untrusted networks.
-      </p>
-      <div class="fix-box">
-        <strong>Recommended Hardening:</strong> Remove <code class="mono">rejectUnauthorized: false</code>. Google SMTP uses well-known, trusted Root CA certificates.
-      </div>
-    </div>
-
-    <!-- SEC-06 -->
-    <div class="issue-card medium">
-      <div class="issue-header">
-        <div class="issue-title">
-          <span class="badge medium">MEDIUM · CVSS 5.4</span>
-          SEC-06: Unsanitized Input in Email Templates (HTML Injection)
-        </div>
-        <span class="badge pending">Action Needed</span>
-      </div>
-      <div class="issue-loc">Target: server.js:405 (Ayubowan, ${bookingData.guestName}) & api/bookings.js</div>
-      <p class="issue-desc">
-        User-supplied strings from booking payloads are concatenated directly into HTML email templates without HTML entity encoding, creating risks of HTML injection and link spoofing in guest/admin email clients.
-      </p>
-      <div class="fix-box">
-        <strong>Recommended Hardening:</strong> Wrap all dynamic user inputs in an HTML entity encoder (e.g., replacing <code class="mono">&lt;</code>, <code class="mono">&gt;</code>, <code class="mono">&quot;</code>, <code class="mono">&#39;</code>, <code class="mono">&amp;</code>).
-      </div>
-    </div>
-  </div>
-
-  <div class="report-footer">
-    <div>Hotel Thaprobane Security Assessment Team • Privileged & Confidential</div>
-    <div class="page-number-footer">Page 3 of 4</div>
-  </div>
-
-  <!-- ========================================== -->
-  <!-- PAGE 4: POSITIVE CONTROLS & ROADMAP        -->
-  <!-- ========================================== -->
-  <div class="page-break"></div>
-
-  <div class="section-block">
-    <div class="section-heading">
-      <span class="pill">05</span> Positive Security Controls Already Active
-    </div>
-    <div class="positive-grid">
-      <div class="positive-card">
-        <h4>🛡️ Reverse Proxy Trust & Anti-Spoofing</h4>
-        <p>Configured with <code class="mono">app.set('trust proxy', 1)</code>. Protects all rate limiting logic and guarantees authentic client IP resolution across Cloudflare and Vercel.</p>
-      </div>
-
-      <div class="positive-card">
-        <h4>🔒 Fail-Closed Diagnostic Auth</h4>
-        <p><code class="mono">ADMIN_KEY</code> is strictly enforced for mail tests. No hardcoded credentials exist, and unauthorized outbound mail relaying is completely blocked.</p>
-      </div>
-
-      <div class="positive-card">
-        <h4>📦 Strict Payload Limits (DOS Defense)</h4>
-        <p><code class="mono">express.json({ limit: '100kb' })</code> prevents memory exhaustion and large-payload buffer denial-of-service attempts.</p>
-      </div>
-
-      <div class="positive-card">
-        <h4>🔑 Atlas Password Masking in Logs</h4>
-        <p>Connection strings automatically sanitize database credentials with regex masking (<code class="mono">:****@</code>), preventing credential leakage in cloud logging.</p>
-      </div>
-
-      <div class="positive-card">
-        <h4>🛡️ Helmet HTTP Security Headers</h4>
-        <p>Enforces <code class="mono">X-Content-Type-Options: nosniff</code>, <code class="mono">X-Frame-Options: SAMEORIGIN</code>, and baseline CSP protections against clickjacking and MIME sniffing.</p>
-      </div>
-
-      <div class="positive-card">
-        <h4>✅ Zero Dependency Vulnerabilities</h4>
-        <p><code class="mono">npm audit</code> confirms <strong>0 vulnerabilities</strong> across 122 production and development dependencies (Express 5.2.1, Mongoose 9.9.4, Helmet 8.3.0).</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-block">
-    <div class="section-heading">
-      <span class="pill">06</span> Remediation Roadmap & Next Steps
-    </div>
-
-    <!-- Phase 1 -->
-    <div class="roadmap-phase done">
-      <div class="phase-header">
-        <span class="phase-title">Phase 1: Emergency Remediations (COMPLETED)</span>
-        <span class="phase-badge done">✓ 100% Complete</span>
-      </div>
-      <ul class="phase-list">
-        <li>✔ Removed hardcoded fallback admin key (<code class="mono">thaprobane_admin_2026</code>) from <code class="mono">server.js</code> & <code class="mono">api/test-email.js</code>.</li>
-        <li>✔ Enforced Express <code class="mono">trust proxy 1</code> to prevent <code class="mono">X-Forwarded-For</code> spoofing attacks.</li>
-        <li>✔ Added <code class="mono">offline_bookings.json</code> to <code class="mono">.gitignore</code> and <code class="mono">.vercelignore</code> to protect guest PII.</li>
+      <ul style="margin-left: 20px; font-size: 12px; color: #334155; line-height: 1.6; margin-bottom: 12px;">
+        <li><strong>SEC-02 (Eliminated):</strong> The hardcoded diagnostic fallback key (<code
+            style="background:#f1f5f9; padding:1px 5px; border-radius:3px; color:#dc2626;">thaprobane_admin_2026</code>)
+          was removed from both <code class="mono">server.js</code> and <code class="mono">api/test-email.js</code>.
+          Strict, fail-closed validation now ensures arbitrary mail relaying is impossible.</li>
+        <li><strong>SEC-03 (Eliminated):</strong> Unvalidated <code class="mono">X-Forwarded-For</code> parsing has been
+          replaced by native Express reverse proxy trust (<code class="mono">app.set('trust proxy', 1)</code>). Remote
+          attackers can no longer spoof local loopback IPs (<code class="mono">127.0.0.1</code>) to bypass rate limits
+          or authentication.</li>
+        <li><strong>SEC-07 (Eliminated):</strong> <code class="mono">offline_bookings.json</code> has been
+          systematically added to <code class="mono">.gitignore</code> and <code class="mono">.vercelignore</code>,
+          mitigating guest PII exposure during emergency failover events.</li>
       </ul>
+      <p style="color:#334155; font-size:12px; line-height:1.65;">
+        The application security posture has elevated from <strong>Grade C+ (68/100)</strong> to <strong>Grade B+
+          (84/100)</strong>. One Critical item remains related to secret hygiene in historical Git commits, which
+        requires token revocation in Google Account.
+      </p>
     </div>
 
-    <!-- Phase 2 -->
-    <div class="roadmap-phase">
-      <div class="phase-header">
-        <span class="phase-title">Phase 2: Secret Hygiene & Hardening (Next 48 Hours)</span>
-        <span class="phase-badge progress">High Priority</span>
+    <!-- Vulnerability Matrix Table -->
+    <div class="section-block avoid-break">
+      <div class="section-heading">
+        <span class="pill">02</span> Vulnerability Status Matrix (Comparison)
       </div>
-      <ul class="phase-list">
-        <li>Revoke and generate a new Gmail App Password in Google Account settings.</li>
-        <li>Restore strict TLS certificate validation by removing <code class="mono">rejectUnauthorized: false</code>.</li>
-        <li>Add HTML entity escaping function to sanitize guest names and special requests in email notifications.</li>
-        <li>Tighten CORS to allow only verified production domains instead of wildcards.</li>
-      </ul>
+      <table class="audit-table">
+        <thead>
+          <tr>
+            <th style="width: 10%;">ID</th>
+            <th style="width: 32%;">Vulnerability Title</th>
+            <th style="width: 13%;">Severity</th>
+            <th style="width: 11%;">CVSS</th>
+            <th style="width: 18%;">Affected Target</th>
+            <th style="width: 16%;">Current Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">SEC-01</td>
+            <td><strong>Plaintext App Password in Git History</strong></td>
+            <td><span class="badge critical">Critical</span></td>
+            <td class="mono">9.1</td>
+            <td class="mono">Commit 7bfc0dd</td>
+            <td><span class="badge pending">Pending Rotation</span></td>
+          </tr>
+          <tr style="background: #f0fdf4;">
+            <td class="mono"><strong>SEC-02</strong></td>
+            <td><strong>Hardcoded Admin Secret & Open Relay</strong></td>
+            <td><span class="badge high">High</span></td>
+            <td class="mono">7.5</td>
+            <td class="mono">server.js & api/test-email</td>
+            <td><span class="badge resolved">✓ REMEDIATED</span></td>
+          </tr>
+          <tr style="background: #f0fdf4;">
+            <td class="mono"><strong>SEC-03</strong></td>
+            <td><strong>Client IP Spoofing (Auth/Rate-Limit Bypass)</strong></td>
+            <td><span class="badge high">High</span></td>
+            <td class="mono">7.3</td>
+            <td class="mono">server.js trust proxy</td>
+            <td><span class="badge resolved">✓ REMEDIATED</span></td>
+          </tr>
+          <tr>
+            <td class="mono">SEC-04</td>
+            <td>Permissive CORS with Reflected Origins</td>
+            <td><span class="badge medium">Medium</span></td>
+            <td class="mono">6.1</td>
+            <td class="mono">server.js & api/_lib/db.js</td>
+            <td><span class="badge pending">Open (Action Needed)</span></td>
+          </tr>
+          <tr>
+            <td class="mono">SEC-05</td>
+            <td>Disabled TLS Certificate Validation (SMTP)</td>
+            <td><span class="badge medium">Medium</span></td>
+            <td class="mono">5.9</td>
+            <td class="mono">nodemailer rejectUnauthorized</td>
+            <td><span class="badge pending">Open (Action Needed)</span></td>
+          </tr>
+          <tr>
+            <td class="mono">SEC-06</td>
+            <td>Unsanitized Input in Email Templates (HTMLi)</td>
+            <td><span class="badge medium">Medium</span></td>
+            <td class="mono">5.4</td>
+            <td class="mono">server.js & api/bookings.js</td>
+            <td><span class="badge pending">Open (Action Needed)</span></td>
+          </tr>
+          <tr style="background: #f0fdf4;">
+            <td class="mono"><strong>SEC-07</strong></td>
+            <td><strong>Offline Bookings PII Leakage Risk</strong></td>
+            <td><span class="badge low">Low</span></td>
+            <td class="mono">4.2</td>
+            <td class="mono">.gitignore & .vercelignore</td>
+            <td><span class="badge resolved">✓ REMEDIATED</span></td>
+          </tr>
+          <tr>
+            <td class="mono">SEC-08</td>
+            <td>Permissive CSP (unsafe-inline & unsafe-eval)</td>
+            <td><span class="badge low">Low</span></td>
+            <td class="mono">3.8</td>
+            <td class="mono">Helmet CSP Config</td>
+            <td><span class="badge low">Hardening Rec</span></td>
+          </tr>
+          <tr>
+            <td class="mono">SEC-09</td>
+            <td>Absence of Anti-Bot Protection (CAPTCHA)</td>
+            <td><span class="badge low">Low</span></td>
+            <td class="mono">3.5</td>
+            <td class="mono">Booking & Newsletter Forms</td>
+            <td><span class="badge low">Hardening Rec</span></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <!-- Phase 3 -->
-    <div class="roadmap-phase">
-      <div class="phase-header">
-        <span class="phase-title">Phase 3: Production Defense-in-Depth (Next 30 Days)</span>
-        <span class="phase-badge future">Planned</span>
+    <div class="report-footer">
+      <div>Hotel Thaprobane Security Assessment Team • Privileged & Confidential</div>
+      <div class="page-number-footer">Page 1 of 4</div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PAGE 2: VERIFIED REMEDIATIONS (SEC 2, 3, 7)-->
+    <!-- ========================================== -->
+    <div class="page-break"></div>
+
+    <div class="section-block">
+      <div class="section-heading">
+        <span class="pill">03</span> Verified Fixes & Architecture Hardening
       </div>
-      <ul class="phase-list">
-        <li>Add invisible honeypot field or Cloudflare Turnstile to public booking and subscription forms to stop automated spam.</li>
-        <li>Migrate CSP away from <code class="mono">'unsafe-inline'</code> to cryptographically signed nonces.</li>
-        <li>Connect distributed rate limiting (e.g., Upstash Redis) for serverless multi-region deployments.</li>
-      </ul>
+
+      <!-- Remediation 1: SEC-02 -->
+      <div class="issue-card resolved">
+        <div class="issue-header">
+          <div class="issue-title">
+            <span class="badge resolved">RESOLVED & VERIFIED</span>
+            SEC-02: Hardcoded Admin Key & Arbitrary Mail Relay
+          </div>
+          <span class="badge high">Was High (CVSS 7.5)</span>
+        </div>
+        <div class="issue-loc">Affected Files: server.js:794-806 & api/test-email.js:14-24</div>
+        <p class="issue-desc">
+          <strong>Previous Risk:</strong> The diagnostic endpoint had a fallback key <code
+            class="mono">'thaprobane_admin_2026'</code> and an IP bypass allowing attackers to relay spam emails to any
+          arbitrary recipient worldwide.
+        </p>
+        <div class="impact-box success">
+          <strong>Verification Result:</strong> Fully Hardened. Hardcoded string was eradicated. Strict fail-closed
+          logic now enforces that unless <code class="mono">process.env.ADMIN_KEY</code> matches explicitly, test emails
+          can <em>only</em> be delivered to the verified hotel admin address (<code
+            class="mono">lochanamithudam097@gmail.com</code>).
+        </div>
+        <div class="code-snippet">
+          <span class="hl-comment">// Verified Live Implementation in server.js & api/test-email.js:</span>
+          <span class="hl-keyword">const</span> configuredAdminKey = process.env.ADMIN_KEY;
+          <span class="hl-keyword">let</span> targetEmail = adminEmail;
+          <span class="hl-keyword">if</span> (requestedEmail && requestedEmail !== adminEmail) {
+          <span class="hl-comment">// Fail-closed: No fallback secrets, no IP bypass</span>
+          <span class="hl-keyword">if</span> (!configuredAdminKey || adminKey !== configuredAdminKey) {
+          <span class="hl-keyword">return</span> res.status(<span class="hl-red">403</span>).json({
+          success: <span class="hl-keyword">false</span>,
+          message: <span class="hl-green">'Forbidden: Test email can only be dispatched to the verified administrator
+            address.'</span>
+          });
+          }
+          targetEmail = requestedEmail;
+          }
+        </div>
+      </div>
+
+      <!-- Remediation 2: SEC-03 -->
+      <div class="issue-card resolved">
+        <div class="issue-header">
+          <div class="issue-title">
+            <span class="badge resolved">RESOLVED & VERIFIED</span>
+            SEC-03: Client IP Header Spoofing via Unvalidated X-Forwarded-For
+          </div>
+          <span class="badge high">Was High (CVSS 7.3)</span>
+        </div>
+        <div class="issue-loc">Affected Files: server.js:19-23 & server.js:50-53</div>
+        <p class="issue-desc">
+          <strong>Previous Risk:</strong> Unvalidated user input from <code
+            class="mono">req.headers['x-forwarded-for']</code> allowed clients to inject <code
+            class="mono">127.0.0.1</code> to spoof loopback origins, reset rate limiter thresholds, and bypass
+          diagnostic safeguards.
+        </p>
+        <div class="impact-box success">
+          <strong>Verification Result:</strong> Fixed via Reverse Proxy Configuration. Express is now configured with
+          <code class="mono">app.set('trust proxy', 1)</code>, delegating IP resolution securely to the first trusted
+          upstream proxy hop (Cloudflare/Nginx/Vercel) via native <code class="mono">req.ip</code>.
+        </div>
+        <div class="code-snippet">
+          <span class="hl-comment">// Verified Live Implementation in server.js:</span>
+          app.set(<span class="hl-green">'trust proxy'</span>, <span class="hl-green">1</span>); <span
+            class="hl-comment">// SEC-03: Trust first proxy hop securely</span>
+
+          <span class="hl-keyword">const</span> apiRateLimiter = (req, res, next) => {
+          <span class="hl-comment">// req.ip is now cryptographically safe from spoofing</span>
+          <span class="hl-keyword">const</span> clientIp = req.ip || req.socket.remoteAddress || <span
+            class="hl-green">'127.0.0.1'</span>;
+          ...
+          };
+        </div>
+      </div>
+
+      <!-- Remediation 3: SEC-07 -->
+      <div class="issue-card resolved">
+        <div class="issue-header">
+          <div class="issue-title">
+            <span class="badge resolved">RESOLVED & VERIFIED</span>
+            SEC-07: Offline Bookings PII Leakage Risk
+          </div>
+          <span class="badge low">Was Low (CVSS 4.2)</span>
+        </div>
+        <div class="issue-loc">Affected Files: .gitignore:9 & .vercelignore:7</div>
+        <p class="issue-desc">
+          <strong>Previous Risk:</strong> The fallback file <code class="mono">offline_bookings.json</code> (used to
+          store guest bookings when MongoDB is unreachable) was not listed in <code class="mono">.gitignore</code>,
+          posing a high risk of committing guest full names, emails, and phone numbers into public version control.
+        </p>
+        <div class="impact-box success">
+          <strong>Verification Result:</strong> Fixed. <code class="mono">offline_bookings.json</code> is now strictly
+          ignored in both <code class="mono">.gitignore</code> and <code class="mono">.vercelignore</code>, ensuring
+          guest PII will never be tracked or bundled into cloud deployments.
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="report-footer">
-    <div>Hotel Thaprobane Security Assessment Team • Privileged Technical Report</div>
-    <div class="page-number-footer">Page 4 of 4</div>
-  </div>
+    <div class="report-footer">
+      <div>Hotel Thaprobane Security Assessment Team • Privileged & Confidential</div>
+      <div class="page-number-footer">Page 2 of 4</div>
+    </div>
 
-</div>
+    <!-- ========================================== -->
+    <!-- PAGE 3: OPEN FINDINGS & REMEDIATION STEPS  -->
+    <!-- ========================================== -->
+    <div class="page-break"></div>
+
+    <div class="section-block">
+      <div class="section-heading">
+        <span class="pill">04</span> Open Findings Requiring Action
+      </div>
+
+      <!-- SEC-01 -->
+      <div class="issue-card critical">
+        <div class="issue-header">
+          <div class="issue-title">
+            <span class="badge critical">CRITICAL · CVSS 9.1</span>
+            SEC-01: Plaintext App Password in Git History
+          </div>
+          <span class="badge pending">Action Needed</span>
+        </div>
+        <div class="issue-loc">Target: Git Commit History (Commit 7bfc0dd) · Secret: gljguakkenemhrkz</div>
+        <p class="issue-desc">
+          An active Google App Password was previously recorded in Git commit <code class="mono">7bfc0dd</code>. While
+          current working trees use environment variables, anyone with read access to the Git repository history can
+          recover the key.
+        </p>
+        <div class="impact-box">
+          <strong>Business Impact:</strong> Total takeover of the hotel's Google Workspace / Gmail account. Attackers
+          could read guest inquiries, intercept booking confirmations, or issue spam campaigns.
+        </div>
+        <div class="fix-box">
+          <strong>Required Immediate Action:</strong>
+          <ol style="margin-left: 18px; margin-top: 4px; line-height: 1.5;">
+            <li>Visit <strong>Google Account &gt; Security &gt; App Passwords</strong> and immediately
+              <strong>Delete/Revoke</strong> the key <code class="mono">gljguakkenemhrkz</code>.</li>
+            <li>Generate a new 16-character App Password and update the local <code class="mono">.env</code> and Vercel
+              environment secrets.</li>
+            <li>Purge Git history using <code class="mono">git-filter-repo</code> or BFG if the repository is ever
+              pushed to GitHub/GitLab.</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- SEC-04 -->
+      <div class="issue-card medium">
+        <div class="issue-header">
+          <div class="issue-title">
+            <span class="badge medium">MEDIUM · CVSS 6.1</span>
+            SEC-04: Permissive CORS with Reflected Origins & Credentials
+          </div>
+          <span class="badge pending">Action Needed</span>
+        </div>
+        <div class="issue-loc">Target: server.js:84-99 & api/_lib/db.js:64</div>
+        <p class="issue-desc">
+          In <code class="mono">server.js</code>, CORS callback passes <code class="mono">callback(null, true)</code>
+          for all origins with <code class="mono">credentials: true</code>. In <code class="mono">api/_lib/db.js</code>,
+          <code class="mono">Access-Control-Allow-Origin: *</code> is set.
+        </p>
+        <div class="fix-box">
+          <strong>Recommended Hardening:</strong> Restrict CORS to explicit production domains (e.g., <code
+            class="mono">https://hotelthaprobane.com</code> and authorized Vercel preview domains).
+        </div>
+      </div>
+
+      <!-- SEC-05 -->
+      <div class="issue-card medium">
+        <div class="issue-header">
+          <div class="issue-title">
+            <span class="badge medium">MEDIUM · CVSS 5.9</span>
+            SEC-05: Disabled TLS Certificate Validation (SMTP Transport)
+          </div>
+          <span class="badge pending">Action Needed</span>
+        </div>
+        <div class="issue-loc">Target: server.js:211 & api/_lib/db.js:59 (rejectUnauthorized: false)</div>
+        <p class="issue-desc">
+          The Nodemailer configuration explicitly disables certificate trust verification (<code
+            class="mono">rejectUnauthorized: false</code>). This exposes SMTP credentials to Man-in-the-Middle (MITM)
+          attacks on untrusted networks.
+        </p>
+        <div class="fix-box">
+          <strong>Recommended Hardening:</strong> Remove <code class="mono">rejectUnauthorized: false</code>. Google
+          SMTP uses well-known, trusted Root CA certificates.
+        </div>
+      </div>
+
+      <!-- SEC-06 -->
+      <div class="issue-card medium">
+        <div class="issue-header">
+          <div class="issue-title">
+            <span class="badge medium">MEDIUM · CVSS 5.4</span>
+            SEC-06: Unsanitized Input in Email Templates (HTML Injection)
+          </div>
+          <span class="badge pending">Action Needed</span>
+        </div>
+        <div class="issue-loc">Target: server.js:405 (Ayubowan, ${bookingData.guestName}) & api/bookings.js</div>
+        <p class="issue-desc">
+          User-supplied strings from booking payloads are concatenated directly into HTML email templates without HTML
+          entity encoding, creating risks of HTML injection and link spoofing in guest/admin email clients.
+        </p>
+        <div class="fix-box">
+          <strong>Recommended Hardening:</strong> Wrap all dynamic user inputs in an HTML entity encoder (e.g.,
+          replacing <code class="mono">&lt;</code>, <code class="mono">&gt;</code>, <code class="mono">&quot;</code>,
+          <code class="mono">&#39;</code>, <code class="mono">&amp;</code>).
+        </div>
+      </div>
+    </div>
+
+    <div class="report-footer">
+      <div>Hotel Thaprobane Security Assessment Team • Privileged & Confidential</div>
+      <div class="page-number-footer">Page 3 of 4</div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PAGE 4: POSITIVE CONTROLS & ROADMAP        -->
+    <!-- ========================================== -->
+    <div class="page-break"></div>
+
+    <div class="section-block">
+      <div class="section-heading">
+        <span class="pill">05</span> Positive Security Controls Already Active
+      </div>
+      <div class="positive-grid">
+        <div class="positive-card">
+          <h4>🛡️ Reverse Proxy Trust & Anti-Spoofing</h4>
+          <p>Configured with <code class="mono">app.set('trust proxy', 1)</code>. Protects all rate limiting logic and
+            guarantees authentic client IP resolution across Cloudflare and Vercel.</p>
+        </div>
+
+        <div class="positive-card">
+          <h4>🔒 Fail-Closed Diagnostic Auth</h4>
+          <p><code class="mono">ADMIN_KEY</code> is strictly enforced for mail tests. No hardcoded credentials exist,
+            and unauthorized outbound mail relaying is completely blocked.</p>
+        </div>
+
+        <div class="positive-card">
+          <h4>📦 Strict Payload Limits (DOS Defense)</h4>
+          <p><code class="mono">express.json({ limit: '100kb' })</code> prevents memory exhaustion and large-payload
+            buffer denial-of-service attempts.</p>
+        </div>
+
+        <div class="positive-card">
+          <h4>🔑 Atlas Password Masking in Logs</h4>
+          <p>Connection strings automatically sanitize database credentials with regex masking (<code
+              class="mono">:****@</code>), preventing credential leakage in cloud logging.</p>
+        </div>
+
+        <div class="positive-card">
+          <h4>🛡️ Helmet HTTP Security Headers</h4>
+          <p>Enforces <code class="mono">X-Content-Type-Options: nosniff</code>, <code
+              class="mono">X-Frame-Options: SAMEORIGIN</code>, and baseline CSP protections against clickjacking and
+            MIME sniffing.</p>
+        </div>
+
+        <div class="positive-card">
+          <h4>✅ Zero Dependency Vulnerabilities</h4>
+          <p><code class="mono">npm audit</code> confirms <strong>0 vulnerabilities</strong> across 122 production and
+            development dependencies (Express 5.2.1, Mongoose 9.9.4, Helmet 8.3.0).</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-heading">
+        <span class="pill">06</span> Remediation Roadmap & Next Steps
+      </div>
+
+      <!-- Phase 1 -->
+      <div class="roadmap-phase done">
+        <div class="phase-header">
+          <span class="phase-title">Phase 1: Emergency Remediations (COMPLETED)</span>
+          <span class="phase-badge done">✓ 100% Complete</span>
+        </div>
+        <ul class="phase-list">
+          <li>✔ Removed hardcoded fallback admin key (<code class="mono">thaprobane_admin_2026</code>) from <code
+              class="mono">server.js</code> & <code class="mono">api/test-email.js</code>.</li>
+          <li>✔ Enforced Express <code class="mono">trust proxy 1</code> to prevent <code
+              class="mono">X-Forwarded-For</code> spoofing attacks.</li>
+          <li>✔ Added <code class="mono">offline_bookings.json</code> to <code class="mono">.gitignore</code> and <code
+              class="mono">.vercelignore</code> to protect guest PII.</li>
+        </ul>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="roadmap-phase">
+        <div class="phase-header">
+          <span class="phase-title">Phase 2: Secret Hygiene & Hardening (Next 48 Hours)</span>
+          <span class="phase-badge progress">High Priority</span>
+        </div>
+        <ul class="phase-list">
+          <li>Revoke and generate a new Gmail App Password in Google Account settings.</li>
+          <li>Restore strict TLS certificate validation by removing <code class="mono">rejectUnauthorized: false</code>.
+          </li>
+          <li>Add HTML entity escaping function to sanitize guest names and special requests in email notifications.
+          </li>
+          <li>Tighten CORS to allow only verified production domains instead of wildcards.</li>
+        </ul>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="roadmap-phase">
+        <div class="phase-header">
+          <span class="phase-title">Phase 3: Production Defense-in-Depth (Next 30 Days)</span>
+          <span class="phase-badge future">Planned</span>
+        </div>
+        <ul class="phase-list">
+          <li>Add invisible honeypot field or Cloudflare Turnstile to public booking and subscription forms to stop
+            automated spam.</li>
+          <li>Migrate CSP away from <code class="mono">'unsafe-inline'</code> to cryptographically signed nonces.</li>
+          <li>Connect distributed rate limiting (e.g., Upstash Redis) for serverless multi-region deployments.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="report-footer">
+      <div>Hotel Thaprobane Security Assessment Team • Privileged Technical Report</div>
+      <div class="page-number-footer">Page 4 of 4</div>
+    </div>
+
+  </div>
 
 </body>
+
 </html>

@@ -212,6 +212,7 @@
           <option value="ocean-suite">Royal Oceanfront Penthouse Suite ($480/nt)</option>
           <option value="premium-view">Ocean Horizon Infinity Plunge Villa ($420/nt)</option>
           <option value="cinnamon-pavilion">Verdant Garden View Sanctuary Suite ($290/nt)</option>
+          <option value="sunset-pavilion">Azure Sunset Deluxe Pavilion ($250/nt)</option>
           <option value="presidential-villa">Imperial 3-Bedroom Oceanfront Estate ($890/nt)</option>
         </select>
       </div>
@@ -1312,7 +1313,7 @@
         </article>
 
         <!-- ==================== VILLA 6: AZURE SUNSET DELUXE PAVILION ==================== -->
-        <article class="villa-card" data-category="suite" data-room="ocean-suite">
+        <article class="villa-card" data-category="suite" data-room="sunset-pavilion">
           <!-- TOP: Centered Text & Details Content -->
           <div class="villa-text-header">
             <div class="villa-badges-row">
@@ -1375,53 +1376,217 @@
               <div class="villa-btn-group">
                 <a href="#booking-section" class="btn-villa-availability"><i class="fa-regular fa-calendar"></i> Check
                   Dates</a>
-                <button class="btn-villa-book room-quick-book" data-room-id="ocean-suite"><i
+                <button class="btn-villa-book room-quick-book" data-room-id="sunset-pavilion"><i
                     class="fa-solid fa-bolt"></i> Book Now</button>
               </div>
             </div>
           </div>
 
-          <!-- BOTTOM: Modern Horizontal Scrolling Image Gallery/Carousel -->
-          <div class="villa-gallery-carousel-wrapper">
-            <div class="villa-carousel-controls">
-              <div class="villa-carousel-hint">
-                <i class="fa-solid fa-arrows-left-right"></i>
-                <span>Drag horizontally or use arrows to view gallery</span>
-              </div>
-              <div class="villa-carousel-arrows">
-                <button class="gallery-nav-btn prev" aria-label="Previous view"><i
-                    class="fa-solid fa-chevron-left"></i></button>
-                <button class="gallery-nav-btn next" aria-label="Next view"><i
-                    class="fa-solid fa-chevron-right"></i></button>
-              </div>
-            </div>
-            <div class="villa-horizontal-gallery">
-              <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=1200&auto=format&fit=crop"
-                  alt="Romantic Sunset Viewing Sun Deck" class="gallery-img" loading="lazy">
-                <div class="gallery-caption"><i class="fa-solid fa-sun"></i> Sunset Viewing Sun Deck</div>
-              </div>
-              <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=1200&auto=format&fit=crop"
-                  alt="Four-Poster Master King Bedroom" class="gallery-img" loading="lazy">
-                <div class="gallery-caption"><i class="fa-solid fa-bed"></i> Four-Poster King Bed Suite</div>
-              </div>
-              <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1200&auto=format&fit=crop"
-                  alt="Freestanding Deep Bathtub" class="gallery-img" loading="lazy">
-                <div class="gallery-caption"><i class="fa-solid fa-bath"></i> Freestanding Deep Soaking Tub</div>
-              </div>
-              <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1200&auto=format&fit=crop"
-                  alt="Golden Hour Ocean Loungers" class="gallery-img" loading="lazy">
-                <div class="gallery-caption"><i class="fa-solid fa-umbrella-beach"></i> Golden Hour Ocean Loungers</div>
-              </div>
-              <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=1200&auto=format&fit=crop"
-                  alt="Artisanal Sunset Cocktail Veranda" class="gallery-img" loading="lazy">
-                <div class="gallery-caption"><i class="fa-solid fa-martini-glass"></i> Artisanal Sunset Cocktail Bar
+          <!-- LUXURY VILLA PHOTO GALLERY SHOWCASE -->
+          <div class="premium-gallery-wrapper" data-gallery-id="sunset-pavilion">
+            <!-- 1. Gallery Header Toolbar -->
+            <div class="gallery-toolbar">
+              <div class="gallery-tabs-scroll">
+                <div class="gallery-room-tabs" role="tablist">
+                  <button class="gallery-room-tab active" data-index="0" role="tab" aria-selected="true">
+                    <i class="fa-solid fa-sun"></i>
+                    <span>Sunset Veranda</span>
+                  </button>
+                  <button class="gallery-room-tab" data-index="1" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-water-ladder"></i>
+                    <span>Infinity Pool</span>
+                  </button>
+                  <button class="gallery-room-tab" data-index="2" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-champagne-glasses"></i>
+                    <span>Beach Cabana</span>
+                  </button>
+                  <button class="gallery-room-tab" data-index="3" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-martini-glass"></i>
+                    <span>Cocktail Bar</span>
+                  </button>
                 </div>
               </div>
+              <div class="gallery-view-actions">
+                <button class="gallery-mode-toggle" aria-label="Switch between single showcase and all photos grid">
+                  <i class="fa-solid fa-table-cells-large"></i>
+                  <span class="mode-text">View All 4 Photos</span>
+                </button>
+                <button class="gallery-fullscreen-action" aria-label="Open Fullscreen Lightbox">
+                  <i class="fa-solid fa-expand"></i>
+                  <span>Fullscreen</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 2. Single Photo Showcase Stage (Default & Interactive) -->
+            <div class="gallery-showcase-view active">
+              <div class="gallery-showcase-stage" role="region" aria-label="Villa Photo Showcase">
+                <div class="stage-top-bar">
+                  <div class="stage-counter-badge">
+                    <span class="counter-curr">01</span>
+                    <span class="counter-sep">/</span>
+                    <span class="counter-total">04</span>
+                    <span class="counter-dot">•</span>
+                    <span class="counter-room-name">Sunset Veranda</span>
+                  </div>
+                  <button class="stage-expand-btn" aria-label="Open Fullscreen Lightbox">
+                    <i class="fa-solid fa-expand"></i>
+                    <span>VIEW FULLSCREEN</span>
+                  </button>
+                </div>
+
+                <button class="stage-nav-arrow prev" aria-label="Previous Photo">
+                  <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button class="stage-nav-arrow next" aria-label="Next Photo">
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <div class="stage-slides-container">
+                  <div class="stage-slide active" data-index="0">
+                    <img src="images/Azure%20Sunset/Gemini_Generated_Image_tt1q4ttt1q4ttt1q%20(1).jpg"
+                      alt="Spacious private timber veranda with luxury loungers and wicker seating overlooking the golden crimson Indian Ocean sunset"
+                      class="stage-slide-img" fetchpriority="high" decoding="async">
+                  </div>
+                  <div class="stage-slide" data-index="1">
+                    <img src="images/Azure%20Sunset/Gemini_Generated_Image_jgfv97jgfv97jgfv.jpg"
+                      alt="Private oceanfront infinity plunge pool surrounded by tropical palm trees and frangipani blossoms at sunset"
+                      class="stage-slide-img" loading="lazy" decoding="async">
+                  </div>
+                  <div class="stage-slide" data-index="2">
+                    <img src="images/Azure%20Sunset/Gemini_Generated_Image_en2b7men2b7men2b.jpg"
+                      alt="Intimate candlelit beachfront dining cabana set for two under thatched roof on the sand with sunset ocean views"
+                      class="stage-slide-img" loading="lazy" decoding="async">
+                  </div>
+                  <div class="stage-slide" data-index="3">
+                    <img src="images/Azure%20Sunset/Gemini_Generated_Image_tt1q4ttt1q4ttt1q.jpg"
+                      alt="Warm luxury teak and brass cocktail bar with mixologist serving tropical cocktails to a couple at twilight"
+                      class="stage-slide-img" loading="lazy" decoding="async">
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. Bottom Filmstrip Thumbnails Row (4 Distinct Room Cards) -->
+              <div class="gallery-thumbnail-filmstrip" role="tablist" aria-label="Photo Thumbnails">
+                <button class="thumb-card active" data-index="0" role="tab" aria-selected="true" aria-label="View Sunset Veranda">
+                  <div class="thumb-img-box">
+                    <img src="images/Azure%20Sunset/Gemini_Generated_Image_tt1q4ttt1q4ttt1q%20(1).jpg" alt="Sunset Veranda thumbnail" loading="lazy">
+                    <span class="thumb-num">01</span>
+                  </div>
+                  <div class="thumb-info">
+                    <span class="thumb-label">Sunset Veranda</span>
+                    <span class="thumb-sub">Ocean Panorama Deck</span>
+                  </div>
+                  <div class="thumb-active-indicator"></div>
+                </button>
+
+                <button class="thumb-card" data-index="1" role="tab" aria-selected="false" aria-label="View Infinity Pool">
+                  <div class="thumb-img-box">
+                    <img src="images/Azure%20Sunset/Gemini_Generated_Image_jgfv97jgfv97jgfv.jpg" alt="Infinity Pool thumbnail" loading="lazy">
+                    <span class="thumb-num">02</span>
+                  </div>
+                  <div class="thumb-info">
+                    <span class="thumb-label">Infinity Pool</span>
+                    <span class="thumb-sub">Cliff-Edge Pool Deck</span>
+                  </div>
+                  <div class="thumb-active-indicator"></div>
+                </button>
+
+                <button class="thumb-card" data-index="2" role="tab" aria-selected="false" aria-label="View Beach Cabana">
+                  <div class="thumb-img-box">
+                    <img src="images/Azure%20Sunset/Gemini_Generated_Image_en2b7men2b7men2b.jpg" alt="Beach Cabana thumbnail" loading="lazy">
+                    <span class="thumb-num">03</span>
+                  </div>
+                  <div class="thumb-info">
+                    <span class="thumb-label">Beach Cabana</span>
+                    <span class="thumb-sub">Private Sunset Dining</span>
+                  </div>
+                  <div class="thumb-active-indicator"></div>
+                </button>
+
+                <button class="thumb-card" data-index="3" role="tab" aria-selected="false" aria-label="View Cocktail Bar">
+                  <div class="thumb-img-box">
+                    <img src="images/Azure%20Sunset/Gemini_Generated_Image_tt1q4ttt1q4ttt1q.jpg" alt="Cocktail Bar thumbnail" loading="lazy">
+                    <span class="thumb-num">04</span>
+                  </div>
+                  <div class="thumb-info">
+                    <span class="thumb-label">Cocktail Bar</span>
+                    <span class="thumb-sub">Artisanal Mixology</span>
+                  </div>
+                  <div class="thumb-active-indicator"></div>
+                </button>
+              </div>
+            </div>
+
+            <!-- 4. "All Photos" Expansive Grid View (4 Separate Luxury Cards) -->
+            <div class="gallery-all-grid-view">
+              <!-- Card 0 -->
+              <article class="all-grid-card" data-index="0" tabindex="0" role="button" aria-label="Open Sunset Veranda photo">
+                <div class="all-grid-img-wrap">
+                  <img src="images/Azure%20Sunset/Gemini_Generated_Image_tt1q4ttt1q4ttt1q%20(1).jpg" alt="Expansive Timber Sunset Veranda" loading="lazy">
+                  <span class="all-grid-badge">01 · Sunset Veranda</span>
+                  <span class="all-grid-zoom-pill"><i class="fa-solid fa-expand"></i> Inspect</span>
+                </div>
+                <div class="all-grid-body">
+                  <h3 class="all-grid-title">EXPANSIVE TIMBER SUNSET VERANDA & OCEAN DECK</h3>
+                  <p class="all-grid-desc">Panoramic open-air timber deck with handcrafted wicker lounges, teak sun loungers & uninterrupted golden hour sunset vistas over the Indian Ocean.</p>
+                  <div class="all-grid-footer">
+                    <span class="all-grid-room-tag"><i class="fa-solid fa-sun"></i> Ocean Panorama Deck</span>
+                    <span class="all-grid-cta">View High-Res <i class="fa-solid fa-arrow-right"></i></span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 1 -->
+              <article class="all-grid-card" data-index="1" tabindex="0" role="button" aria-label="Open Infinity Pool photo">
+                <div class="all-grid-img-wrap">
+                  <img src="images/Azure%20Sunset/Gemini_Generated_Image_jgfv97jgfv97jgfv.jpg" alt="Horizon Sunset Infinity Pool & Lounger Deck" loading="lazy">
+                  <span class="all-grid-badge">02 · Infinity Pool</span>
+                  <span class="all-grid-zoom-pill"><i class="fa-solid fa-expand"></i> Inspect</span>
+                </div>
+                <div class="all-grid-body">
+                  <h3 class="all-grid-title">HORIZON SUNSET INFINITY POOL & LOUNGER DECK</h3>
+                  <p class="all-grid-desc">Private cliff-edge infinity pool fringed with frangipani blossoms, teak sun loungers, artisanal lanterns & front-row Indian Ocean sunset vistas.</p>
+                  <div class="all-grid-footer">
+                    <span class="all-grid-room-tag"><i class="fa-solid fa-water-ladder"></i> Cliff-Edge Pool Deck</span>
+                    <span class="all-grid-cta">View High-Res <i class="fa-solid fa-arrow-right"></i></span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 2 -->
+              <article class="all-grid-card" data-index="2" tabindex="0" role="button" aria-label="Open Beach Cabana photo">
+                <div class="all-grid-img-wrap">
+                  <img src="images/Azure%20Sunset/Gemini_Generated_Image_en2b7men2b7men2b.jpg" alt="Romantic Private Sunset Cabana & Beach Dining" loading="lazy">
+                  <span class="all-grid-badge">03 · Beach Cabana</span>
+                  <span class="all-grid-zoom-pill"><i class="fa-solid fa-expand"></i> Inspect</span>
+                </div>
+                <div class="all-grid-body">
+                  <h3 class="all-grid-title">ROMANTIC PRIVATE SUNSET CABANA & BEACH DINING</h3>
+                  <p class="all-grid-desc">Secluded private beachfront timber pavilion with candle lanterns, flowing sheer drapes & golden hour dining overlooking crimson Indian Ocean sunsets.</p>
+                  <div class="all-grid-footer">
+                    <span class="all-grid-room-tag"><i class="fa-solid fa-champagne-glasses"></i> Private Sunset Dining</span>
+                    <span class="all-grid-cta">View High-Res <i class="fa-solid fa-arrow-right"></i></span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 3 -->
+              <article class="all-grid-card" data-index="3" tabindex="0" role="button" aria-label="Open Cocktail Bar photo">
+                <div class="all-grid-img-wrap">
+                  <img src="images/Azure%20Sunset/Gemini_Generated_Image_tt1q4ttt1q4ttt1q.jpg" alt="Artisanal Sunset Cocktail Bar & Lounge" loading="lazy">
+                  <span class="all-grid-badge">04 · Cocktail Bar</span>
+                  <span class="all-grid-zoom-pill"><i class="fa-solid fa-expand"></i> Inspect</span>
+                </div>
+                <div class="all-grid-body">
+                  <h3 class="all-grid-title">ARTISANAL SUNSET COCKTAIL BAR & LOUNGE</h3>
+                  <p class="all-grid-desc">Warm teak-and-brass cocktail bar with master mixologist crafting bespoke Ceylon arrack infusions, sunset tapas & tropical fruit elixirs.</p>
+                  <div class="all-grid-footer">
+                    <span class="all-grid-room-tag"><i class="fa-solid fa-martini-glass"></i> Artisanal Mixology</span>
+                    <span class="all-grid-cta">View High-Res <i class="fa-solid fa-arrow-right"></i></span>
+                  </div>
+                </div>
+              </article>
             </div>
           </div>
         </article>

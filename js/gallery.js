@@ -138,8 +138,45 @@ const VILLA_GALLERIES = {
     }
   ],
   'cinnamon-pavilion': [],
-  'presidential-villa': [],
-  'sunset-pavilion': []
+  'sunset-pavilion': [
+    {
+      src: 'images/Azure%20Sunset/Gemini_Generated_Image_tt1q4ttt1q4ttt1q%20(1).jpg',
+      caption: 'EXPANSIVE TIMBER SUNSET VERANDA & OCEAN DECK',
+      alt: 'Spacious private timber veranda with luxury loungers and wicker seating overlooking the golden crimson Indian Ocean sunset',
+      tag: 'Sunset Veranda',
+      sub: 'Ocean Panorama Deck',
+      icon: 'fa-sun',
+      desc: 'Panoramic open-air timber deck with handcrafted wicker lounges, teak sun loungers & uninterrupted golden hour sunset vistas over the Indian Ocean.'
+    },
+    {
+      src: 'images/Azure%20Sunset/Gemini_Generated_Image_jgfv97jgfv97jgfv.jpg',
+      caption: 'HORIZON SUNSET INFINITY POOL & LOUNGER DECK',
+      alt: 'Private oceanfront infinity plunge pool surrounded by tropical palm trees and frangipani blossoms at sunset',
+      tag: 'Infinity Pool',
+      sub: 'Cliff-Edge Pool Deck',
+      icon: 'fa-water-ladder',
+      desc: 'Private cliff-edge infinity pool fringed with frangipani blossoms, teak sun loungers, artisanal lanterns & front-row Indian Ocean sunset vistas.'
+    },
+    {
+      src: 'images/Azure%20Sunset/Gemini_Generated_Image_en2b7men2b7men2b.jpg',
+      caption: 'ROMANTIC PRIVATE SUNSET CABANA & BEACH DINING',
+      alt: 'Intimate candlelit beachfront dining cabana set for two under thatched roof on the sand with sunset ocean views',
+      tag: 'Beach Cabana',
+      sub: 'Private Sunset Dining',
+      icon: 'fa-champagne-glasses',
+      desc: 'Secluded private beachfront timber pavilion with candle lanterns, flowing sheer drapes & golden hour dining overlooking crimson Indian Ocean sunsets.'
+    },
+    {
+      src: 'images/Azure%20Sunset/Gemini_Generated_Image_tt1q4ttt1q4ttt1q.jpg',
+      caption: 'ARTISANAL SUNSET COCKTAIL BAR & LOUNGE',
+      alt: 'Warm luxury teak and brass cocktail bar with mixologist serving tropical cocktails to a couple at twilight',
+      tag: 'Cocktail Bar',
+      sub: 'Artisanal Mixology',
+      icon: 'fa-martini-glass',
+      desc: 'Warm teak-and-brass cocktail bar with master mixologist crafting bespoke Ceylon arrack infusions, sunset tapas & tropical fruit elixirs.'
+    }
+  ],
+  'presidential-villa': []
 };
 
 // -------------------------------------------------------------

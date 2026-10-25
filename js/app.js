@@ -9,6 +9,7 @@ const roomRates = {
   'heritage-villa': { name: 'Ceylon Heritage Private Plunge Villa', baseRate: 360, tax: 0.12 },
   'premium-view': { name: 'Taprobane Premium Ocean King', baseRate: 250, tax: 0.12 },
   'cinnamon-pavilion': { name: 'Cinnamon Garden Luxury Pavilion', baseRate: 210, tax: 0.12 },
+  'sunset-pavilion': { name: 'Azure Sunset Deluxe Pavilion', baseRate: 250, tax: 0.12 },
   'presidential-villa': { name: 'Imperial 3-Bedroom Oceanfront Estate', baseRate: 890, tax: 0.12 }
 };
 
