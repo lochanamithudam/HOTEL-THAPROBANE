@@ -141,7 +141,8 @@ const mediaStaticOptions = {
 
 app.use('/css', express.static(path.join(__dirname, 'css'), staticOptions));
 app.use('/js', express.static(path.join(__dirname, 'js'), staticOptions));
-app.use('/Images', express.static(path.join(__dirname, 'Images'), mediaStaticOptions));
+app.use('/images', express.static(path.join(__dirname, 'images'), mediaStaticOptions));
+app.use('/Images', express.static(path.join(__dirname, 'images'), mediaStaticOptions));
 app.use('/Videos', express.static(path.join(__dirname, 'Videos'), mediaStaticOptions));
 app.use('/fonts', express.static(path.join(__dirname, 'fonts'), mediaStaticOptions));
 app.use(express.static(path.join(__dirname), staticOptions));

@@ -99,7 +99,44 @@ const VILLA_GALLERIES = {
       desc: 'Freestanding marble soaking tub, carved natural stone double vanity, brushed brass fixtures & sweeping ocean views.'
     }
   ],
-  'premium-view': [],
+  'premium-view': [
+    {
+      src: 'images/Ocean%20Horizon%20infinity/villa_exterior_infinity_pool_1792898101425.jpg',
+      caption: 'CANTILEVERED INFINITY PLUNGE POOL & TIMBER DECK',
+      alt: 'Cantilevered oceanfront infinity plunge pool merging with the horizon, personal timber sun deck, and direct golden beach access',
+      tag: 'Infinity Plunge Pool',
+      sub: 'Shoreline Deck',
+      icon: 'fa-water-ladder',
+      desc: 'Cantilevered infinity plunge pool merging directly with the ocean horizon, personal timber deck with plush loungers & private beach walkout.'
+    },
+    {
+      src: 'images/Ocean%20Horizon%20infinity/villa_master_bedroom_1792898134713.jpg',
+      caption: 'OCEANFRONT CANOPY MASTER BEDROOM',
+      alt: 'Spacious luxury master bedroom featuring king-size canopy bed, soaring ceilings, panoramic floor-to-ceiling coastal glass, and ocean views',
+      tag: 'Master Bedroom',
+      sub: 'King Canopy Suite',
+      icon: 'fa-bed',
+      desc: 'Handcrafted king-size canopy bed, dramatic coastal floor-to-ceiling glass, Italian linens & walkout access to the plunge pool terrace.'
+    },
+    {
+      src: 'images/Ocean%20Horizon%20infinity/villa_oceanview_bathtub_1792898174168.jpg',
+      caption: 'DEEP SOAKING OCEAN-VIEW BATHTUB & EN-SUITE',
+      alt: 'Sculpted freestanding deep soaking bathtub with floor-to-ceiling panoramic ocean view, marble vanity, and walk-in rain shower',
+      tag: 'Ocean-View Bath',
+      sub: 'Deep Soaking Tub',
+      icon: 'fa-bath',
+      desc: 'Freestanding deep soaking bathtub positioned against panoramic ocean glass, dual stone vanities & organic botanical amenities.'
+    },
+    {
+      src: 'images/Ocean%20Horizon%20infinity/villa_floating_breakfast_1792898209208.jpg',
+      caption: 'SIGNATURE FLOATING PLUNGE POOL BREAKFAST',
+      alt: 'Signature luxury floating breakfast tray in the private infinity plunge pool with fresh tropical fruits, pastries, juices, and turquoise ocean backdrop',
+      tag: 'Floating Breakfast',
+      sub: 'In-Pool Dining',
+      icon: 'fa-utensils',
+      desc: 'Complimentary artisanal floating breakfast tray with tropical fruits, fresh pastries, Ceylon tea & sparkling champagne in your plunge pool.'
+    }
+  ],
   'cinnamon-pavilion': [],
   'presidential-villa': [],
   'sunset-pavilion': []

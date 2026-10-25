@@ -946,9 +946,213 @@
             </div>
           </div>
 
-          <!-- LUXURY VILLA PHOTO GALLERY -->
-          <!-- TODO: Add photos to images/ocean-horizon-villa/ and configure in js/gallery.js -->
-          <div class="premium-gallery-wrapper is-hidden" data-gallery-id="premium-view" style="display: none;"></div>
+          <!-- LUXURY VILLA PHOTO GALLERY SHOWCASE -->
+          <div class="premium-gallery-wrapper" data-gallery-id="premium-view">
+            <!-- 1. Gallery Header Toolbar -->
+            <div class="gallery-toolbar">
+              <div class="gallery-tabs-scroll">
+                <div class="gallery-room-tabs" role="tablist">
+                  <button class="gallery-room-tab active" data-index="0" role="tab" aria-selected="true">
+                    <i class="fa-solid fa-water-ladder"></i>
+                    <span>Infinity Plunge Pool</span>
+                  </button>
+                  <button class="gallery-room-tab" data-index="1" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-bed"></i>
+                    <span>Master Bedroom</span>
+                  </button>
+                  <button class="gallery-room-tab" data-index="2" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-bath"></i>
+                    <span>Ocean-View Bath</span>
+                  </button>
+                  <button class="gallery-room-tab" data-index="3" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-utensils"></i>
+                    <span>Floating Breakfast</span>
+                  </button>
+                </div>
+              </div>
+              <div class="gallery-view-actions">
+                <button class="gallery-mode-toggle" aria-label="Switch between single showcase and all photos grid">
+                  <i class="fa-solid fa-table-cells-large"></i>
+                  <span class="mode-text">View All 4 Photos</span>
+                </button>
+                <button class="gallery-fullscreen-action" aria-label="Open Fullscreen Lightbox">
+                  <i class="fa-solid fa-expand"></i>
+                  <span>Fullscreen</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 2. Single Photo Showcase Stage (Default & Interactive) -->
+            <div class="gallery-showcase-view active">
+              <div class="gallery-showcase-stage" role="region" aria-label="Villa Photo Showcase">
+                <div class="stage-top-bar">
+                  <div class="stage-counter-badge">
+                    <span class="counter-curr">01</span>
+                    <span class="counter-sep">/</span>
+                    <span class="counter-total">04</span>
+                    <span class="counter-dot">•</span>
+                    <span class="counter-room-name">Infinity Plunge Pool</span>
+                  </div>
+                  <button class="stage-expand-btn" aria-label="Open Fullscreen Lightbox">
+                    <i class="fa-solid fa-expand"></i>
+                    <span>VIEW FULLSCREEN</span>
+                  </button>
+                </div>
+
+                <button class="stage-nav-arrow prev" aria-label="Previous Photo">
+                  <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button class="stage-nav-arrow next" aria-label="Next Photo">
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <div class="stage-slides-container">
+                  <div class="stage-slide active" data-index="0">
+                    <img src="images/Ocean%20Horizon%20infinity/villa_exterior_infinity_pool_1792898101425.jpg"
+                      alt="Cantilevered oceanfront infinity plunge pool merging with the horizon, personal timber sun deck, and direct golden beach access"
+                      class="stage-slide-img" fetchpriority="high" decoding="async">
+                  </div>
+                  <div class="stage-slide" data-index="1">
+                    <img src="images/Ocean%20Horizon%20infinity/villa_master_bedroom_1792898134713.jpg"
+                      alt="Spacious luxury master bedroom featuring king-size canopy bed, soaring ceilings, panoramic floor-to-ceiling coastal glass, and ocean views"
+                      class="stage-slide-img" loading="lazy" decoding="async">
+                  </div>
+                  <div class="stage-slide" data-index="2">
+                    <img src="images/Ocean%20Horizon%20infinity/villa_oceanview_bathtub_1792898174168.jpg"
+                      alt="Sculpted freestanding deep soaking bathtub with floor-to-ceiling panoramic ocean view, marble vanity, and walk-in rain shower"
+                      class="stage-slide-img" loading="lazy" decoding="async">
+                  </div>
+                  <div class="stage-slide" data-index="3">
+                    <img src="images/Ocean%20Horizon%20infinity/villa_floating_breakfast_1792898209208.jpg"
+                      alt="Signature luxury floating breakfast tray in the private infinity plunge pool with fresh tropical fruits, pastries, juices, and turquoise ocean backdrop"
+                      class="stage-slide-img" loading="lazy" decoding="async">
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. Bottom Filmstrip Thumbnails Row (4 Distinct Room Cards) -->
+              <div class="gallery-thumbnail-filmstrip" role="tablist" aria-label="Photo Thumbnails">
+                <button class="thumb-card active" data-index="0" role="tab" aria-selected="true" aria-label="View Infinity Plunge Pool">
+                  <div class="thumb-img-box">
+                    <img src="images/Ocean%20Horizon%20infinity/villa_exterior_infinity_pool_1792898101425.jpg" alt="Infinity Plunge Pool thumbnail" loading="lazy">
+                    <span class="thumb-num">01</span>
+                  </div>
+                  <div class="thumb-info">
+                    <span class="thumb-label">Infinity Plunge Pool</span>
+                    <span class="thumb-sub">Shoreline Deck</span>
+                  </div>
+                  <div class="thumb-active-indicator"></div>
+                </button>
+
+                <button class="thumb-card" data-index="1" role="tab" aria-selected="false" aria-label="View Master Bedroom">
+                  <div class="thumb-img-box">
+                    <img src="images/Ocean%20Horizon%20infinity/villa_master_bedroom_1792898134713.jpg" alt="Master Bedroom thumbnail" loading="lazy">
+                    <span class="thumb-num">02</span>
+                  </div>
+                  <div class="thumb-info">
+                    <span class="thumb-label">Master Bedroom</span>
+                    <span class="thumb-sub">King Canopy Suite</span>
+                  </div>
+                  <div class="thumb-active-indicator"></div>
+                </button>
+
+                <button class="thumb-card" data-index="2" role="tab" aria-selected="false" aria-label="View Ocean-View Bath">
+                  <div class="thumb-img-box">
+                    <img src="images/Ocean%20Horizon%20infinity/villa_oceanview_bathtub_1792898174168.jpg" alt="Ocean-View Bath thumbnail" loading="lazy">
+                    <span class="thumb-num">03</span>
+                  </div>
+                  <div class="thumb-info">
+                    <span class="thumb-label">Ocean-View Bath</span>
+                    <span class="thumb-sub">Deep Soaking Tub</span>
+                  </div>
+                  <div class="thumb-active-indicator"></div>
+                </button>
+
+                <button class="thumb-card" data-index="3" role="tab" aria-selected="false" aria-label="View Floating Breakfast">
+                  <div class="thumb-img-box">
+                    <img src="images/Ocean%20Horizon%20infinity/villa_floating_breakfast_1792898209208.jpg" alt="Floating Breakfast thumbnail" loading="lazy">
+                    <span class="thumb-num">04</span>
+                  </div>
+                  <div class="thumb-info">
+                    <span class="thumb-label">Floating Breakfast</span>
+                    <span class="thumb-sub">In-Pool Dining</span>
+                  </div>
+                  <div class="thumb-active-indicator"></div>
+                </button>
+              </div>
+            </div>
+
+            <!-- 4. "All Photos" Expansive Grid View (4 Separate Luxury Cards) -->
+            <div class="gallery-all-grid-view">
+              <!-- Card 0 -->
+              <article class="all-grid-card" data-index="0" tabindex="0" role="button" aria-label="Open Infinity Plunge Pool photo">
+                <div class="all-grid-img-wrap">
+                  <img src="images/Ocean%20Horizon%20infinity/villa_exterior_infinity_pool_1792898101425.jpg" alt="Cantilevered oceanfront infinity plunge pool" loading="lazy">
+                  <span class="all-grid-badge">01 · Infinity Plunge Pool</span>
+                  <span class="all-grid-zoom-pill"><i class="fa-solid fa-expand"></i> Inspect</span>
+                </div>
+                <div class="all-grid-body">
+                  <h3 class="all-grid-title">CANTILEVERED INFINITY PLUNGE POOL & TIMBER DECK</h3>
+                  <p class="all-grid-desc">Cantilevered infinity plunge pool merging directly with the ocean horizon, personal timber deck with plush loungers & private beach walkout.</p>
+                  <div class="all-grid-footer">
+                    <span class="all-grid-room-tag"><i class="fa-solid fa-water-ladder"></i> Shoreline Deck</span>
+                    <span class="all-grid-cta">View High-Res <i class="fa-solid fa-arrow-right"></i></span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 1 -->
+              <article class="all-grid-card" data-index="1" tabindex="0" role="button" aria-label="Open Master Bedroom photo">
+                <div class="all-grid-img-wrap">
+                  <img src="images/Ocean%20Horizon%20infinity/villa_master_bedroom_1792898134713.jpg" alt="Oceanfront Canopy Master Bedroom" loading="lazy">
+                  <span class="all-grid-badge">02 · Master Bedroom</span>
+                  <span class="all-grid-zoom-pill"><i class="fa-solid fa-expand"></i> Inspect</span>
+                </div>
+                <div class="all-grid-body">
+                  <h3 class="all-grid-title">OCEANFRONT CANOPY MASTER BEDROOM</h3>
+                  <p class="all-grid-desc">Handcrafted king-size canopy bed, dramatic coastal floor-to-ceiling glass, Italian linens & walkout access to the plunge pool terrace.</p>
+                  <div class="all-grid-footer">
+                    <span class="all-grid-room-tag"><i class="fa-solid fa-bed"></i> King Canopy Suite</span>
+                    <span class="all-grid-cta">View High-Res <i class="fa-solid fa-arrow-right"></i></span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 2 -->
+              <article class="all-grid-card" data-index="2" tabindex="0" role="button" aria-label="Open Ocean-View Bath photo">
+                <div class="all-grid-img-wrap">
+                  <img src="images/Ocean%20Horizon%20infinity/villa_oceanview_bathtub_1792898174168.jpg" alt="Deep Soaking Ocean-View Bathtub & En-Suite" loading="lazy">
+                  <span class="all-grid-badge">03 · Ocean-View Bath</span>
+                  <span class="all-grid-zoom-pill"><i class="fa-solid fa-expand"></i> Inspect</span>
+                </div>
+                <div class="all-grid-body">
+                  <h3 class="all-grid-title">DEEP SOAKING OCEAN-VIEW BATHTUB & EN-SUITE</h3>
+                  <p class="all-grid-desc">Freestanding deep soaking bathtub positioned against panoramic ocean glass, dual stone vanities & organic botanical amenities.</p>
+                  <div class="all-grid-footer">
+                    <span class="all-grid-room-tag"><i class="fa-solid fa-bath"></i> Deep Soaking Tub</span>
+                    <span class="all-grid-cta">View High-Res <i class="fa-solid fa-arrow-right"></i></span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 3 -->
+              <article class="all-grid-card" data-index="3" tabindex="0" role="button" aria-label="Open Floating Breakfast photo">
+                <div class="all-grid-img-wrap">
+                  <img src="images/Ocean%20Horizon%20infinity/villa_floating_breakfast_1792898209208.jpg" alt="Signature Floating Plunge Pool Breakfast" loading="lazy">
+                  <span class="all-grid-badge">04 · Floating Breakfast</span>
+                  <span class="all-grid-zoom-pill"><i class="fa-solid fa-expand"></i> Inspect</span>
+                </div>
+                <div class="all-grid-body">
+                  <h3 class="all-grid-title">SIGNATURE FLOATING PLUNGE POOL BREAKFAST</h3>
+                  <p class="all-grid-desc">Complimentary artisanal floating breakfast tray with tropical fruits, fresh pastries, Ceylon tea & sparkling champagne in your plunge pool.</p>
+                  <div class="all-grid-footer">
+                    <span class="all-grid-room-tag"><i class="fa-solid fa-utensils"></i> In-Pool Dining</span>
+                    <span class="all-grid-cta">View High-Res <i class="fa-solid fa-arrow-right"></i></span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
         </article>
 
         <!-- ==================== VILLA 4: VERDANT GARDEN VIEW SANCTUARY SUITE ==================== -->
